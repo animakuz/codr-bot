@@ -22,6 +22,8 @@ body {
   	transform-style: preserve-3d;
 }
 
+.bold { font-size: 1.5em; font-weight: 600; font-color: 000; }
+
 /* main subdivisions - first holds the actual app, second holds the logo splashscreen */
 .loader { display: none;/*incase i decide to make a loader??*/}
 .app_container { width: 100%; height: 100%; display: none;}
@@ -38,7 +40,7 @@ body {
 	width: 100%; height: 100%;
 	background-color: rgba(0,0,255,0.2);
 }
-	.user_session { display: none;}
+	.user_session { display: block;}
 	.login { display: none;}
 	.game_menu { display: none;}
 
