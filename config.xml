@@ -3,23 +3,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
 
-    xmlns:gap   = "http://phonegap.com/ns/1.0"
-    id          = "com.phonegap.example"
-    version     = "1.0.0"
-    versionCode = "10" >
+    xmlns:gap   = "http://phonegap.com/ns/1.0"s
+    id          = "com.unellez.programaquina"
+    version     = "0.0.1"
+    versionCode = "1" >
 
     <!-- versionCode is optional and Android only -->
 
     <preference name="phonegap-version" value="3.5.0" />
+    <preference name="orientation" value="landscape" />
+    <preference name="fullscreen" value="false"/> <!-- later change to true for full release  -->
+    <prefërence name="splash-screen-duration" value="10000" /> <!-- change this later to fit actual splash screen -->
 
-    <name>Proyecto de Grado - Config.xml</name>
+
+    <name>Proyecto de Grado - Programaquina</name>
 
     <description>
-        Config.xml - archivo de configuración para el proyecto Programaquina.
+        Programaquina - software desarrollado como Trabajo de Grado para optar al titulo de Ingeniero en INformática. Este software se trata de un juego educativo basado en la enseñanza de la lógica de la programación.
     </description>
 
     <author href="www.animakuz.com" email="marbap45@gmail.com">
-        Marcus Baptiste - ID R0032401
+        Marcus Baptiste
     </author>
 
 </widget>
