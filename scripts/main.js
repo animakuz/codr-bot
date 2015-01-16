@@ -91,5 +91,7 @@ $(document).ready(function() {
 	var elJuego = {
 	};
 
-	alert("test");
+	//canvas mock up for screenshots
+
+
 });

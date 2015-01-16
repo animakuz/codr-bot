@@ -15,12 +15,17 @@
 <body>
 	<div class="wrapper">
 		<div class="app_container">
+			<canvas class="game_canvas" width="800"  height="400">
+				<span class="mensaje_error"> No puedes correr este juego con este navegador.<br>
+					Hable con un adulto para actualizar! </span>
+				<!-- better idea would be to check for availability and if not show splash screen -->
+			</canvas>
 			<div class="gui_overlay">
-				GUI OVERLAY
 				<div class="user_session"></div>
 				<!-- login page -->
 				<div class="login">
-					
+					<label>Usuario</label><input type="text" name="usuario" />
+					<label>Clave</label><input type="password" name="clave" />
 				</div>
 				<!-- game main menu -->
 				<div class="game_menu">
@@ -42,12 +47,15 @@
 				<div class="seleccionar_nivel">
 					
 				</div>
+				
+				<!-- panel where code-bits will be placed -->
+				<div class="code_panel">
+					<div class="cp_content"></div>
+					<div class="cp_left_side"></div>
+					<div class="cp_right_side"></div>
+
+				</div>
 			</div>
-			<canvas class="game_canvas" width="800"  height="600">
-				<span class="mensaje_error"> No puedes correr este juego con este navegador.<br>
-					Hable con un adulto para actualizar! </span>
-				<!-- better idea would be to check for availability and if not show splash screen -->
-			</canvas>
 		</div>
 		<div class="logo_container">
 			<!-- logo parts  -->
@@ -62,8 +70,8 @@
 
 
 <!-- jquery and jquery mobile scripts  -->
-<script src="phonegap.js"></script>
 <script src="scripts\jquery\jquery-1.11.2.min.js"></script>
-<script src="scripts\jquery\jquery.mobile-1.4.5.min.js"></script>
+<!-- <script src="scripts\jquery\jquery.mobile-1.4.5.min.js"></script> -->
+<!-- <script src="phonegap.js"></script> -->
 <script src="scripts\main.js"></script>
 </html>
