@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 	Titulo de Proyecto: Programaquina y los Secretos del Planeta Algoritmus;
 		Autor: Marcus Baptiste - ID: R0032401; -->
-<html lang="es">
+<html>
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no" />
 	<meta charset="utf-8" />
@@ -13,64 +13,64 @@
 </head>
 
 <body>
-	<div id="wrapper">
-		<div id="app_container">
-			<canvas id="game_canvas" width="800"  height="400">
+	<div class="wrapper">
+		<div class="app_container">
+			<canvas class="game_canvas" width="800"  height="400">
 				<span class="message_error"> No puedes correr este juego con este navegador.<br>
 					Hable con un adulto para actualizar! </span>
 				<!-- better idea would be to check for availability and if not show splash screen -->
 			</canvas>
-			<div id="gui_overlay">
+			<div class="gui_overlay">
 				<!-- create new profile screen -->
-				<div id="user_create">
+				<div class="user_create">
 					
 				</div>
 				
 				<!-- select user screen -->
-				<div id="user_select">
+				<div class="user_select">
 					<label>Usuario</label><input type="text" name="user" />
 					<label>Clave</label><input type="password" name="pass" />
 				</div>
 
 				<!-- current user information -->
-				<div id="user_session"></div>
+				<div class="user_session"></div>
 				
 				<!-- game main menu -->
-				<div id="game_menu">
+				<div class="game_menu">
 					
 				</div>
 
 				<!-- game options select screen -->
-				<div id="game_options">
+				<div class="game_options">
 					
 				</div>
 
 				<!-- level select screen (will be generated with javascript) -->
-				<div id="level_select">
+				<div class="level_select">
 					
 				</div>
 				
 				<!-- panel where code-bits will be placed -->
-				<div id="code_panel">
-					<div id="cp_content"></div>
-					<div id="cp_left_side" class="center_bg_full">
-						<div id="cp_view_toggle" class="center_bg_full"></div>
+				<div class="code_panel">
+					<div class="cp_content"></div>
+					<div class="cp_left_side center_bg_full">
+						<div class="cp_view_toggle center_bg_full"></div>
 					</div>
-					<div id="cp_right_side" class="center_bg_full">
-						<div id="cp_add"></div>
-						<div id="cp_delete"></div>
-						<div id="cp_run"></div>
+					<div class="cp_right_side center_bg_full">
+						<div class="cp_add"></div>
+						<div class="cp_delete"></div>
+						<div class="cp_run"></div>
 					</div>
 
 				</div>
 			</div>
 		</div>
-		<div id="logo_container">
+		<div class="logo_container">
 			<!-- logo parts  -->
-			<div id="part0"> </div>
-			<div id="part1"> </div>
-			<div id="part2"> </div>
-			<div id="part3"> </div>
+			<div class="part0"> </div>
+			<div class="part1"> </div>
+			<div class="part2"> </div>
+			<div class="part3"> </div>
 			
 		</div>
 	</div>
