@@ -85,13 +85,63 @@ $(document).ready(function() {
 		}
 	};
 
-
+	//code panel control object 
+	var codePanel = {
+		"viewState": "open",
+		"numCodeBits": 0
+	};
 
 	//game engine
 	var elJuego = {
+
 	};
 
 	//canvas mock up for screenshots
 
+
+
+
+
+	//GUI INTERACTION
+		//CODE PANEL
+		$(".gui_overlay").on("click", ".cp_view_toggle", function() {
+			//open and close code panel
+			if (codePanel.viewState === "open") {
+				$(".code_panel").animate({width: "100px"}, "fast", function() {
+					codePanel.viewState = "closed";
+				});
+			} else {
+				$(".code_panel").animate({width: "400px"}, "fast", function() {
+					codePanel.viewState = "open";
+				});
+			}
+		});
+
+		//control buttons
+		$(".gui_overlay").on("click", ".cp_agregar, .cp_eliminar, .cp_correr",
+			function() {
+				var cualBoton = $(this).attr("class");
+				switch(cualBoton) {
+					case "cp_agregar": 
+						if (codePanel.viewState === "open") {
+							if (codePanel.numCodeBits < 8) {
+								//only allow 8 code bits
+								
+
+							}
+						}
+					break;
+
+					case "cp_eliminar": 
+						//eliminate selected
+					break;
+
+					case "cp_correr": 
+						//run code
+
+					break;
+				}
+			}
+		);
 
 });
