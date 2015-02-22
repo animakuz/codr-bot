@@ -1,7 +1,6 @@
 // Titulo de Proyecto: Programaquina y los Secretos del Planeta Algoritmus;
 // Autor: Marcus Baptiste - ID: R0032401;
-
-$(document).ready(function() {
+window.onload = function() {
 	//game objects
 	function crearObjetosJuego(xPos, yPos, tipo) {
 		//these objects will only store information on the game object. The game engine
@@ -104,44 +103,45 @@ $(document).ready(function() {
 
 	//GUI INTERACTION
 		//CODE PANEL
-		$(".gui_overlay").on("click", ".cp_view_toggle", function() {
-			//open and close code panel
-			if (codePanel.viewState === "open") {
-				$(".code_panel").animate({width: "100px"}, "fast", function() {
-					codePanel.viewState = "closed";
-				});
-			} else {
-				$(".code_panel").animate({width: "400px"}, "fast", function() {
-					codePanel.viewState = "open";
-				});
-			}
-		});
+		// !change all this shit to work without jquery
+		// $(".gui_overlay").on("click", ".cp_view_toggle", function() {
+		// 	//open and close code panel
+		// 	if (codePanel.viewState === "open") {
+		// 		$(".code_panel").animate({width: "100px"}, "fast", function() {
+		// 			codePanel.viewState = "closed";
+		// 		});
+		// 	} else {
+		// 		$(".code_panel").animate({width: "400px"}, "fast", function() {
+		// 			codePanel.viewState = "open";
+		// 		});
+		// 	}
+		// });
 
-		//control buttons
-		$(".gui_overlay").on("click", ".cp_agregar, .cp_eliminar, .cp_correr",
-			function() {
-				var cualBoton = $(this).attr("class");
-				switch(cualBoton) {
-					case "cp_agregar": 
-						if (codePanel.viewState === "open") {
-							if (codePanel.numCodeBits < 8) {
-								//only allow 8 code bits
+		// //control buttons
+		// $(".gui_overlay").on("click", ".cp_agregar, .cp_eliminar, .cp_correr",
+		// 	function() {
+		// 		var cualBoton = $(this).attr("class");
+		// 		switch(cualBoton) {
+		// 			case "cp_agregar": 
+		// 				if (codePanel.viewState === "open") {
+		// 					if (codePanel.numCodeBits < 8) {
+		// 						//only allow 8 code bits
 								
 
-							}
-						}
-					break;
+		// 					}
+		// 				}
+		// 			break;
 
-					case "cp_eliminar": 
-						//eliminate selected
-					break;
+		// 			case "cp_eliminar": 
+		// 				//eliminate selected
+		// 			break;
 
-					case "cp_correr": 
-						//run code
+		// 			case "cp_correr": 
+		// 				//run code
 
-					break;
-				}
-			}
-		);
-
-});
+		// 			break;
+		// 		}
+		// 	}
+		// );
+	console.log("prueba");
+};
