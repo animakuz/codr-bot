@@ -1,79 +1,82 @@
 <!DOCTYPE html>
 <!-- 	Titulo de Proyecto: Programaquina y los Secretos del Planeta Algoritmus;
 		Autor: Marcus Baptiste - ID: R0032401; -->
-<html>
+<html lang="es">
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no" />
 	<meta charset="utf-8" />
 	<meta name="description" content="" />
 	<meta name="keywords" content=""/>
 	<title> Proyecto de Grado </title>
-	<link rel="stylesheet" type="text/css" href="estilos.css"/>
+	<link rel="stylesheet" type="text/css" href="css/styles.css"/>
 	<link rel="icon" href="favicon.ico" />
 </head>
 
 <body>
-	<div class="wrapper">
-		<div class="app_container">
-			<canvas class="game_canvas" width="800"  height="400">
-				<span class="mensaje_error"> No puedes correr este juego con este navegador.<br>
+	<div id="wrapper">
+		<div id="app_container">
+			<canvas id="game_canvas" width="800"  height="400">
+				<span class="message_error"> No puedes correr este juego con este navegador.<br>
 					Hable con un adulto para actualizar! </span>
 				<!-- better idea would be to check for availability and if not show splash screen -->
 			</canvas>
-			<div class="gui_overlay">
-				<div class="user_session"></div>
-				<!-- login page -->
-				<div class="login">
-					<label>Usuario</label><input type="text" name="usuario" />
-					<label>Clave</label><input type="password" name="clave" />
-				</div>
-				<!-- game main menu -->
-				<div class="game_menu">
-					
-				</div>
-				<!-- game options select screen -->
-				<div class="opciones">
-					
-				</div>
+			<div id="gui_overlay">
 				<!-- create new profile screen -->
-				<div class="crear_perfil">
+				<div id="user_create">
 					
 				</div>
-				<!-- change password screen (the whole password thing might end up being optional) -->
-				<div class="cambiar_clave">
+				
+				<!-- select user screen -->
+				<div id="user_select">
+					<label>Usuario</label><input type="text" name="user" />
+					<label>Clave</label><input type="password" name="pass" />
+				</div>
+
+				<!-- current user information -->
+				<div id="user_session"></div>
+				
+				<!-- game main menu -->
+				<div id="game_menu">
 					
 				</div>
+
+				<!-- game options select screen -->
+				<div id="game_options">
+					
+				</div>
+
 				<!-- level select screen (will be generated with javascript) -->
-				<div class="seleccionar_nivel">
+				<div id="level_select">
 					
 				</div>
 				
 				<!-- panel where code-bits will be placed -->
-				<div class="code_panel">
-					<div class="cp_content"></div>
-					<div class="cp_left_side center_bg_full">
-						<div class="cp_view_toggle center_bg_full"></div>
+				<div id="code_panel">
+					<div id="cp_content"></div>
+					<div id="cp_left_side" class="center_bg_full">
+						<div id="cp_view_toggle" class="center_bg_full"></div>
 					</div>
-					<div class="cp_right_side center_bg_full">
-						<div class="cp_agregar"></div>
-						<div class="cp_eliminar"></div>
-						<div class="cp_correr"></div>
+					<div id="cp_right_side" class="center_bg_full">
+						<div id="cp_add"></div>
+						<div id="cp_delete"></div>
+						<div id="cp_run"></div>
 					</div>
 
 				</div>
 			</div>
 		</div>
-		<div class="logo_container">
+		<div id="logo_container">
 			<!-- logo parts  -->
-			<div class="part0"> </div>
-			<div class="part1"> </div>
-			<div class="part2"> </div>
-			<div class="part3"> </div>
+			<div id="part0"> </div>
+			<div id="part1"> </div>
+			<div id="part2"> </div>
+			<div id="part3"> </div>
 			
 		</div>
 	</div>
+	<!-- <script src="js/phonegap.js"></script> -->
+	<!--script src="js/main.js"></script-->
 </body>
 
-<!-- <script src="phonegap.js"></script> -->
-<script src="scripts\main.js"></script>
+
 </html>
