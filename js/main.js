@@ -2,12 +2,33 @@
 // Autor: Marcus Baptiste - ID: R0032401;
 window.onload = function() {
 	//interface elements
-	var guiOverlay = document.getElementById("gui_overlay");
+	//main divisions
+	var wrapper = document.getElementsByClassName("wrapper")[0];
+	var appContainer = document.getElementsByClassName("app_container")[0];
+	var logoContainer = document.getElementsByClassName("logo_container")[0];
 
+	//gui overlay
+	var guiOverlay = document.getElementsByClassName("gui_overlay")[0];
+	var userCreate = document.getElementsByClassName("user_create")[0];
+	var userSelect = document.getElementsByClassName("user_select")[0];
+	var userSession = document.getElementsByClassName("user_session")[0];
+	var gameMenu = document.getElementsByClassName("game_menu")[0] ;
+	var gameOptions = document.getElementsByClassName("game_options")[0];
+	var levelSelect = document.getElementsByClassName("level_select")[0];
 
+	//code panel
+	var cpGUI = document.getElementsByClassName("code_panel");
+	var cpViewToggle = document.getElementsByClassName("cp_view_toggle")[0];
+	var cpAdd = document.getElementsByClassName("cp_add")[0];
+	var cpDelete = document.getElementsByClassName("cp_delete")[0];
+	var cpRun = document.getElementsByClassName("cp_run")[0];
+	var cpContent = document.getElementsByClassName("cp_content")[0];
+
+	//game view
+	var gameCanvas = document.getElementsByClassName("game_canvas")[0];
 
 	//game objects
-	function crearObjetosJuego(xPos, yPos, tipo) {
+	function createGameObjects(xPos, yPos, tipo) {
 		//these objects will only store information on the game object. The game engine
 		//will be responsible for rendering the visual element
 		return {
@@ -20,40 +41,41 @@ window.onload = function() {
 
 
 	//game levels
-	function crearNivel(id, titulo) {
+	function createLevel(id, title) {
 		//create level object
 		return {
 			"id": id,
-			"titulo": titulo,
-			"obstaculos": [ ],
-			"herramientas": [],
-			"meta": { },
-			"huecos": [ ],
-			"entrada": { },
-			"codigoPermitido": [ ],
-			"guias": [ ]
+			"title": title,
+			"obstacles": [ ],
+			"tools": [],
+			"goal": { },
+			"gaps": [ ],
+			"intro": { },
+			"allowedCodeBits": [ ],
+			"hints": [ ]
 		};
 	}
 
 
 	//code-bit (fragments of code - instruction bits to be place code panel) 
-	function crearCodeBit(nombre, tipo, posicion, numero) {
+	function createCodeBit(name, type, position, number) {
 		var codeBit = {
-			"nombre": nombre,
-			"tipo": tipo,
-			"posicion": posicion
+			"name": name,
+			"type": type,
+			"position": position,
+			"number" : number
 		};
 
-		if (tipo === 'ciclo') {
+		if (type === 'loop') {
 			//make code bit object for loop
 
-		} else if (tipo === 'condInicio') {
+		} else if (type === 'condIf') {
 			//make code bit object for start condition 
 
-		} else if (tipo === 'condElse') {
+		} else if (type === 'condElse') {
 			//make code bit object for else condition
 
-		} else if (tipo === 'function') {
+		} else if (type === 'function') {
 			//make code bit object for function
 
 		} else {
@@ -70,7 +92,7 @@ window.onload = function() {
 		"xPos": 0,
 		"yPos": 0,
 		"graphic": { /* graphics data (using image sprits) */},
-		"tema": "default",
+		"theme": "default",
 		"animation": {
 			"fall": [],
 			"fly": [],
@@ -106,45 +128,43 @@ window.onload = function() {
 
 	//GUI INTERACTION
 		//CODE PANEL
-		// !change all this shit to work with VELOCITY
-		$(".gui_overlay").on("click", ".cp_view_toggle", function() {
-			//open and close code panel
+		//toggle view - open and close 
+		cpViewToggle.onclick = function() {
 			if (codePanel.viewState === "open") {
-				$(".code_panel").animate({width: "100px"}, "fast", function() {
+				Velocity(cpGUI, {width: "100px"}, {duration: 300,  complete: function() {
 					codePanel.viewState = "closed";
-				});
+				}});
 			} else {
-				$(".code_panel").animate({width: "400px"}, "fast", function() {
+				Velocity(cpGUI, {width: "400px"}, {duration: 300,  complete: function() {
 					codePanel.viewState = "open";
-				});
+				}});
 			}
-		});
+		};
 
 		//control buttons
-		$(".gui_overlay").on("click", ".cp_agregar, .cp_eliminar, .cp_correr",
-			function() {
-				var cualBoton = $(this).attr("class");
-				switch(cualBoton) {
-					case "cp_agregar": 
-						if (codePanel.viewState === "open") {
-							if (codePanel.numCodeBits < 8) {
-								//only allow 8 code bits
-								
+		//add code bits
+		cpAdd.onclick = function() {
+			if (codePanel.viewState === "open") {
+				if (codePanel.numCodeBits < 8) {
+					//only allow 8 code bits
+					console.log("adding");
 
-							}
-						}
-					break;
-
-					case "cp_eliminar": 
-						//eliminate selected
-					break;
-
-					case "cp_correr": 
-						//run code
-
-					break;
 				}
 			}
-		);
-	console.log("prueba");
+		};
+
+		//delete code bits
+		cpDelete.onclick = function() {
+			if (codePanel.viewState === "open") {
+				//delete selected 
+				console.log("deleting");
+			}
+		};
+
+
+		//run code bits
+		cpRun.onclick = function() {
+			console.log("running");
+		};
+
 };

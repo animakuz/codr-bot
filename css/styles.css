@@ -6,7 +6,7 @@
 body { 
 	position: relative;
 	width: auto; height: auto;
-	background-color: .666; 
+	background-color: #666; 
 	color: white; 
 	font-size: 1em; font-family: Arial sans-serif;
 }
@@ -33,7 +33,7 @@ body {
 }
 
 /* bolded text general class (for more advanced styling and responsive) */
-.bold { font-size: 1.5em; font-weight: 600; color: .000; }
+.bold { font-size: 1.5em; font-weight: 600; color: #000; }
 
 /* main subdivisions */
 /*incase i decide to make a loader??*/
@@ -72,7 +72,7 @@ body {
 /* Code panel elements */
 .code_panel { width: 400px; height: 200px;
 	position: absolute; top: 0; left: 0;
-	overflow: hidden;
+	overflow: hidden; 
 }
 
 	.cp_left_side, .cp_right_side { 
@@ -82,26 +82,26 @@ body {
 	.cp_left_side {
 		width: 42px; height: 180px;
 		top: 0; left: 0;
-		background-image: url("img/code_panel_left_side.png");
+		background-image: url("../img/code_panel_left_side.png");
 	}
 
 	.cp_right_side {
 		width: 60px; height: 180px;
 		top: 0; right: 0; 
-		background-image: url("img/code_panel_right_side.png");
+		background-image: url("../img/code_panel_right_side.png");
 	}
 
 	.cp_view_toggle { 
 		width: 25px; height: 50px;
 		position: relative;
 		top: 64px; left: 8px;
-		background-image: url("img/cp_view_toggle.png");
+		background-image: url("../img/cp_view_toggle.png");
 		cursor: pointer;
 	}
 	
 	.cp_add, .cp_delete, .cp_run { 
 		width: 40px; height: 40px; position: relative;
-		background-image: url("img/cp_buttons.png");
+		background-image: url("../img/cp_buttons.png");
 		background-repeat: no-repeat; background-size: 120px 40px;
 		cursor: pointer; left: 16px;
 	}
@@ -132,7 +132,7 @@ body {
 	-ms-transform: translateY(-50%);
 	-o-transform: translateY(-50%);
 	transform: translateY(-50%); 
-	background-color: .f00;
+	background-color: #f00;
 	background-color: rgba(255,0,0,0.4);
 	width: 800px; height: 500px;
 }
