@@ -4,37 +4,37 @@ window.onload = function() {
 	//interface elements
 	//main divisions
 	var wrapper = document.getElementsByClassName("wrapper")[0];
-	var appContainer = document.getElementsByClassName("app_container")[0];
-	var logoContainer = document.getElementsByClassName("logo_container")[0];
+	var appContainer = document.getElementsByClassName("app-container")[0];
+	var logoContainer = document.getElementsByClassName("logo-container")[0];
 
 	//gui overlay
-	var guiOverlay = document.getElementsByClassName("gui_overlay")[0];
-	var userCreate = document.getElementsByClassName("user_create")[0];
-	var userSelect = document.getElementsByClassName("user_select")[0];
-	var userSession = document.getElementsByClassName("user_session")[0];
-	var gameMenu = document.getElementsByClassName("game_menu")[0] ;
-	var gameOptions = document.getElementsByClassName("game_options")[0];
-	var levelSelect = document.getElementsByClassName("level_select")[0];
+	var guiOverlay = document.getElementsByClassName("gui-overlay")[0];
+	var userCreate = document.getElementsByClassName("user-create")[0];
+	var userSelect = document.getElementsByClassName("user-select")[0];
+	var userSession = document.getElementsByClassName("user-session")[0];
+	var gameMenu = document.getElementsByClassName("game-menu")[0] ;
+	var gameOptions = document.getElementsByClassName("game-options")[0];
+	var levelSelect = document.getElementsByClassName("level-select")[0];
 
 	//code panel
-	var cpGUI = document.getElementsByClassName("code_panel");
-	var cpViewToggle = document.getElementsByClassName("cp_view_toggle")[0];
-	var cpAdd = document.getElementsByClassName("cp_add")[0];
-	var cpDelete = document.getElementsByClassName("cp_delete")[0];
-	var cpRun = document.getElementsByClassName("cp_run")[0];
-	var cpContent = document.getElementsByClassName("cp_content")[0];
+	var cpGUI = document.getElementsByClassName("code-panel");
+	var cpViewToggle = document.getElementsByClassName("cp-view-toggle")[0];
+	var cpAdd = document.getElementsByClassName("cp-add")[0];
+	var cpDelete = document.getElementsByClassName("cp-delete")[0];
+	var cpRun = document.getElementsByClassName("cp-run")[0];
+	var cpContent = document.getElementsByClassName("cp-content")[0];
 
 	//game view
-	var gameCanvas = document.getElementsByClassName("game_canvas")[0];
+	var gameCanvas = document.getElementsByClassName("game-canvas")[0];
 
 	//game objects
 	function createGameObjects(xPos, yPos, tipo) {
 		//these objects will only store information on the game object. The game engine
 		//will be responsible for rendering the visual element
 		return {
-			"xPos": xPos,
-			"yPos": yPos,
-			"tipo": tipo
+			xPos: xPos,
+			yPos: yPos,
+			tipo: tipo
 		};
 
 	}
@@ -44,15 +44,15 @@ window.onload = function() {
 	function createLevel(id, title) {
 		//create level object
 		return {
-			"id": id,
-			"title": title,
-			"obstacles": [ ],
-			"tools": [],
-			"goal": { },
-			"gaps": [ ],
-			"intro": { },
-			"allowedCodeBits": [ ],
-			"hints": [ ]
+			id: id,
+			title: title,
+			obstacles: [ ],
+			tools: [],
+			goal: { },
+			gaps: [ ],
+			intro: { },
+			allowedCodeBits: [ ],
+			hints: [ ]
 		};
 	}
 
@@ -60,10 +60,10 @@ window.onload = function() {
 	//code-bit (fragments of code - instruction bits to be place code panel) 
 	function createCodeBit(name, type, position, number) {
 		var codeBit = {
-			"name": name,
-			"type": type,
-			"position": position,
-			"number" : number
+			name: name,
+			type: type,
+			position: position,
+			number : number
 		};
 
 		if (type === 'loop') {
@@ -88,33 +88,33 @@ window.onload = function() {
 
 	//characters 
 	var avatar = {
-		"name": "P-1",
-		"xPos": 0,
-		"yPos": 0,
-		"graphic": { /* graphics data (using image sprits) */},
-		"theme": "default",
-		"animation": {
-			"fall": [],
-			"fly": [],
-			"step": [],
+		name: "P-1",
+		xPos: 0,
+		yPos: 0,
+		graphic: { /* graphics data (using image sprits) */},
+		theme: "default",
+		animation: {
+			fall: [],
+			fly: [],
+			step: [],
 
 		}
 	};
 
 	var guideBot = {
-		"name": "C-bot",
-		"graphic": { /* graphics data (using image sprits) */},
-		"animation": {
-			"talk": [],
-			"jump": [],
-			"signal": []
+		name: "C-bot",
+		graphic: { /* graphics data (using image sprits) */},
+		animation: {
+			talk: [],
+			jump: [],
+			signal: []
 		}
 	};
 
 	//code panel control object 
 	var codePanel = {
-		"viewState": "open",
-		"numCodeBits": 0
+		viewState: "open",
+		numCodeBits: 0
 	};
 
 	//game engine
