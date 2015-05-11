@@ -7,35 +7,63 @@
 	<meta charset="utf-8" />
 	<meta name="description" content="" />
 	<meta name="keywords" content=""/>
-	<title> Proyecto de Grado </title>
+	<title> Programaquina </title>
 	<link rel="stylesheet" type="text/css" href="css/styles.css"/>
-	<link rel="icon" href="favicon.ico" />
+	<link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
 </head>
 
 <body>
 	<div class="wrapper">
 		<div class="app-container">
 			<canvas class="game-canvas" width="800"  height="400">
-				<span class="message-error"> No puedes correr este juego con este navegador.<br>
-					Hable con un adulto para actualizar! </span>
+				<span class="message-error">
+					<span class='lang-eng'>You can't run this game with this browser.<br>
+					Speak with an adult to update!</span>
+					<span class='lang-esp'>No puedes correr este juego con este navegador.<br>
+					Hable con un adulto para actualizar!</span>
+				</span>
 				<!-- better idea would be to check for availability and if not show splash screen -->
 			</canvas>
 			<div class="gui-overlay">
 				<!-- create new profile screen -->
 				<div class="user-create">
-					
+					<div class='button-wrapper'>
+						<button class='gui-button blue-button'>
+							<span class='lang-esp'>Volver</span><span class='lang-eng'>Back</span>
+						</button>						
+						<button class='gui-button green-button'>
+							<span class='lang-esp'>Crear</span><span class='lang-eng'>Create</span>
+						</button>
+					</div>	
 				</div>
 				
-				<!-- select user screen -->
+				<!-- select user screen (collapsed)-->
 				<div class="user-select">
-					<label>Usuario</label><input type="text" name="user" />
-					<label>Clave</label><input type="password" name="pass" />
+					<h2 class='page-title'>
+						<span class='lang-esp'>Ingresar</span><span class='lang-eng'>Login</span>
+					</h2>
+					<label><span class='lang-eng'>Username</span><span class='lang-esp'>Usuario</span></label>
+					<input type="text" name="user" />
+					<label><span class='lang-eng'>Password</span><span class='lang-esp'>Clave</span></label>
+					<input type="password" name="pass" />
+					<div class='button-wrapper'>
+						<button class='gui-button blue-button'>
+							<span class='lang-esp'>Volver</span><span class='lang-eng'>Back</span>
+						</button>						
+						<button class='gui-button green-button'>
+							<span class='lang-esp'>Entrar</span><span class='lang-eng'>Enter</span>
+						</button>
+					</div>
+					<a href='#' class='gui-block-link'>
+						<span class='lang-esp'>Crear Nuevo Usuario</span>
+						<span class='lang-eng'>Create New Profile</span>
+					</a>
 				</div>
 
 				<!-- current user information -->
 				<div class="user-session"></div>
 				
-				<!-- game main menu -->
+				<!-- game main (start) menu -->
 				<div class="game-menu">
 					
 				</div>
