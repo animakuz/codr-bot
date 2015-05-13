@@ -23,6 +23,9 @@ body {
 	font-family: "space-font", arial, sans-serif; font-size: 1em; 
 }
 
+/*remove defaults on links*/
+a { text-decoration: none}
+
 /* Language options - (spanish language option by default) */
 .lang-eng { display: none; }
 
@@ -30,6 +33,7 @@ body {
 
 
 /* general property modifiers */
+
 .center-bg-full {
 	/* centered background scaled to fit element */
 	background-repeat: no-repeat; 
@@ -61,41 +65,94 @@ input {
 	height: 20px; 
 	line-height: 20px; 
 	padding: 4px 10px;
+	display: inline-block;
+}
+
+label {
+	display: inline-block; 
 }
 
 .gui-button {
 	display: inline-block; 
-	padding: 5px 10px; 
-	line-height: 20px; 
-	font-size: 20px; font-family: "Century Gothic", Century;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+ 	font-family: "Century Gothic", Century;
 	cursor: pointer;
 }
 
+	.small-button {
+		padding: 5px 10px; 
+		line-height: 20px; 
+		font-size: 20px;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+	}
 
-.green-button {
-	border: 2px solid #407F10;
-	background-color: #61c419; 
-	color: #333;
+	.large-button {
+		padding: 8px 20px; 
+		line-height: 26px; 
+		font-size: 26px;
+		border-radius: 8px;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+	}
+
+
+	.green-button {
+		border: 2px solid #407F10;
+		background-color: #61c419; 
+		color: #333;
+	}
+
+		.green-button:hover, .green-button:active {
+			background-color: #4D9913; 
+			color: #ddd;
+		}
+
+	.blue-button {
+		border: 2px solid #4B88C1;
+		background-color: #60abf8; 
+		color: #333;
+	}
+
+		.blue-button:hover, .blue-button:active {
+			background-color: #569ADD; 
+			color: #ddd;
+		}
+
+	.yellow-button {
+		border: 2px solid #B29B17;
+		background-color: #E5CA1D; 
+		color: #333;
+	}
+
+		.yellow-button:hover, .yellow-button:active {
+			background-color: #C9AF1A; 
+			color: #ddd;
+		}
+
+.gui-icon {
+	display: inline-block;
+	background-image: url("../img/icon-user.png");
+	background-size: 100%;
+	background-position: 50%;
+	background-repeat: no-repeat;
 }
 
-.green-button:hover, .green-button:active {
-	background-color: #4D9913; 
-	color: #ddd;
-}
+	.small-icon {
+		width: 16px; height: 16px;
+	}
 
-.blue-button {
-	border: 2px solid #4B88C1;
-	background-color: #60abf8; 
-	color: #333;
-}
+	.med-icon {
+		width: 24px; height: 24px;
+	}
 
-.blue-button:hover, .blue-button:active {
-	background-color: #569ADD; 
-	color: #ddd;
-}
+	.large-icon {
+		width: 32px; height: 32px;
+	}
+
+	.icon-arrow-down { background-image: url("../img/icon-arrow-down.png"); }
+	.icon-arrow-up { background-image: url("../img/icon-arrow-up.png"); }
+	.icon-user { background-image: url("../img/icon-user.png"); }
 
 .gui-block-link {
 	text-decoration: none; 
@@ -103,13 +160,17 @@ input {
 	color: #333; 
 	display: block; 
 	padding: 4px 0; 
-	text-align: center; 
-}
-
-.gui-block-link:hover, .gui-block-link:active {
+	width: 200px;
+	margin: 0 auto;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+	text-align: center; 
+	background-color: rgba(250,250,255,0.8);
+}
+
+.gui-block-link:hover, .gui-block-link:active {
+
 	background-color: rgba(20,20,20,0.5); 
 	color: #eee;
 	
@@ -176,13 +237,14 @@ input {
 		position: relative;
 		height: 40px;
 		margin: 10px auto 0;
+		display: block;
 	}
 
-	.user-select .gui-button:first-child, .user-create .gui-button:first-child {
+	.user-create .gui-button:first-child {
 		position: absolute; 
 		left: 0;
 	}	
-	.user-select .gui-button:last-child, .user-create .gui-button:last-child {
+	.user-create .gui-button:last-child {
 		position: absolute; 
 		right: 0;
 	}
@@ -197,50 +259,106 @@ input {
 
 /*select user (login)*/
 .user-select { 
-	display: none; 
+	display: block; 
 	width: 300px; 
 	margin:-115px auto 0; 
 	top: 50% ;
 }
 	.user-select label, .user-select input { 
 		width: 200px; 
-		display: block; 
 		margin: 0 auto;
 	}
 	.user-select label { 
 		padding: 10px 0 0 0; 
 		width: 220px;
 		font-weight: bold;
+		display: block;
 	}
 	.user-select input { 
 		margin-top: 0;
+		display: block;
 	}
 	.user-select .button-wrapper {
 		width: 220px;
 	}
 
+	.user-select .gui-button {
+		position: absolute;
+		right: 0;
+	}
 
-/*creat user */
+
+/*create user */
 .user-create {
-	display: block;
+	display: none;
 	width: 400px; 
 	margin:-115px auto 0; 
 	top: 50% ;
-	outline: 2px solid red;
 }
 
 	.user-create .button-wrapper {
 		width: 300px;
 	}
 
+	.input-group-wrapper {
+		width: 300px;
+		margin: 5px auto 0;
+	}
+
+
+	.input-group-wrapper label {
+		width: 100px;
+		position: relative; top: 4px;
+		text-align: right;
+	}
+
+	.input-group-wrapper input {
+	}
+
 .user-session { 
 	display: block; 
 	position: absolute;
-}
+	top: 2px; right: 5px;
+	width: auto; height: 20px;
+	padding: 2px 5px;
+	font-family: "Century Gothic", Century;
+	font-size: 16px;  line-height: 24px;
+	background-color: rgba(250,250,255,0.5);
+	border: 2px solid rgba(25,25,75,0.4);
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radiusus: 5px;
+	cursor: pointer;
+	overflow: hidden;
+
+}	
+	
+	.user-session-open {
+		height: 300px; 
+	}
+
+	.user-session-options {
+		width: 100%; height: auto;
+	}
+
+	.menu-option {
+		display: block;
+	}
 
 .game-menu { 
 	display: none;
+	position: relative;
+	top: 50%;
+	margin-top: -100px;
 }
+
+	.game-menu .button-wrapper {
+	}
+
+	.game-menu .gui-button {
+		display: block;
+		margin: 20px auto;	
+	}
 
 .game-options { 
 	display: none;
@@ -248,8 +366,55 @@ input {
 
 .level-select {
 	display: none;
+	text-align: center;
+	position: relative;
+	top: 50%;
+	margin-top: -80px;
 }
-	
+	.level-select .page-title {
+		margin-bottom: 20px;
+	}
+
+	.level-thumb {
+		/*dimensions will vary according to screen size*/
+		width: 80px; height: 60px;
+		border: 2px solid rgba(25,50,25,0.2);
+		display: inline-table;
+	}
+
+	.level-thumb:hover {
+		border: 2px dashed rgba(100,150,100,0.5);
+		outline: 2px solid rgba(90,120,90,0.8);
+	}
+
+	.level-passed {
+		background-color: rgba(200,250,200,0.8);
+	}
+
+	.level-open {
+		background-color: rgba(200,200,250,0.8);
+	}
+
+	.level-selected {
+		background-color: rgba(150,255,220, 0.9);
+		outline: 2px solid rgba(90,120,90,0.8);
+	}
+
+	.level-locked {
+		background-color: rgba(200,120,100,0.8);
+	}
+
+	.level-select .gui-button {
+		display: block;
+		margin: 20px auto 0;
+	}	
+
+
+	/*scroll arrows for showing levels that cannot be shown on screen because of space restrictions*/
+	.level-scroll-left, .level-scroll-right {
+		display: none;
+	}
+
 
 /* Code panel elements */
 .code-panel { 
@@ -336,11 +501,30 @@ input {
 	width: 480px; height: 240px;
 }
 
+/*media queries for small, med and large visible options (with upper and lower bounds)*/
+@media only screen and (min-width: 200px) and (max-width: 699px) {
+	.visible-med, .visible-large { 
+		display: none;
+	}
+}
+
+@media only screen and (min-width: 700px) and (max-width: 999px) {
+	.visible-small, .visible-large {
+		display: none;
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+	.visible-small, .visible-med {
+		display: none;
+	}
+}
 
 
-
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 300px) {
 	/*css styles for screen size adaptations (responsiveness)*/
+
+
 	.wrapper, .game-canvas {
 		width: 480px;
 		height: 240px;
@@ -349,6 +533,8 @@ input {
 	body { 
 		font-size: 1.1em;
 	}
+
+
 }
 
 @media only screen and (min-width: 600px) {
@@ -361,7 +547,6 @@ input {
 	body { 
 		font-size: 1.2em;
 	}
-
 }
 
 @media only screen and (min-width: 700px) {
@@ -386,6 +571,10 @@ input {
 	body { 
 		font-size: 1.2em;
 	}
+
+	.gui-block-link {
+		width: 250px;
+	}
 }
 
 @media only screen and (min-width: 840px) {
@@ -409,6 +598,10 @@ input {
 
 	body { 
 		font-size: 1.5em;
+	}
+
+	.gui-block-link {
+		width: 300px;
 	}
 }
 
