@@ -1,0 +1,89 @@
+-- NEXT TASKS TO TACKLE --
+	-- MAKE TUTOR SIGNATURE PAGE FOR THESIS
+	-- MAKE OPTIONS AND USER PROFILE INTERFACES
+	-- ADD STUB CODE TO ALL USER INTERFACES
+
+DEVELOPMENT CHECKLIST
+
+
+	Semana 3 – Implementación de la Interfaz de Usuario
+
+-	Elementos de la interfaz fuera del juego
+		o	Logeo (IMPLEMENT WITH JAVASCRIPT OBJECTS, JSON AND LOCALSTORAGE)
+		o	Menú inicial del juego
+		o	Opciones
+		o	Selección de niveles
+		o	Vista de datos del usuario
+		o	Barra de información de usuario
+
+
+	Semana 4 - 6 – Diseño e Implementación de Funcionalidad Base del Juego
+-	Funcionalidad general
+		o	Unidades de tiempo
+		o	Unidades de distancia
+
+-	Code panel
+		o	Agregar code-bit
+		o	Eliminar code-bit
+		o	Correr 
+
+-	Acciones del robot
+		o	Paso
+		o	Esperar
+		o	Interactuaciones
+			?	Herramientas
+			?	Obstáculos
+		o	Alcanzar blanco
+
+-	Comandos (code-bits)
+		o	Paso
+		o	Interactuar
+		o	Esperar
+		o	Condición
+		o	Ciclo
+
+-	Gráficos básicos
+		o	Fondo
+		o	Caracteres
+		o	Interfaz de usuario
+		o	Objetos del juego
+
+-	Funcionalidad de objetos del juego
+		o	Herramientas
+			?	Palancas
+			?	Puentes
+			?	Detonadores
+			?	Bombas
+		o	Obstáculos
+			?	Rocas
+			?	Huecos
+			?	Paredes
+		o	Blanco
+
+-	Caracteres
+		o	Programaquina
+		o	C-bot
+
+
+	Semana 7 – 8 – Diseño Detallado de Niveles y Historia
+-	Diseño del rompecabezas de cada nivel
+-	Implementación de la funcionalidad general de niveles
+-	Implementación de niveles especificos
+-	Implementación de elementos de la historia (entradas, guias etc)
+
+
+
+	Semana 9 – 10 – Diseño Detallado e Implementación de Gráficos
+-	Diseño y desarrollo de animaciones
+-	Implementación de gráficos y animaciones
+-	Diseño de gráficos adicionales (fondos, historia etc.)
+
+
+
+	Semana 11 – Retoques y Detalles
+-	Pruebas extensivas de partes del juego
+-	Correcciones y refactorización general
+-	Creación de producto final para móviles con Phonegap
+
+
+	Semana 12 – Pruebas de Usuario y Análisis

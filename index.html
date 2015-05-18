@@ -25,6 +25,26 @@
 				<!-- better idea would be to check for availability and if not show splash screen -->
 			</canvas>
 			<div class="gui-overlay">
+				<!-- select user screen-->
+				<div class="user-select">
+					<h2 class='page-title'>
+						<span class='lang-eng'>Login</span><span class='lang-esp'>Ingresar</span>
+					</h2>
+					<label><span class='lang-eng'>Username</span><span class='lang-esp'>Usuario</span></label>
+					<input type="text" name="user" id='txt-user' />
+					<label><span class='lang-eng'>Password</span><span class='lang-esp'>Clave</span></label>
+					<input type="password" name="pass" id='txt-pass' />
+					<div class='button-wrapper'>					
+						<button class='gui-button small-button green-button' id='btn-login'>
+							<span class='lang-eng'>Enter</span><span class='lang-esp'>Entrar</span>
+						</button>
+					</div>
+					<button class='gui-button small-button blue-button' id='btn-create-profile'>
+						<span class='lang-eng'>Create New Profile</span>
+						<span class='lang-esp'>Crear Nuevo Usuario</span>
+					</button>
+				</div>
+
 				<!-- create new profile screen -->
 				<div class="user-create">
 					<h2 class='page-title'>
@@ -34,14 +54,14 @@
 						<label>
 							<span class='lang-eng'>First Name:</span><span class='lang-esp'>Nombre:</span>
 						</label>
-						<input type="text" name="firstname" />
+						<input type="text" name="firstName" />
 					</div>
 
 					<div class='input-group-wrapper'>
 						<label>
 							<span class='lang-eng'>Last Name:</span><span class='lang-esp'>Apellido:</span>
 						</label>
-						<input type="text" name="lastname" />
+						<input type="text" name="lasName" />
 					</div>
 
 					<div class='input-group-wrapper'>
@@ -55,47 +75,24 @@
 						<label>
 							<span class='lang-eng'>Password:</span><span class='lang-esp'>Clave:</span>
 						</label>
-						<input type="text" name="pass" />
+						<input type="password" name="pass" />
 					</div>
 
-					<div class='button-wrapper'>
-						<button class='gui-button small-button blue-button'>
-							<span class='lang-esp'>Volver</span><span class='lang-eng'>Back</span>
-						</button>						
-						<button class='gui-button small-button green-button'>
+					<div class='button-wrapper'>					
+						<button class='gui-button small-button green-button' id='btn-create-user'>
 							<span class='lang-esp'>Crear</span><span class='lang-eng'>Create</span>
 						</button>
 					</div>	
 
-					<button class='gui-button large-button blue-button back-button'>
+					<button class='gui-button small-button blue-button back-button'>
 						<span class='lang-eng'>Back</span>
 						<span class='lang-esp'>Atras</span>
 					</button>
 				</div>
 				
-				<!-- select user screen-->
-				<div class="user-select">
-					<h2 class='page-title'>
-						<span class='lang-eng'>Login</span><span class='lang-esp'>Ingresar</span>
-					</h2>
-					<label><span class='lang-eng'>Username</span><span class='lang-esp'>Usuario</span></label>
-					<input type="text" name="user" />
-					<label><span class='lang-eng'>Password</span><span class='lang-esp'>Clave</span></label>
-					<input type="password" name="pass" />
-					<div class='button-wrapper'>					
-						<button class='gui-button small-button green-button'>
-							<span class='lang-eng'>Enter</span><span class='lang-esp'>Entrar</span>
-						</button>
-					</div>
-					<a href='#' class='gui-block-link'>
-						<span class='lang-eng'>Create New Profile</span>
-						<span class='lang-esp'>Crear Nuevo Usuario</span>
-					</a>
-				</div>
-
 				<!-- current user information -->
-				<div class="user-session user-session-open">
-					<div class='user-session-bar'>
+				<div class="user-session unselectable">
+					<div class='user-session-bar '>
 						<span class='gui-icon small-icon icon-user visible-small'></span>
 						<span class='gui-icon med-icon icon-user visible-med'></span>
 						<span class='gui-icon large-icon icon-user visible-large'></span>
@@ -105,14 +102,14 @@
 						<span class='gui-icon large-icon icon-arrow-down visible-large'></span>
 					</div>
 					<div class='user-session-options'> 	
-						<a href='#' class='menu-option'>
+						<a href='#' class='menu-option' id='user-session-profile'>
 							<span class='gui-icon small-icon icon-user visible-small'></span>
 							<span class='gui-icon med-icon icon-user visible-med'></span>
 							<span class='gui-icon large-icon icon-user visible-large'></span>
 							<span class='lang-eng'>Profile</span>
 							<span class='lang-esp'>Perfil</span>
 						</a>
-						<a href='#' class='menu-option'>
+						<a href='#' class='menu-option' id='user-session-exit'>
 							<span class='gui-icon small-icon icon-user visible-small'></span>
 							<span class='gui-icon med-icon icon-user visible-med'></span>
 							<span class='gui-icon large-icon icon-user visible-large'></span>

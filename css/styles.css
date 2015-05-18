@@ -1,6 +1,6 @@
 /*
 	Project Title: Programaquina y los Secretos del Planeta Algoritmus;
-	Author: Marcus Baptiste - ID: R0032401;
+	Author: Marcus Baptiste 
 */
 
 /*fonts */
@@ -12,8 +12,6 @@
 	font-family: "rvd-code28";
 	src: url("../fonts/rvd_code28.ttf") format("truetype");
 }
-
-
 
 body { 
 	position: relative; 
@@ -34,6 +32,7 @@ a { text-decoration: none}
 
 /* general property modifiers */
 
+
 .center-bg-full {
 	/* centered background scaled to fit element */
 	background-repeat: no-repeat; 
@@ -47,6 +46,19 @@ a { text-decoration: none}
 	font-weight: 600; 
 	color: #000; 
 }
+
+.unselectable {
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
+}
+
 
 /*page content*/
 .page-title {
@@ -240,26 +252,10 @@ label {
 		display: block;
 	}
 
-	.user-create .gui-button:first-child {
-		position: absolute; 
-		left: 0;
-	}	
-	.user-create .gui-button:last-child {
-		position: absolute; 
-		right: 0;
-	}
-
-	.user-select label {
-
-	}
-
-	.user-select input {
-
-	}
 
 /*select user (login)*/
 .user-select { 
-	display: block; 
+	display: none; 
 	width: 300px; 
 	margin:-115px auto 0; 
 	top: 50% ;
@@ -287,6 +283,11 @@ label {
 		right: 0;
 	}
 
+	#btn-create-profile {
+		position: relative;
+		display: block;
+		margin: 10px auto 0;
+	}
 
 /*create user */
 .user-create {
@@ -312,11 +313,13 @@ label {
 		text-align: right;
 	}
 
-	.input-group-wrapper input {
+	#btn-create-user {
+		position: absolute;
+		right: 0;
 	}
 
 .user-session { 
-	display: block; 
+	display: none; 
 	position: absolute;
 	top: 2px; right: 5px;
 	width: auto; height: 20px;
@@ -334,7 +337,11 @@ label {
 }	
 	
 	.user-session-open {
-		height: 300px; 
+		height: 80px; 
+	}
+
+	.user-session-bar {
+
 	}
 
 	.user-session-options {
@@ -344,6 +351,16 @@ label {
 	.menu-option {
 		display: block;
 	}
+
+	.user-name {
+		margin-right: 20px;
+	}
+
+	.user-name, .user-session .lang-eng, .user-session .lang-esp {
+		position: relative;
+		top: -2px;
+	}
+
 
 .game-menu { 
 	display: none;
@@ -501,29 +518,36 @@ label {
 	width: 480px; height: 240px;
 }
 
+
+.gui-active {
+	/*section of gui that is currently active*/
+	display: block;
+}
+
+
 /*media queries for small, med and large visible options (with upper and lower bounds)*/
-@media only screen and (min-width: 200px) and (max-width: 699px) {
-	.visible-med, .visible-large { 
-		display: none;
+	@media only screen and (min-width: 200px) and (max-width: 699px) {
+		.visible-med, .visible-large { 
+			display: none;
+		}
 	}
-}
 
-@media only screen and (min-width: 700px) and (max-width: 999px) {
-	.visible-small, .visible-large {
-		display: none;
+	@media only screen and (min-width: 700px) and (max-width: 999px) {
+		.visible-small, .visible-large {
+			display: none;
+		}
 	}
-}
 
-@media only screen and (min-width: 1000px) {
-	.visible-small, .visible-med {
-		display: none;
+	@media only screen and (min-width: 1000px) {
+		.visible-small, .visible-med {
+			display: none;
+		}
 	}
-}
-
+/*--------------------------------------------------------------------------------*/
 
 @media only screen and (min-width: 300px) {
 	/*css styles for screen size adaptations (responsiveness)*/
-
+	/*SMALL SIZE LOWER LIMIT*/
 
 	.wrapper, .game-canvas {
 		width: 480px;
@@ -532,9 +556,8 @@ label {
 
 	body { 
 		font-size: 1.1em;
+		background-color: red;
 	}
-
-
 }
 
 @media only screen and (min-width: 600px) {
@@ -551,6 +574,7 @@ label {
 
 @media only screen and (min-width: 700px) {
 	/*css styles for screen size adaptations (responsiveness)*/
+	/*MEDIUM SIZE LOWER LIMIT*/
 	.wrapper, .game-canvas {
 		width: 640px;
 		height: 320px;
@@ -558,7 +582,27 @@ label {
 
 	body { 
 		font-size: 1.2em;
+		background-color: green;
 	}
+
+	.user-session { 
+		top: 4px; right: 5px;
+		height: 26px;
+		padding: 4px 10px;
+		font-size: 18px;  line-height:28px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radiusus: 5px;
+	}	
+		
+		.user-session-open {
+			height: 100px; 
+		}
+
+		.user-name, .user-session .lang-eng, .user-session .lang-esp {
+			top: -4px;
+		}
+
 }
 
 @media only screen and (min-width: 750px) {
@@ -608,6 +652,7 @@ label {
 
 @media only screen and (min-width: 1000px) {
 	/*css styles for screen size adaptations (responsiveness)*/
+	/*LARGE SIZE LOWER LIMIT*/
 	.wrapper, .game-canvas {
 		width: 960px;
 		height: 480px;
@@ -615,7 +660,26 @@ label {
 
 	body { 
 		font-size: 1.5em;
+		background-color: blue;
 	}
+
+	.user-session { 
+		top: 4px; right: 5px;
+		height: 30px;
+		padding: 5px 10px;
+		font-size: 20px;  line-height:32px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radiusus: 5px;
+	}	
+		
+		.user-session-open {
+			height: 120px; 
+		}
+
+		.user-name, .user-session .lang-eng, .user-session .lang-esp {
+			top: -6px;
+		}
 }
 
 
