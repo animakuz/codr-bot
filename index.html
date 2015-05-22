@@ -25,26 +25,6 @@
 				<!-- better idea would be to check for availability and if not show splash screen -->
 			</canvas>
 			<div class="gui-overlay">
-				<!-- select user screen-->
-				<div class="user-select">
-					<h2 class='gui-page-title'>
-						<span class='lang-eng'>Login</span><span class='lang-esp'>Ingresar</span>
-					</h2>
-					<label><span class='lang-eng'>Username</span><span class='lang-esp'>Usuario</span></label>
-					<input type="text" name="user" id='txt-user' />
-					<label><span class='lang-eng'>Password</span><span class='lang-esp'>Clave</span></label>
-					<input type="password" name="pass" id='txt-pass' />
-					<div class='button-wrapper'>					
-						<button class='gui-button small-button green-button' id='btn-login'>
-							<span class='lang-eng'>Enter</span><span class='lang-esp'>Entrar</span>
-						</button>
-					</div>
-					<button class='gui-button small-button blue-button' id='btn-create-profile'>
-						<span class='lang-eng'>Create New Profile</span>
-						<span class='lang-esp'>Crear Nuevo Usuario</span>
-					</button>
-				</div>
-
 				<!-- create new profile screen -->
 				<div class="user-create">
 					<h2 class='gui-page-title'>
@@ -84,12 +64,32 @@
 						</button>
 					</div>	
 
-					<button class='gui-button small-button blue-button back-button'>
+					<button class='gui-button small-button blue-button back-button' data-screen='user-create'>
 						<span class='lang-eng'>Back</span>
 						<span class='lang-esp'>Atras</span>
 					</button>
 				</div>
 				
+				<!-- select user screen-->
+				<div class="user-select">
+					<h2 class='gui-page-title'>
+						<span class='lang-eng'>Login</span><span class='lang-esp'>Ingresar</span>
+					</h2>
+					<label><span class='lang-eng'>Username</span><span class='lang-esp'>Usuario</span></label>
+					<input type="text" name="user" id='txt-user' />
+					<label><span class='lang-eng'>Password</span><span class='lang-esp'>Clave</span></label>
+					<input type="password" name="pass" id='txt-pass' />
+					<div class='button-wrapper'>					
+						<button class='gui-button small-button green-button' id='btn-login'>
+							<span class='lang-eng'>Enter</span><span class='lang-esp'>Entrar</span>
+						</button>
+					</div>
+					<button class='gui-button small-button blue-button' id='btn-create-profile'>
+						<span class='lang-eng'>Create New Profile</span>
+						<span class='lang-esp'>Crear Nuevo Usuario</span>
+					</button>
+				</div>
+
 				<!-- current user information -->
 				<div class="user-session unselectable">
 					<div class='user-session-bar '>
@@ -171,7 +171,7 @@
 						<div></div>
 					</div>
 
-					<button class='gui-button small-button blue-button back-button'>
+					<button class='gui-button small-button blue-button back-button' data-screen='game-options'>
 						<span class='lang-eng'>Back</span>
 						<span class='lang-esp'>Atras</span>
 					</button>
@@ -233,6 +233,8 @@
 	
 	<!-- main scripts -->
 	<script src="js/base.js"></script>
+	<script src="js/game.js"></script>
+	<script src="js/user.js"></script>
 	<script src="js/main.js"></script>
 </body>
 

@@ -1,6 +1,9 @@
 // Project Title: Programaquina y los Secretos del Planeta Algoritmus
 // Author: Marcus Baptiste - ID: R0032401
 
+//MAIN SCRIPT FILE - MAKE ASSIGNMENTS OF REFERENCES TO VISUAL COMPONENTS, BIND EVENTS AND BRING 
+//TOGETHER THE DIFFERENT PARTS OF THE SOFTWARE
+
 /* TODO 
 	- FIX STUFF COMMENTED WITH TODO
 	- MAKE PROPER MESSAGE DISPLAYING FUNCTION SIMILAR TO SWEET ALERT BUT STYLED TO THE GAME
@@ -8,9 +11,6 @@
 
 */
 window.onload = function() {
-	//user that is currently logged in 
-	var currentUser;
-
 	//interface elements
 	//main divisions
 	var wrapper = document.getElementsByClassName("wrapper")[0];
@@ -65,187 +65,12 @@ window.onload = function() {
 	//check boxes
 	var checkBoxes = document.querySelectorAll('.gui-check-box');
 
-	//--GAME BASE FUNCTIONS AND OBJECTS----------------------------------------------------------------
-
-	//game objects
-	var createGameObjects = function(xPos, yPos, tipo) {
-		//these objects will only store information on the game object. The game engine
-		//will be responsible for rendering the visual element
-		return {
-			xPos: xPos,
-			yPos: yPos,
-			tipo: tipo
-		};
-	};
 
 
-	//game levels
-	var createLevel = function(id, title, options) {
-		//create level object
-		return {
-			id: id,
-			title: title,
-			obstacles: [ ], //array of obstacle game objects
-			tools: [], //array of tools game objects
-			goal: { }, //location of goal
-			gaps: [ ], //array of gap locations
-			intro: { }, 
-			allowedCodeBits: [ ], //array of code bits allowed
-			hints: [ ] //array of hints to be shown
-		};
-	};
 
-
-	//code-bit (fragments of code - instruction bits to be place code panel) 
-	var createCodeBit = function(name, type, position, number) {
-		var codeBit = {
-			name: name,
-			type: type,
-			position: position,
-			number : number
-		};
-
-		if (type === 'loop') {
-			//make code bit object for loop
-
-		} else if (type === 'condIf') {
-			//make code bit object for start condition 
-
-		} else if (type === 'condElse') {
-			//make code bit object for else condition
-
-		} else if (type === 'function') {
-			//make code bit object for function
-
-		} else {
-			//make code bit object for any other instruction
-
-		}
-
-		return codeBit;
-	};
-
-	//characters 
-	var avatar = {
-		name: "P-1",
-		xPos: 0,
-		yPos: 0,
-		graphic: { /* graphics data (using image sprits) */},
-		theme: "default",
-		animation: {
-			fall: [],
-			fly: [],
-			step: [],
-
-		}
-	};
-
-	var guideBot = {
-		name: "C-bot",
-		graphic: { /* graphics data (using image sprits) */},
-		animation: {
-			talk: [],
-			jump: [],
-			signal: []
-		}
-	};
-
-	//code panel control object 
-	var codePanel = {
-		viewState: "open",
-		numCodeBits: 0
-	};
-
-	//game engine
-	var theGame = {
-
-	};
-
-
-	//-- END GAME BASE FUNCTIONS AND OBJECTS --------------
-
-
-	//----NON-CORE FUNCTIONS AND OBJECTS (GUI STUFF ETC) ----------------------------
-	//User level info prototype ( for showing in completed levels part of profile)
-	var UserLevel = {
-		id: -1,
-		title: "",
-		preview: "", //image link to preview
-		description: "",
-		grade: 0, //0 =failed, 1 = bronze, 2 = silver, 3 = gold
-	};
-
-	//user prototype
-	var User = {
-		firstName: "",
-		lastName: "",
-		user: "",
-		pass: "",
-		options: {
-			language: "spanish",
-			background: "bg1",
-			sound: "off"
-		},
-		data: {
-			totalPoints: 0,
-			levelsCleared: [], //array of levels objects with specific values	
-			achievements: [],	//array of achievement objects with specific values	   
-		}
-	};
-
-	//load user interface with user specific options and data
-	var loadUser = function(user) {
-		//switch to start page 
-		
-		removeClass(userSelect, 'gui-active');
-		addClass(userSession, 'gui-active');
-		addClass(gameMenu, "gui-active");
-
-		//set current user
-		currentUser = user;
-
-		//set current user in localstorage
-		localStorage.setItem('currentUser', currentUser.user);
-
-		//set session info
-		var userSessionName = userSessionBar.querySelectorAll('.user-name')[0];
-		userSessionName.innerHTML = currentUser.user;
-
-		//set options 
-	};
-
-	//USER SESSION EXIT FUNCTION ( for both exit buttons in session bar and options menu)
-	var exitUserSession = function() {
-		//get confirmation
-		if (confirm('Are you sure you want to exit?')) {
-			//exit confirmed - exit procedure
-
-			//clear current user object
-			currentUser = null;
-
-			//clear current user from local storage
-			localStorage.removeItem('currentUser');
-
-			//hide all active gui elements
-			var i;
-			var activeElements = document.querySelectorAll('.gui-active');
-			for (i=0; i<activeElements.length; i++) {
-				removeClass(activeElements[i], 'gui-active');
-			}
-
-			//show start screen (user select)
-			addClass(userSelect, 'gui-active');;
-		} else {
-			return false;
-		}
-	};
-
+	// -- BINDINGS AND EVENTS -----------------------------------------------------------------
 	
-	//-- END NON-CORE FUNCTIONS AND OBJECT-------------------
-
-
-	// -- GUI INTERACTION -----------------------------------------------------------------
-		//-- CODE PANEL -------------------------------------------------------------------
+	//-- CODE PANEL -------------------------------------------------------------------
 		//toggle view - open and close 
 		cpViewToggle.onclick = function() {
 			if (codePanel.viewState === "open") {
@@ -268,7 +93,6 @@ window.onload = function() {
 					//changed from there)
 					console.log("adding");
 				} else {
-
 					console.log("you've reached the maximum number of code bits");
 				}
 			}
@@ -292,103 +116,9 @@ window.onload = function() {
 			console.log("running");
 		};
 
-		//------END CODE PANEL ----------------
+	//------END CODE PANEL ----------------
 
-
-		//-- USER SELECT -----------------------------------------------------------------
-		//LOGIN PROCEDURE
-		var loginProc = function() {
-			var inputs = userSelect.querySelectorAll('input');
-			var validated = true;
-			var i, respMessage = '';
-			
-			//validations
-			for (i=0; i<inputs.length; i++) {
-				var validation = valInput(inputs[i]);
-				if (!validation.success ) {
-					validated = false;
-					respMessage = validation["message" + language];
-					break;
-				}
-			}
-
-			if (validated) {
-				//user input valid check login
-				var userName = inputs[0].value;
-				var userAccess = getUserData(userName);
-				if (userAccess) {
-					//user exists check password
-					if (userAccess.pass === inputs[1].value) {
-						//correct password
-						switch (language) {
-							case 'Eng': 
-								respMessage = 'You have successfully logged in!';
-								break;
-							case 'Esp':
-								respMessage = 'Usted ha ingresado exitosamente!';
-								break;
-						}
-
-						alert(respMessage);
-
-						loadUser(userAccess);
-
-					} else {
-						//incorrect password
-						switch (language) {
-							case 'Eng': 
-								respMessage = 'The password you have entered is incorrect!';
-								break;
-							case 'Esp':
-								respMessage = 'La clave que introdujo está incorrecto!';
-								break;
-						}
-
-						alert(respMessage);
-					}
-				} else {
-					//error - user doesn't exist
-					switch (language) {
-						case 'Eng':
-							respMessage = "This user doesn't exist!";
-							break;
-
-						case 'Esp':
-							respMessage = 'Este usuario no existe!';
-							break;
-					}
-
-					alert(respMessage);
-				}
-			} else {
-				alert(respMessage);
-			}
-
-		};
-
-		btnLogin.onclick = loginProc;
-		//also set login proc for enter keypress event of inputs
-
-		(function() { 
-			var inputs = userSelect.querySelectorAll('input');
-			var i;
-
-			for (i=0; i<inputs.length; i++) {
-				inputs[i].onkeyup = function(event) {
-					if (event.which == 13)  {
-						loginProc();
-					}
-				};
-			}
-
-		})();
-
-
-		//---------END USER SELECT ---------------
-
-
-
-		//-- USER CREATE ------------------------------------------------------------------
+	//-- USER CREATE ------------------------------------------------------------------
 		btnCreateUser.onclick = function() {
 			//get values
 			var inputs = userCreate.querySelectorAll('input');
@@ -416,6 +146,9 @@ window.onload = function() {
 				alert(respMessage);
 				//hide user create and show login - TODO - ADD FADE IN FADE OUT EFFECT
 				if (res.success)  {
+					//clear inputs
+					clearFields(userCreate);
+
 					//switch active to user select
 					removeClass(userCreate, 'gui-active');
 					addClass(userSelect, 'gui-active');
@@ -425,40 +158,59 @@ window.onload = function() {
 				alert(respMessage);
 			}
 		};
+	//--------END USER CREATE ------------------
+
+	//-- USER SELECT -----------------------------------------------------------------
+		btnLogin.onclick = function() {
+			loginProc(userSelect, gameMenu, userSession);
+		};
 		
-		//--------END USER CREATE ------------------
+		//also set login proc for enter keypress event of inputs
+		(function() { 
+			var inputs = userSelect.querySelectorAll('input');
+			var i;
 
+			for (i=0; i<inputs.length; i++) {
+				inputs[i].onkeyup = function(event) {
+					if (event.which == 13)  {
+						loginProc(userSelect, gameMenu, userSession);
+					}
+				};
+			}
 
-		//-- USER SESSION ----------------------------------------------------------------
+		})();
+	//---------END USER SELECT ---------------
 
+	//-- USER SESSION ----------------------------------------------------------------
 		userSessionBar.onclick = function() {
 			//open and close user info bar
 			toggleClass(this.parentNode, "user-session-open");
 		};
+	//--------END USER SESSION -----------------
 
-		//--------END USER SESSION -----------------
 
-
-		//-- START MENU ------------------------------------------------------------------
+	//-- START MENU ------------------------------------------------------------------
 		linkGameOptions.onclick = function() {
 			//hide start menu and show options
 			removeClass(gameMenu, "gui-active");
 			addClass(gameOptions, "gui-active");
 		};
-
-		//-------END START MENU -------------------
-
-
-		//-- OPTIONS MENU ----------------------------------------------------------------
-
-		//------END OPTIONS MENU-------------------
+	//-------END START MENU -------------------
 
 
-		//-- LEVEL SELECT ----------------------------------------------------------------
+	//-- OPTIONS MENU ----------------------------------------------------------------
 
-		//------END LEVEL SELECT ------------------
+	//------END OPTIONS MENU-------------------
 
-		//--- OTHER GUI ELEMENTS ----------------------------------------------------------
+
+	//-- LEVEL SELECT ----------------------------------------------------------------
+
+	//------END LEVEL SELECT ------------------
+
+
+
+
+	//--- OTHER GUI ELEMENTS ----------------------------------------------------------
 		//check boxes
 		(function() {
 			var i;
@@ -469,12 +221,11 @@ window.onload = function() {
 				};
 			}
 		})();
-
-		//------END OTHER GUI ELEMENTS --------------
-
-		//-- NAVIGATION--------------------
+	//------END OTHER GUI ELEMENTS --------------
 
 
+
+	//-- NAVIGATION-------------------------------------------------------------
 		//BACK BUTTONS
 		(function() {
 			var i;
@@ -482,14 +233,11 @@ window.onload = function() {
 			//assign back button navigation events to back buttons
 			for (i=0; i<backButtons.length; i++) {
 				backButtons[i].onclick = function(){
-					var activeGui = document.querySelectorAll(".gui-active")[0];
-					//TODO - ADD CASES FOR DIFFERENT SECTIONS AS YOU NEED THEM
-					switch(activeGui) {
-						case userSelect :
-							//there's no back for user -select
-							break;
+					var currentScreen = this.getAttribute('data-screen');
 
-						case userCreate :
+					//TODO - ADD CASES FOR DIFFERENT SECTIONS AS YOU NEED THEM
+					switch(currentScreen) {
+						case 'user-create' :
 							//empty fields in case they had anything
 							clearFields(userCreate);
 
@@ -498,8 +246,7 @@ window.onload = function() {
 							addClass(userSelect, 'gui-active');
 							break;
 
-						case gameOptions :
-							alert('test');
+						case 'game-options' :
 							//switch active to user game menu
 							removeClass(gameOptions, 'gui-active');
 							addClass(gameMenu, 'gui-active');
@@ -507,7 +254,6 @@ window.onload = function() {
 					}
 				};
 			}
-
 		})();
 
 
@@ -530,29 +276,26 @@ window.onload = function() {
 		};
 
 		//Exit
-		linkSessionExit.onclick = exitUserSession;
+		linkSessionExit.onclick = function() {
+			exitUserSession(userSelect);
+		};
 
+	//------END NAVIGATION --------------
 
-
-		//------END NAVIGATION --------------
-
-		
-		//--- FINAL INITIALIZATIONS-----------------------------
-		//CHECK FOR LOGGED IN USER AND LOAD
 	
+	//--- FINAL INITIALIZATIONS-----------------------------
+		//CHECK FOR LOGGED IN USER AND LOAD
+		
 		var loggedUserName = localStorage.getItem('currentUser');
-
 		if (loggedUserName) {
 			//user already logged - automatically load start menu
 			var loggedUser = getUserData(loggedUserName);
-			loadUser(loggedUser);
+			loadUser(loggedUser, userSelect, gameMenu, userSession);
 		} else {
 			//no user logged - show user select screen
 			addClass(userSelect, 'gui-active');
 		}
 
-
-
-		//------END FINAL INITIALIZATIONS -----------
+	//------END FINAL INITIALIZATIONS -----------
 
 };
