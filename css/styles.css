@@ -61,12 +61,18 @@ a { text-decoration: none}
 
 
 /*page content*/
-.page-title {
+.gui-page-title {
 	margin: 0; 
 	padding: 0;
 	text-align: center;
 }
 
+
+.gui-item-title {
+	width: 100%;
+	text-align: center;
+	margin: 0;
+}
 
 /*form elements*/
 input {
@@ -188,6 +194,36 @@ label {
 	
 }
 
+.gui-check-box {
+	display: block;
+	width: auto;
+	text-align: center;
+	font-weight: bold;
+	color: rgba(50,50,80,0.8);
+}
+	.gui-check-box div { 
+		display: inline-block;
+	}
+
+	.gui-check-box div:first-child {
+
+	}
+
+	.gui-check-box div:last-child {
+		width: 20px; height: 20px;
+		background-color: rgba(240,240,240,0.8);
+		position: relative; 
+		margin-left: 10px;
+		border: 2px solid rgba(25,25,25,0.5);
+	}
+
+.check-box-checked {
+
+}
+	.check-box-checked div:last-child {
+		background-color: rgba(50,50,50,0.8);
+		border: 2px solid rgba(240,240,240,0.8);
+	}
 
 /* wrapper for all content (will set size of all display elements except for possible a 
 	background canvas for displaying background elements to take up all screen) */
@@ -379,7 +415,38 @@ label {
 
 .game-options { 
 	display: none;
+	position: relative;
+	top: 50%;
+	width: 400px;
+	margin: -100px auto 0;
 }
+	.game-options .button-wrapper {
+		text-align: center;
+		margin: 0 0 10px;
+		height: auto;
+	}	
+
+	.game-options .gui-item-title {
+
+	}
+
+	.bg-thumb {
+		/*dimensions will vary according to screen size*/
+		width: 80px; height: 60px;
+		border: 2px solid rgba(25,50,25,0.2);
+		display: inline-block;
+		margin: 0 5px;
+		background-color: rgba(200,150,90,0.5);
+	}
+
+	.bg-thumb:hover {
+		border: 2px dashed rgba(100,150,100,0.5);
+		outline: 2px solid rgba(90,120,90,0.8);
+	}
+
+	.bg-selected {
+		outline: 2px solid rgba(90,120,90,0.8);
+	}
 
 .level-select {
 	display: none;
@@ -388,7 +455,7 @@ label {
 	top: 50%;
 	margin-top: -80px;
 }
-	.level-select .page-title {
+	.level-select .gui-page-title {
 		margin-bottom: 20px;
 	}
 

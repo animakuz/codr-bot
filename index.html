@@ -27,7 +27,7 @@
 			<div class="gui-overlay">
 				<!-- select user screen-->
 				<div class="user-select">
-					<h2 class='page-title'>
+					<h2 class='gui-page-title'>
 						<span class='lang-eng'>Login</span><span class='lang-esp'>Ingresar</span>
 					</h2>
 					<label><span class='lang-eng'>Username</span><span class='lang-esp'>Usuario</span></label>
@@ -47,7 +47,7 @@
 
 				<!-- create new profile screen -->
 				<div class="user-create">
-					<h2 class='page-title'>
+					<h2 class='gui-page-title'>
 						<span class='lang-esp'>Crear Usuario</span><span class='lang-eng'>Create Profile</span>
 					</h2>
 					<div class='input-group-wrapper'>
@@ -127,7 +127,7 @@
 						</button>
 					</div>
 					<div class='button-wrapper'>
-						<button class='gui-button large-button blue-button'>
+						<button class='gui-button large-button blue-button' id='btn-game-options'>
 							<span class='lang-eng'>Options</span><span class='lang-esp'>Opciones</span>
 						</button>
 					</div>
@@ -145,12 +145,41 @@
 
 				<!-- game options select screen -->
 				<div class="game-options">
-					
+					<!-- HERE HERE HERE -->
+					<h3 class='gui-item-title'>
+						<span class='lang-eng'>Language</span>
+						<span class='lang-esp'>Lenguaje</span>
+					</h3>
+					<div class='button-wrapper'>
+						<button class='gui-button small-button' id='option-lang-eng'>English</button>
+						<button class='gui-button small-button' id='option-lang-esp'>Español</button>
+					</div>					
+					<h3 class='gui-item-title'>
+						<span class='lang-eng'>Background</span>
+						<span class='lang-esp'>Fondo</span>
+					</h3>
+					<div class='button-wrapper'>
+						<div class='bg-thumb'></div>
+						<div class='bg-thumb bg-selected'></div>
+						<div class='bg-thumb'></div>
+					</div>
+					<div class='gui-check-box check-box-checked unselectable'>
+						<div>
+							<span class='lang-eng'>Sound</span>
+							<span class='lang-esp'>Sonido</span>
+						</div>
+						<div></div>
+					</div>
+
+					<button class='gui-button small-button blue-button back-button'>
+						<span class='lang-eng'>Back</span>
+						<span class='lang-esp'>Atras</span>
+					</button>
 				</div>
 
 				<!-- level select screen (will be generated with javascript) -->
 				<div class="level-select">
-					<h2 class='page-title'>
+					<h2 class='gui-page-title'>
 						<span class='lang-esp'>Seleccionar Nivel</span><span class='lang-eng'>Level Select</span>
 					</h2>
 					<!-- will be populated with javascript - the following are the prototypes
@@ -203,6 +232,7 @@
 	<script src="js/velocity.min.js"></script>
 	
 	<!-- main scripts -->
+	<script src="js/base.js"></script>
 	<script src="js/main.js"></script>
 </body>
 

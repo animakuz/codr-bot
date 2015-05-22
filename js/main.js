@@ -7,225 +7,8 @@
 	- KEEP WORKING AND FINISH THIS SHIIIIIT
 
 */
-//general global data
-var language = 'Esp';
-
-//default messages
-var msgEng = 'All Good!';
-var msgEsp = 'Todo Bien!';
-var msgErrorEng = 'There was an error!';
-var msgErrorEsp = 'Hubo un error!';
-
-//array containing objects navigated to (for implementing back button)
-var navList = []; 
-
-//result object prototype
-var protoResult = { 
-	success: true,
-	messageEng: msgEng, 
-	messageEsp: msgEsp 
-};
-
-//helper functions 
-var classCheck = function(element, classToCheck) {
-	//check if an element has a certain class
-	var classes = classToCheck.replace(/\s+/g,'').split(",");
-	var elementClass = element.className;
-	var hasClass = false;
-	var i, len=classes.length;
-
-	for (i=0; i<len; i++) {
-		var testStr = new RegExp(classes[i]);
-		if (testStr.test(elementClass)) {
-			hasClass = true;
-		} else {
-			hasClass = false;
-			break;
-		}
-	}
-
-	return hasClass;
-};
-
-var addClass = function(element, classToAdd) {
-	if (!(classCheck(element, classToAdd))) {
-		//element doesn't have class - add it
-		var classes = classToAdd.replace(/\s+/g,'').split(",");
-		var i, len = classes.length;
-		var newClass = element.className.trim();
-
-		for (i=0; i<len; i++) { //agregate separte classes
-			newClass += ' ' + classes[i];			
-		}
-		
-		element.className = newClass;
-	}
-};
-
-var removeClass = function(element, classToRemove) { 
-	if (classCheck(element, classToRemove)) {
-		//element has class - remove it
-		var classes = classToRemove.replace(/\s+/g,'').split(",");
-		var i, len = classes.length;
-		var newClass = element.className;
-
-		for (i=0; i<len; i++) { //agregate separte classes
-			newClass = newClass.replace(classes[i],'');
-		}
-		
-		element.className = newClass.trim();
-	}
-};
-
-var toggleClass = function(element, classToToggle) {
-	if (classCheck(element, classToToggle)) { 
-		//element has class  - remove it
-		removeClass(element, classToToggle);
-	} else {
-		//element doesn't have class add it
-		addClass(element, classToToggle);
-	}
-};
-
-
-var valInput = function(element, pattern) {
-	var inputType = element.type;
-	var value = element.value;
-	var name = element.getAttribute('name');
-	var result = Object.create(protoResult);
-
-
-	if (value == '') {
-		//TODO - MAKE PROPER EMPTY STRING VALIDATION WITH REGEX
-		result.success = false;
-		result.messageEng = "Please fill in all fields!";
-		result.messageEsp = "Por favor llenar todos los campos!";
-	} else {
-		switch(inputType) {
-			case 'text':
-				if (pattern) {
-					//TODO - MAKE THIS WORK - checking for patterns in username and such
-					if (!(pattern.test(value))) {
-						result.success = false;
-						result.messageEng = "";
-						result.messageEsp = "";
-					}
-				}
-				break;
-
-			case 'number':
-				if (isNaN(value)) {
-					result.success = false;
-					result.messageEng = "Enter only numbers in the " + name + " field!";
-					result.messageEsp = "Introducir solamente numeros en el campo de " + name + "!";
-				}
-				break;
-
-			case 'email':
-				//TDOD - proper email regex
-				if (value.indexOf('@') == -1) {
-					result.success = false;
-					result.messageEng = "Please enter a valid email adress!";
-					result.messageEsp = "Por favor introduzca un correo valido!";
-				}
-				break;
-		}
-	}
-
-	return result;	
-};
-
-
-var clearFields = function(parentContainer) {
-	//clear all the fields in a certain parent
-	var inputs = parentContainer.querySelectorAll('input');
-	var i;
-	for (j=0; j<inputs.length; j++) {
-		inputs[j].value = '';
-	}
-};
-
-
-//LOCAL STORAGE FUNCTIONS
-
-//store user data 
-var setUserData = function(userObj, isNewUser) {
-	//newObj specifies if the variable is to be newly stored (has to create new ID and 
-	//localstorage variable)
-	var result = Object.create(protoResult);
-
-	if (isNewUser) {
-		//new user - increase value of stored users - create ID and add
-		var numUsers = localStorage.getItem('numUsers') || 0;
-
-		//check if username already exists
-		if (localStorage.getItem(userObj.user)) {
-			//username already exists - send error stuff
-			result.messageEng = 'This username is not available!';
-			result.messageEsp = 'Este nombre de usuario no está dispnible';
-			result.success = false;
-		} else {
-			//user doesn't exist - create it
-			//TODO - MAKE ENCRYPTED PASSWORDS
-			var userStr = JSON.stringify(userObj);
-			localStorage.setItem(userObj.user, userStr);
-
-			if (localStorage.getItem(userObj.user)) {
-				//user data successfully stored - update number of users and output messages
-				numUsers++;
-				localStorage.setItem('numUsers', numUsers);
-				result.messageEng = 'Your user profile successfully created!';
-				result.messageEsp = 'Su usuario fue creado exitosamente!';
-				result.success = true;
-			} else {
-				//show error messages
-				result.messageEng = 'There was an error in creating your profile!';
-				result.messageEsp = 'Hubo un error en la creación de su usuario!';
-				result.success = false;
-			}
-		}
-
-
-	} else {
-		//not new user - only update
-
-		//check if user exists
-		if (localStorage.getItem(userObj.user)) {
-			//user exists update - set response messages
-			localStorage.setItem(userObj.user, JSON.stringify(userObj));
-			result.messageEng = 'Your profile was successfully updated!';
-			result.messageEsp = 'Su usuario fue actualizado exitosamente!';
-			result.success = true;
-		} else {
-			//user doesn't exist - set error messages
-			result.messageEng = 'There was an error in updating your profile!';
-			result.messageEsp = 'Hubo un error en la actualización de su usuario!';
-			result.success = false;
-		}
-	}
-
-	return result;
-};
-
-//retreive user data - returns user object if user exists - returns false if not
-var getUserData = function(userName) {
-	var result = false;
-	var checkUser = localStorage.getItem(userName);
-	if (checkUser) {
-		//user exists get data and return 
-		return JSON.parse(checkUser);
-	} else {
-		//user doesn't exist return false
-		return false;
-	}
-};
-
-
-
-
-
 window.onload = function() {
-	//user currently logged in 
+	//user that is currently logged in 
 	var currentUser;
 
 	//interface elements
@@ -269,8 +52,18 @@ window.onload = function() {
 	var linkSessionProfile = document.getElementById('user-session-profile');
 	var linkSessionExit = document.getElementById('user-session-exit');
 
+	//game menu buttons 
+	var linkGameOptions = document.getElementById('btn-game-options');
+
+	//game options elements
+	var optionLangEsp = document.getElementById('option-lang-esp');
+	var optionLangEng = document.getElementById('option-lang-eng');
+
 	//back buttons
 	var backButtons = document.querySelectorAll('.back-button');
+
+	//check boxes
+	var checkBoxes = document.querySelectorAll('.gui-check-box');
 
 	//--GAME BASE FUNCTIONS AND OBJECTS----------------------------------------------------------------
 
@@ -373,7 +166,34 @@ window.onload = function() {
 
 
 	//----NON-CORE FUNCTIONS AND OBJECTS (GUI STUFF ETC) ----------------------------
-	//load user after login or automatically at start if user alraedy logged in
+	//User level info prototype ( for showing in completed levels part of profile)
+	var UserLevel = {
+		id: -1,
+		title: "",
+		preview: "", //image link to preview
+		description: "",
+		grade: 0, //0 =failed, 1 = bronze, 2 = silver, 3 = gold
+	};
+
+	//user prototype
+	var User = {
+		firstName: "",
+		lastName: "",
+		user: "",
+		pass: "",
+		options: {
+			language: "spanish",
+			background: "bg1",
+			sound: "off"
+		},
+		data: {
+			totalPoints: 0,
+			levelsCleared: [], //array of levels objects with specific values	
+			achievements: [],	//array of achievement objects with specific values	   
+		}
+	};
+
+	//load user interface with user specific options and data
 	var loadUser = function(user) {
 		//switch to start page 
 		
@@ -390,6 +210,8 @@ window.onload = function() {
 		//set session info
 		var userSessionName = userSessionBar.querySelectorAll('.user-name')[0];
 		userSessionName.innerHTML = currentUser.user;
+
+		//set options 
 	};
 
 	//USER SESSION EXIT FUNCTION ( for both exit buttons in session bar and options menu)
@@ -417,32 +239,8 @@ window.onload = function() {
 			return false;
 		}
 	};
-	//User level info prototype ( for showing in completed levels part of profile)
-	var UserLevel = {
-		id: -1,
-		title: "",
-		preview: "", //image link to preview
-		description: "",
-		grade: 0, //0 =failed, 1 = bronze, 2 = silver, 3 = gold
-	};
 
-	//user prototype
-	var User = {
-		firstName: "",
-		lastName: "",
-		user: "",
-		pass: "",
-		options: {
-			language: "spanish",
-			background: "bg1",
-			sound: "off"
-		},
-		data: {
-			totalPoints: 0,
-			levelsCleared: [], //array of levels objects with specific values	
-			achievements: [],	//array of achievement objects with specific values	   
-		}
-	};
+	
 	//-- END NON-CORE FUNCTIONS AND OBJECT-------------------
 
 
@@ -498,7 +296,8 @@ window.onload = function() {
 
 
 		//-- USER SELECT -----------------------------------------------------------------
-		btnLogin.onclick = function() {
+		//LOGIN PROCEDURE
+		var loginProc = function() {
 			var inputs = userSelect.querySelectorAll('input');
 			var validated = true;
 			var i, respMessage = '';
@@ -548,7 +347,7 @@ window.onload = function() {
 						alert(respMessage);
 					}
 				} else {
-					//error user doesn't exist;
+					//error - user doesn't exist
 					switch (language) {
 						case 'Eng':
 							respMessage = "This user doesn't exist!";
@@ -566,6 +365,24 @@ window.onload = function() {
 			}
 
 		};
+
+		btnLogin.onclick = loginProc;
+		//also set login proc for enter keypress event of inputs
+
+		(function() { 
+			var inputs = userSelect.querySelectorAll('input');
+			var i;
+
+			for (i=0; i<inputs.length; i++) {
+				inputs[i].onkeyup = function(event) {
+					if (event.which == 13)  {
+						loginProc();
+					}
+				};
+			}
+
+		})();
+
 
 		//---------END USER SELECT ---------------
 
@@ -623,6 +440,11 @@ window.onload = function() {
 
 
 		//-- START MENU ------------------------------------------------------------------
+		linkGameOptions.onclick = function() {
+			//hide start menu and show options
+			removeClass(gameMenu, "gui-active");
+			addClass(gameOptions, "gui-active");
+		};
 
 		//-------END START MENU -------------------
 
@@ -636,6 +458,19 @@ window.onload = function() {
 
 		//------END LEVEL SELECT ------------------
 
+		//--- OTHER GUI ELEMENTS ----------------------------------------------------------
+		//check boxes
+		(function() {
+			var i;
+
+			for (i=0; i<checkBoxes.length; i++) {
+				checkBoxes[i].onclick = function() {
+					toggleClass(this, 'check-box-checked');
+				};
+			}
+		})();
+
+		//------END OTHER GUI ELEMENTS --------------
 
 		//-- NAVIGATION--------------------
 
@@ -661,6 +496,13 @@ window.onload = function() {
 							//switch active to user select
 							removeClass(userCreate, 'gui-active');
 							addClass(userSelect, 'gui-active');
+							break;
+
+						case gameOptions :
+							alert('test');
+							//switch active to user game menu
+							removeClass(gameOptions, 'gui-active');
+							addClass(gameMenu, 'gui-active');
 							break;
 					}
 				};
