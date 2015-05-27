@@ -84,7 +84,7 @@
 							<span class='lang-eng'>Enter</span><span class='lang-esp'>Entrar</span>
 						</button>
 					</div>
-					<button class='gui-button small-button blue-button' id='btn-create-profile'>
+					<button class='gui-button small-button blue-button' id='link-create-user'>
 						<span class='lang-eng'>Create New Profile</span>
 						<span class='lang-esp'>Crear Nuevo Usuario</span>
 					</button>
@@ -102,14 +102,14 @@
 						<span class='gui-icon large-icon icon-arrow-down visible-large'></span>
 					</div>
 					<div class='user-session-options'> 	
-						<a href='#' class='menu-option' id='user-session-profile'>
+						<a href='#' class='menu-option' id='link-session-profile'>
 							<span class='gui-icon small-icon icon-user visible-small'></span>
 							<span class='gui-icon med-icon icon-user visible-med'></span>
 							<span class='gui-icon large-icon icon-user visible-large'></span>
 							<span class='lang-eng'>Profile</span>
 							<span class='lang-esp'>Perfil</span>
 						</a>
-						<a href='#' class='menu-option' id='user-session-exit'>
+						<a href='#' class='menu-option' id='link-session-exit'>
 							<span class='gui-icon small-icon icon-user visible-small'></span>
 							<span class='gui-icon med-icon icon-user visible-med'></span>
 							<span class='gui-icon large-icon icon-user visible-large'></span>
@@ -122,7 +122,7 @@
 				<!-- game main (start) menu -->
 				<div class="game-menu">
 					<div class='button-wrapper'>
-						<button class='gui-button large-button green-button'>
+						<button class='gui-button large-button green-button' id='btn-start-game'>
 							<span class='lang-eng'>Start</span><span class='lang-esp'>Iniciar</span>
 						</button>
 					</div>
@@ -132,12 +132,12 @@
 						</button>
 					</div>
 					<div class='button-wrapper'>
-						<button class='gui-button large-button yellow-button'>
-							<span class='lang-eng'>Credits</span><span class='lang-esp'>Creditos</span>
+						<button class='gui-button large-button yellow-button' id='btn-credits'>
+							<span class='lang-eng'>Credits</span><span class='lang-esp'>Reconocimientos</span>
 						</button>
 					</div>					
 					<div class='button-wrapper'>
-						<button class='gui-button large-button red-button'>
+						<button class='gui-button large-button red-button' id='btn-exit'>
 							<span class='lang-eng'>Exit</span><span class='lang-esp'>Salir</span>
 						</button>
 					</div>
@@ -151,24 +151,29 @@
 						<span class='lang-esp'>Lenguaje</span>
 					</h3>
 					<div class='button-wrapper'>
-						<button class='gui-button small-button' id='option-lang-eng'>English</button>
-						<button class='gui-button small-button' id='option-lang-esp'>Español</button>
+						<button class='gui-button small-button btn-change-lang' data-lang='Eng'>
+							English
+						</button>
+						<button class='gui-button small-button btn-change-lang active-lang' data-lang='Esp'>
+							Español
+						</button>
 					</div>					
 					<h3 class='gui-item-title'>
 						<span class='lang-eng'>Background</span>
 						<span class='lang-esp'>Fondo</span>
 					</h3>
 					<div class='button-wrapper'>
-						<div class='bg-thumb'></div>
-						<div class='bg-thumb bg-selected'></div>
-						<div class='bg-thumb'></div>
+						<!-- actual backgrond options to be generated with javascript -->
+						<div class='bg-thumb' data-bg='bg1'></div>
+						<div class='bg-thumb bg-selected' data-bg='bg2'></div>
+						<div class='bg-thumb' data-bg='bg3'></div>
 					</div>
-					<div class='gui-check-box check-box-checked unselectable'>
+					<div class='gui-check-box check-box-checked unselectable' id='sound-option' data-option='sound'>
 						<div>
 							<span class='lang-eng'>Sound</span>
 							<span class='lang-esp'>Sonido</span>
 						</div>
-						<div></div>
+						<div><!-- check box tick item --></div>
 					</div>
 
 					<button class='gui-button small-button blue-button back-button' data-screen='game-options'>
@@ -185,13 +190,13 @@
 					<!-- will be populated with javascript - the following are the prototypes
 					of the different options  that will exist -->
 
-					<div class='level-thumb level-passed'></div>
-					<div class='level-thumb level-open'></div>
-					<div class='level-thumb level-selected'></div>
-					<div class='level-thumb level-locked'></div>
+					<div class='level-thumb th-level-select level-passed' data-level='level1'></div>
+					<div class='level-thumb th-level-select level-open' data-level='level2'></div>
+					<div class='level-thumb th-level-select level-selected' data-level='level3'></div>
+					<div class='level-thumb th-level-select level-locked' data-level='level4'></div>
 					<!-- possibly include level name here  -->
 					<div class='button-wrapper'>
-						<button class='gui-button large-button green-button'>
+						<button class='gui-button large-button green-button' id='btn-start-level'>
 							<span class='lang-eng'>Start</span>
 							<span class='lang-esp'>Iniciar</span>
 						</button>
@@ -199,7 +204,23 @@
 					<!-- these will show only when there is not enough space to show all the level on screen -->
 					<div class='level-scroll-left'></div>
 					<div class='level-scroll-right'></div>
+
+					<button class='gui-button small-button blue-button back-button' data-screen='level-select'>
+						<span class='lang-eng'>Back</span>
+						<span class='lang-esp'>Atras</span>
+					</button>
 					
+				</div>
+
+				<div class='credits-page'>
+					<h2 class='gui-page-title'>
+						<span class='lang-esp'>Reconocimientos</span><span class='lang-eng'>Credits</span>
+					</h2>
+
+					<button class='gui-button small-button blue-button back-button' data-screen='credits-page'>
+						<span class='lang-eng'>Back</span>
+						<span class='lang-esp'>Atras</span>
+					</button>
 				</div>
 				
 				<!-- panel where code-bits will be placed -->
@@ -214,6 +235,57 @@
 						<div class="cp-run"></div>
 					</div>
 
+				</div>
+
+				<div class='user-profile'>
+					<h2 class='gui-page-title'>
+						<span class='lang-esp'>Perfil de Usuario</span><span class='lang-eng'>User Profile</span>
+					</h2>
+
+					<div class='profile-user-info'>
+						<div>
+							<img id='profile-user-icon' src='#'  />
+						</div>
+						<div>
+							<span id='profile-username'>User</span><br>
+							<span id='profile-user-names'>Nombre Apellido</span>
+						</div>
+						<div>
+							<span class='lang-eng'>Total Points: </span>
+							<span class='lang-esp'>Puntos Total: </span>
+							<span id='profile-user-points'>0</span>
+						</div>
+					</div>
+
+
+					<div class='gui-tab-group' id='tabs-user-info'>
+						<div class='gui-tab-title-bar'>
+							<span class='gui-tab-title active-tab-title' data-target='profile-levels-cleared'>
+								<span class='lang-eng'>Levels Cleared</span>
+								<span class='lang-esp'>Niveles Superados</span>
+							</span>
+
+							<span class='gui-tab-title ' data-target='profile-acheivements'>
+								<span class='lang-eng'>Acheivements</span>
+								<span class='lang-esp'>Logros</span>
+							</span>
+						</div>
+		
+						<div class='gui-tab-content active-tab' id='profile-levels-cleared'>
+							<div class='level-thumb th-profile-level level-passed'></div>
+							<div class='level-thumb th-profile-level level-passed'></div>
+							<div class='level-thumb th-profile-level level-passed'></div>
+						</div>						
+						<div class='gui-tab-content' id='profile-acheivements'>
+							<div class='acheive-thumb'></div>
+							<div class='acheive-thumb'></div>
+						</div>
+					</div>
+
+					<button class='gui-button small-button green-button' id='btn-close-profile'>
+						<span class='lang-eng'>Close</span>
+						<span class='lang-esp'>Cerrar</span>
+					</button>
 				</div>
 
 			</div>

@@ -1,7 +1,6 @@
 //BASE FUNCTIONS AND STUFF (SEPARATED TO MAKE IT EASIER TO WORK)
 
-//general global data
-var language = 'Esp';
+//GENERAL GLOBAL DATA
 
 //default messages
 var msgEng = 'All Good!';
@@ -17,6 +16,13 @@ var protoResult = {
 	success: true,
 	messageEng: msgEng, 
 	messageEsp: msgEsp 
+};
+
+//Source - Alex Grande - StackOverflow  - Answer 09/09/11
+var isFunction = function(functionToCheck) {
+	//check if variable is function
+	var getType = {};
+	return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 };
 
 //helper functions 
@@ -41,6 +47,7 @@ var classCheck = function(element, classToCheck) {
 };
 
 var addClass = function(element, classToAdd) {
+	//TODO - MAKE THIS WORK WITH ARRAYS OF OBJECTS OR SINGLE OBJECTS
 	if (!(classCheck(element, classToAdd))) {
 		//element doesn't have class - add it
 		var classes = classToAdd.replace(/\s+/g,'').split(",");
@@ -56,6 +63,7 @@ var addClass = function(element, classToAdd) {
 };
 
 var removeClass = function(element, classToRemove) { 
+	//TODO - HERE TO
 	if (classCheck(element, classToRemove)) {
 		//element has class - remove it
 		var classes = classToRemove.replace(/\s+/g,'').split(",");
@@ -80,13 +88,23 @@ var toggleClass = function(element, classToToggle) {
 	}
 };
 
+var modifyMultiple = function(elements, action) {
+	var i, len= elements.length;
+	for (i=0; i<len; i++) {
+		action(elements[i]);
+	}
+};
+
+var switchScreens = function(activeScreen, screenToSwitch) {
+	removeClass(activeScreen, 'gui-active');
+	addClass(screenToSwitch, 'gui-active');
+};
 
 var valInput = function(element, pattern) {
 	var inputType = element.type;
 	var value = element.value;
 	var name = element.getAttribute('name');
 	var result = Object.create(protoResult);
-
 
 	if (value == '') {
 		//TODO - MAKE PROPER EMPTY STRING VALIDATION WITH REGEX
@@ -142,7 +160,7 @@ var clearFields = function(parentContainer) {
 //LOCAL STORAGE FUNCTIONS
 
 //store user data 
-var setUserData = function(userObj, isNewUser) {
+var storeUserData = function(userObj, isNewUser) {
 	//isNewUser specifies if the user data is for a new user 
 	var result = Object.create(protoResult);
 
@@ -202,9 +220,23 @@ var getUserData = function(userName) {
 	var checkUser = localStorage.getItem(userName);
 	if (checkUser) {
 		//user exists get data and return 
-		return JSON.parse(checkUser);
+		var retreivedUser = JSON.parse(checkUser);
+		return retreivedUser;
+
 	} else {
 		//user doesn't exist return false
 		return false;
+	}
+};
+
+
+//bind similar event to multiple objects
+var bindMultiple = function(elements, event, handler) {
+	var i, len = elements.length;
+
+	for (i=0; i<len; i++) {
+		elements[i][event] = function(event) {
+			handler(this, event);
+		};
 	}
 };

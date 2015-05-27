@@ -3,6 +3,8 @@
 	Author: Marcus Baptiste 
 */
 
+/*TODO - ADD PROPER CSS WHERE NEEDED TO LOAD IMAGE GRAPHICS INSTEAD OF PLAIN COLORED DIVS/SPANS*/
+
 /*fonts */
 @font-face {
 	font-family: "space-font";
@@ -24,6 +26,7 @@ body {
 /*remove defaults on links*/
 a { text-decoration: none}
 
+hr { padding: 0; margin: 0;}
 /* Language options - (spanish language option by default) */
 .lang-eng { display: none; }
 
@@ -74,6 +77,123 @@ a { text-decoration: none}
 	margin: 0;
 }
 
+
+/*tabs*/
+.gui-tab-group {
+	width: 100%; 
+	position: relative;
+
+}	
+	.gui-tab-title-bar {
+	}
+
+	.gui-tab-title {
+		position: relative;
+		top: -6px;
+		height: 100%;
+		padding: 4px 5px 0;
+		margin: 0 -6px 0 0;
+		background-color: #ddd;
+		display: inline-block;
+		border-top: 2px solid rgba(50,50,50,0.8);
+		border-left: 2px solid rgba(50,50,50,0.8);
+		border-right: 2px solid rgba(50,50,50,0.8);
+		-webkit-border-radius: 5px 5px 0 0;
+		-moz-border-radius: 5px 5px 0 0;
+		border-radius: 5px 5px 0 0;
+		cursor: pointer;
+	}
+
+	.gui-tab-content {
+		margin: 0;
+		padding: 5px 10px;
+		display: none;
+		height: 60%;
+		background-color: #ffe;
+		border: 2px solid rgba(50,50,50,0.8);
+	}
+
+	.active-tab-title {
+		border-bottom: 2px solid #fff;
+		background-color: #fff;
+
+	}
+
+	.active-tab {
+		display: block;
+	}
+
+
+/*pop-up messages boxes*/
+.gui-message-box {
+	position: absolute;
+	top: 25%; left: 25%;
+	width: 46%;	height: auto;
+	padding: 2%;
+	background-color: white;
+}
+	.message-box-title {
+		color: #333;
+		margin: 1% 1% 10px;
+		text-align: center;
+	}
+
+	.message-box-icon {
+		width: 32px; height: 32px;
+		margin-right: 10px;
+		float: left;
+	}
+
+		.message-icon-success {
+			background-color: green;
+		}
+
+		.message-icon-warning {
+			background-color: yellow;
+		}	
+
+		.message-icon-error {
+			background-color: red;
+		}
+
+	.message-box-text {
+
+	}
+
+	.message-button-wrapper {
+		display: block;
+		margin-top: 10px;
+		width: 100%;
+	 	font-family: "Century Gothic", Century;
+		cursor: pointer;
+		text-align: center;
+	}
+
+	.message-button {
+		display: inline-block;
+	}
+
+	.message-btn-ok {
+		border: 2px solid #407F10;
+		background-color: #61c419; 
+		color: #333;
+	}
+		.message-btn-ok:hover, .message-btn-ok:active {
+			background-color: #4D9913; 
+			color: #ddd;
+		}
+
+	.message-btn-cancel {
+		border: 2px solid #AD0303;
+		background-color: #fe3019; 
+		color: #333;
+		margin-left: 1%;
+	}
+		.message-btn-cancel:hover, .message-btn-cancel:active {
+			background-color: #cf0404; 
+			color: #ddd;	
+		}
+
 /*form elements*/
 input {
 	-moz-border-radius: 5px; 
@@ -97,21 +217,21 @@ label {
 }
 
 	.small-button {
-		padding: 5px 10px; 
-		line-height: 20px; 
-		font-size: 20px;
-		border-radius: 5px;
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
+		padding: 3px 5px; 
+		line-height: 15px; 
+		font-size: 15px;
+		border-radius: 3px;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
 	}
 
 	.large-button {
-		padding: 8px 20px; 
-		line-height: 26px; 
-		font-size: 26px;
-		border-radius: 8px;
-		-moz-border-radius: 8px;
-		-webkit-border-radius: 8px;
+		padding: 4px 10px; 
+		line-height: 18px; 
+		font-size: 18px;
+		border-radius: 4px;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
 	}
 
 
@@ -146,7 +266,23 @@ label {
 		.yellow-button:hover, .yellow-button:active {
 			background-color: #C9AF1A; 
 			color: #ddd;
+		}	
+
+	.red-button {
+		border: 2px solid #AD0303;
+		background-color: #fe3019; 
+		color: #333;
+	}
+
+		.red-button:hover, .red-button:active {
+			background-color: #cf0404; 
+			color: #ddd;
 		}
+
+	.back-button {
+		display: block;
+		margin: 1% auto;
+	}
 
 .gui-icon {
 	display: inline-block;
@@ -196,7 +332,8 @@ label {
 
 .gui-check-box {
 	display: block;
-	width: auto;
+	width: 120px;
+	margin: 0 auto;
 	text-align: center;
 	font-weight: bold;
 	color: rgba(50,50,80,0.8);
@@ -224,6 +361,34 @@ label {
 		background-color: rgba(50,50,50,0.8);
 		border: 2px solid rgba(240,240,240,0.8);
 	}
+
+/*thumbnail previews for levels in level select and showing cleared levels in profile*/
+.level-thumb {
+	/* TODO - dimensions will vary according to screen size*/
+	width: 80px; height: 60px;
+	border: 2px solid rgba(25,50,25,0.2);
+	display: inline-table;
+}
+
+.level-thumb:hover, .level-thumb:active{
+	border: 2px dashed rgba(100,150,100,0.5);
+	outline: 2px solid rgba(90,120,90,0.8);
+}
+
+/*thumbnail previews for acheivements */
+.acheive-thumb {
+	/* TODO - dimensions will vary according to screen size*/
+	width: 80px; height: 60px;
+	border: 2px solid rgba(25,50,25,0.2);
+	background-color: rgba(25,60,120, 0.8);
+	display: inline-table;
+}
+
+.acheive-thumb:hover, .acheive-thumb:active {
+	border: 2px dashed rgba(100,150,100,0.5);
+	outline: 2px solid rgba(90,120,90,0.8);
+	background-color: rgba(50,80,150, 0.8);
+}
 
 /* wrapper for all content (will set size of all display elements except for possible a 
 	background canvas for displaying background elements to take up all screen) */
@@ -319,7 +484,7 @@ label {
 		right: 0;
 	}
 
-	#btn-create-profile {
+	#link-create-user {
 		position: relative;
 		display: block;
 		margin: 10px auto 0;
@@ -369,7 +534,7 @@ label {
 	border-radiusus: 5px;
 	cursor: pointer;
 	overflow: hidden;
-
+	z-index: 2;
 }	
 	
 	.user-session-open {
@@ -398,14 +563,64 @@ label {
 	}
 
 
+.user-profile {
+	display: none;
+	position: absolute;
+	padding: 0 3%;
+	top: 10%; left: 5%;
+	background-color: white;
+	width: 84%; height: 90%;
+	border-radius: 1%;
+	-webkit-border-radius: 1%;
+	-moz-border-radius: 1%;
+}
+	
+	.user-profile .gui-page-title {
+		background-color: #aab;
+	}
+
+	.profile-user-info {
+		position: relative;
+	}
+
+	.profile-user-info div {
+		display: inline-block;
+		
+	}
+
+	.profile-user-info div:first-child {vertical-align: top; }
+	.profile-user-info div:last-child { margin-left: 10%;}
+
+	.profile-user-info img{
+		float: left;
+		width: 32px; height: 32px;
+	}
+
+	.user-profile .gui-button {
+		display: block;
+		margin: 1% auto 0;
+	}
+
+	.user-profile .gui-tab-group {
+		margin-top: 1.5%;
+		position: relative;
+		height: 50%;
+	}
+
+	.user-profile .gui-tab-title-bar {
+		height: 20%;
+	}
+
+
 .game-menu { 
 	display: none;
 	position: relative;
 	top: 50%;
-	margin-top: -100px;
+	margin-top: -110px;
 }
 
 	.game-menu .button-wrapper {
+		height: auto;
 	}
 
 	.game-menu .gui-button {
@@ -448,6 +663,28 @@ label {
 		outline: 2px solid rgba(90,120,90,0.8);
 	}
 
+	/*language options*/
+	.btn-change-lang {
+		border: 2px solid rgba(25,25,25,0.6);
+	}
+
+	.btn-change-lang:hover, .btn-change-lang:active {
+		outline: 2px solid rgba(50,100,50,0.5);
+	}
+
+	.active-lang {
+		border: 2px solid rgba(25,75,50,0.7);
+		background-color: #99efac;
+	}
+
+.credits-page {
+	display: none;
+	text-align: center;
+	position: relative;
+	top: 50%;
+	margin-top: -80px;
+}
+
 .level-select {
 	display: none;
 	text-align: center;
@@ -457,18 +694,6 @@ label {
 }
 	.level-select .gui-page-title {
 		margin-bottom: 20px;
-	}
-
-	.level-thumb {
-		/*dimensions will vary according to screen size*/
-		width: 80px; height: 60px;
-		border: 2px solid rgba(25,50,25,0.2);
-		display: inline-table;
-	}
-
-	.level-thumb:hover {
-		border: 2px dashed rgba(100,150,100,0.5);
-		outline: 2px solid rgba(90,120,90,0.8);
 	}
 
 	.level-passed {
@@ -488,10 +713,16 @@ label {
 		background-color: rgba(200,120,100,0.8);
 	}
 
+	.level-select .button-wrapper {
+		height: auto;
+	}
+
 	.level-select .gui-button {
 		display: block;
-		margin: 20px auto 0;
+		margin: 10px auto 0;
 	}	
+
+
 
 
 	/*scroll arrows for showing levels that cannot be shown on screen because of space restrictions*/
@@ -652,6 +883,29 @@ label {
 		background-color: green;
 	}
 
+	.small-button {
+		padding: 5px 10px; 
+		line-height: 20px; 
+		font-size: 20px;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+	}
+
+
+	.large-button {
+		padding: 8px 20px; 
+		line-height: 26px; 
+		font-size: 26px;
+		border-radius: 8px;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+	}
+
+	.gui-tab-content {
+		height: 70%;
+	}
+
 	.user-session { 
 		top: 4px; right: 5px;
 		height: 26px;
@@ -670,6 +924,21 @@ label {
 			top: -4px;
 		}
 
+	.user-profile {
+
+	}
+
+		.profile-user-info img{
+			width: 48px; height: 48px;
+		}
+
+		.user-profile .gui-tab-title-bar {
+			height: 15%;
+		}
+
+		.user-profile .gui-tab-group {
+			height: 55%;
+		}
 }
 
 @media only screen and (min-width: 750px) {
@@ -730,6 +999,10 @@ label {
 		background-color: blue;
 	}
 
+	.gui-tab-content {
+		height: 80%;
+	}
+
 	.user-session { 
 		top: 4px; right: 5px;
 		height: 30px;
@@ -746,6 +1019,21 @@ label {
 
 		.user-name, .user-session .lang-eng, .user-session .lang-esp {
 			top: -6px;
+		}
+
+	.user-profile {
+
+	}
+		.profile-user-info img{
+			width: 64px; height: 64px;
+		}
+
+		.user-profile .gui-tab-title-bar {
+			height: 10%;
+		}
+
+		.user-profile .gui-tab-group {
+			height: 60%;
 		}
 }
 

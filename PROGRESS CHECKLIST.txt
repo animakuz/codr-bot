@@ -1,19 +1,14 @@
 -- NEXT TASKS TO TACKLE --
-	-- MAKE OPTIONS AND USER PROFILE INTERFACES
-	-- ADD STUB CODE TO ALL USER INTERFACES
+	
+	-- GENERATE AND SHOW BACKGROUND ELEMENTS 
+	-- COORDINATE DIMENSIONS - USE BACKGROUND CANVAS
+	-- ADD CHANGE/SET BACKGROUND FUNCTIONALITY
 
 DEVELOPMENT CHECKLIST
 
 
-	Semana 3 – Implementación de la Interfaz de Usuario
-
 -	Elementos de la interfaz fuera del juego
-		o	Logeo (IMPLEMENT WITH JAVASCRIPT OBJECTS, JSON AND LOCALSTORAGE)
-		o	Menú inicial del juego
-		o	Opciones
 		o	Selección de niveles
-		o	Vista de datos del usuario
-		o	Barra de información de usuario
 
 
 	Semana 4 - 6 – Diseño e Implementación de Funcionalidad Base del Juego
