@@ -13,8 +13,19 @@
 </head>
 
 <body>
+	<!-- realitvely static background elements created outside of the game canvas for performance -->
+	<div class='game-bg-sky bg-sky-cloudy' id='game-bg-sky'></div>
+	<div class='game-bg-underground'></div>
+	<canvas class='game-bg-clouds' id='game-bg-clouds-canvas'></canvas>
+	
+
+	<div class='game-bg-lands-wrapper'>
+		<div class='bg-lands-left' id='game-bg-lands-left'></div>
+	</div>
+
 	<div class="wrapper">
 		<div class="app-container">
+			<!-- main game graphics -->
 			<canvas class="game-canvas" width="800"  height="400">
 				<span class="message-error">
 					<span class='lang-eng'>You can't run this game with this browser.<br>
@@ -24,6 +35,15 @@
 				</span>
 				<!-- better idea would be to check for availability and if not show splash screen -->
 			</canvas>
+
+			<!-- game 'lands' graphics  -->
+<!-- 			<canvas class='game-lands-canvas' width='800' height='400'>
+			</canvas>
+ -->
+			<!-- game objects graphics -->
+<!-- 			<canvas class='game-objects-canvas' width='800' height='400'>
+			</canvas> -->
+
 			<div class="gui-overlay">
 				<!-- create new profile screen -->
 				<div class="user-create">
@@ -70,7 +90,7 @@
 					</button>
 				</div>
 				
-				<!-- select user screen-->
+				<!-- select user screen (login)-->
 				<div class="user-select">
 					<h2 class='gui-page-title'>
 						<span class='lang-eng'>Login</span><span class='lang-esp'>Ingresar</span>
@@ -88,35 +108,6 @@
 						<span class='lang-eng'>Create New Profile</span>
 						<span class='lang-esp'>Crear Nuevo Usuario</span>
 					</button>
-				</div>
-
-				<!-- current user information -->
-				<div class="user-session unselectable">
-					<div class='user-session-bar '>
-						<span class='gui-icon small-icon icon-user visible-small'></span>
-						<span class='gui-icon med-icon icon-user visible-med'></span>
-						<span class='gui-icon large-icon icon-user visible-large'></span>
-						<span class='user-name'>User</span>
-						<span class='gui-icon small-icon icon-arrow-down visible-small'></span>
-						<span class='gui-icon med-icon icon-arrow-down visible-med'></span>
-						<span class='gui-icon large-icon icon-arrow-down visible-large'></span>
-					</div>
-					<div class='user-session-options'> 	
-						<a href='#' class='menu-option' id='link-session-profile'>
-							<span class='gui-icon small-icon icon-user visible-small'></span>
-							<span class='gui-icon med-icon icon-user visible-med'></span>
-							<span class='gui-icon large-icon icon-user visible-large'></span>
-							<span class='lang-eng'>Profile</span>
-							<span class='lang-esp'>Perfil</span>
-						</a>
-						<a href='#' class='menu-option' id='link-session-exit'>
-							<span class='gui-icon small-icon icon-user visible-small'></span>
-							<span class='gui-icon med-icon icon-user visible-med'></span>
-							<span class='gui-icon large-icon icon-user visible-large'></span>
-							<span class='lang-eng'>Exit</span>
-							<span class='lang-esp'>Salir</span>
-						</a>
-					</div>
 				</div>
 				
 				<!-- game main (start) menu -->
@@ -164,9 +155,9 @@
 					</h3>
 					<div class='button-wrapper'>
 						<!-- actual backgrond options to be generated with javascript -->
-						<div class='bg-thumb' data-bg='bg1'></div>
-						<div class='bg-thumb bg-selected' data-bg='bg2'></div>
-						<div class='bg-thumb' data-bg='bg3'></div>
+						<div class='bg-thumb bg-sky-sunny' data-bg='sunny'></div>
+						<div class='bg-thumb bg-sky-cloudy bg-selected' data-bg='cloudy'></div>
+						<div class='bg-thumb bg-sky-sunset' data-bg='sunset'></div>
 					</div>
 					<div class='gui-check-box check-box-checked unselectable' id='sound-option' data-option='sound'>
 						<div>
@@ -209,9 +200,9 @@
 						<span class='lang-eng'>Back</span>
 						<span class='lang-esp'>Atras</span>
 					</button>
-					
 				</div>
 
+				<!-- page that shows the credits to game developments -->
 				<div class='credits-page'>
 					<h2 class='gui-page-title'>
 						<span class='lang-esp'>Reconocimientos</span><span class='lang-eng'>Credits</span>
@@ -234,9 +225,9 @@
 						<div class="cp-delete"></div>
 						<div class="cp-run"></div>
 					</div>
-
 				</div>
 
+				<!-- view of the user data  -->
 				<div class='user-profile'>
 					<h2 class='gui-page-title'>
 						<span class='lang-esp'>Perfil de Usuario</span><span class='lang-eng'>User Profile</span>
@@ -297,7 +288,47 @@
 			<div class="part2"> </div>
 			<div class="part3"> </div>
 		</div>
+	</div> <!-- end wrapper -->
+
+	<div class='game-bg-lands-wrapper'>
+		<div class='bg-lands-right' id='game-bg-lands-right'></div>
 	</div>
+
+	<!-- current user information (put outside so it's not affected by the limits of the wrapper) -->
+	<div class="user-session unselectable">
+		<div class='user-session-bar '>
+			<span class='gui-icon small-icon icon-user visible-small'></span>
+			<span class='gui-icon med-icon icon-user visible-med'></span>
+			<span class='gui-icon large-icon icon-user visible-large'></span>
+			<span class='user-name'>User</span>
+			<span class='gui-icon small-icon icon-arrow-down visible-small'></span>
+			<span class='gui-icon med-icon icon-arrow-down visible-med'></span>
+			<span class='gui-icon large-icon icon-arrow-down visible-large'></span>
+		</div>
+		<div class='user-session-options'> 	
+			<a href='#' class='menu-option' id='link-session-profile'>
+				<span class='gui-icon small-icon icon-user visible-small'></span>
+				<span class='gui-icon med-icon icon-user visible-med'></span>
+				<span class='gui-icon large-icon icon-user visible-large'></span>
+				<span class='lang-eng'>Profile</span>
+				<span class='lang-esp'>Perfil</span>
+			</a>
+			<a href='#' class='menu-option' id='link-session-exit'>
+				<span class='gui-icon small-icon icon-user visible-small'></span>
+				<span class='gui-icon med-icon icon-user visible-med'></span>
+				<span class='gui-icon large-icon icon-user visible-large'></span>
+				<span class='lang-eng'>Exit</span>
+				<span class='lang-esp'>Salir</span>
+			</a>
+		</div>
+	</div>
+
+	<h2 class='screen-too-small page-title'>
+		<!-- show error for screens with insufficient width -->
+		<span class='lang-eng'>This application is unable to display at this screen size</span>
+		<span class='lang-esp'>Esta aplicación no está compatible con este tamaño de pantalla</span>
+	</h2>
+
 	<!-- <script src="js/phonegap.js"></script> -->
 
 	<!-- velocity  -->

@@ -16,6 +16,9 @@ window.onload = function() {
 	var appContainer = document.getElementsByClassName('app-container')[0];
 	var logoContainer = document.getElementsByClassName('logo-container')[0];
 
+	//background elements outside of main game canvas
+
+
 	//gui overlay
 	var guiOverlay = document.getElementsByClassName('gui-overlay')[0];
 	var userCreate = document.getElementsByClassName('user-create')[0];
@@ -38,7 +41,9 @@ window.onload = function() {
 
 	//game view
 	var gameCanvas = document.getElementsByClassName('game-canvas')[0];
-	
+	// var gameLandsCanvas = document.getElementsByClassName('game-lands-canvas')[0];
+	// var gameObjectsCanvas = document.getElementsByClassName('game-objects-canvas')[0];
+
 	//specific items identified by id (specific buttons, fields, etc)
 	//login form send button
 	var btnLogin = document.getElementById('btn-login');

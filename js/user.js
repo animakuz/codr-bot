@@ -2,6 +2,7 @@
 //object which contains the data of the user currently logged in
 var currentUser;
 var defaultLanguage = 'Esp';
+var messageShowing = false;
 
 //User level info prototype ( for showing in completed levels part of profile)
 var UserLevel = {
@@ -21,7 +22,7 @@ var createUser = function() {
 		pass: '',
 		options: {
 			language: 'Esp',
-			background: 'bg1',
+			background: 'sunny',
 			sound: 'off'
 		},
 		data: {
@@ -37,99 +38,106 @@ with the code to be run after clicking the ok button
 if a simple function object is defined, it is taken as the OK response function
 both for simple alerts and confirm*/
 var showMessageBox = function(message, boxType, messageType, action) {
-	//create elements
-	var container = document.getElementsByClassName('gui-overlay')[0];
-	var box = document.createElement('div');
-	var titleBox = document.createElement('h3');
-	var title = document.createTextNode(messageType.toUpperCase() + "!");
-	var icon = document.createElement('div');
-	var messageTextBox = document.createElement('span');
-	var messageText = document.createTextNode(message);
-	var lineBreak = document.createElement('br');
-	var buttonWrapper = document.createElement('div');
-	var buttonOK = document.createElement('button');
-	var buttonOKText = document.createTextNode('OK');
+	//check if message box already showing
+
+	if (!messageShowing) {
+		messageShowing = true;
+		//create elements
+		var container = document.getElementsByClassName('gui-overlay')[0];
+		var box = document.createElement('div');
+		var titleBox = document.createElement('h3');
+		var title = document.createTextNode(messageType.toUpperCase() + "!");
+		var icon = document.createElement('div');
+		var messageTextBox = document.createElement('span');
+		var messageText = document.createTextNode(message);
+		var lineBreak = document.createElement('br');
+		var buttonWrapper = document.createElement('div');
+		var buttonOK = document.createElement('button');
+		var buttonOKText = document.createTextNode('OK');
 
 
-	//set classes and values	
-	addClass(box, 'gui-message-box');
-	addClass(titleBox, 'message-box-title');
-	addClass(icon, 'message-box-icon');
-	addClass(messageTextBox, 'message-box-text');
-	addClass(buttonWrapper, 'message-button-wrapper');
-	addClass(buttonOK, 'message-box-button, message-btn-ok, small-button');
+		//set classes and values	
+		addClass(box, 'gui-message-box');
+		addClass(titleBox, 'message-box-title');
+		addClass(icon, 'message-box-icon');
+		addClass(messageTextBox, 'message-box-text');
+		addClass(buttonWrapper, 'message-button-wrapper');
+		addClass(buttonOK, 'message-box-button, message-btn-ok, small-button');
 
-	lineBreak.style.clear = 'both';
+		lineBreak.style.clear = 'both';
 
-	switch(messageType) {
-		case 'success':
-			addClass(icon, 'message-icon-success');
-			break;
+		switch(messageType) {
+			case 'success':
+				addClass(icon, 'message-icon-success');
+				break;
 
-		case 'warning':
-			addClass(icon, 'message-icon-warning');
-			break;
+			case 'warning':
+				addClass(icon, 'message-icon-warning');
+				break;
 
-		case 'error':
-			addClass(icon, 'message-icon-error');
-			break;
-	};
+			case 'error':
+				addClass(icon, 'message-icon-error');
+				break;
+		};
 
-	//organize elements
-	messageTextBox.appendChild(messageText);
-	titleBox.appendChild(title);
-	buttonOK.appendChild(buttonOKText);
-	
-	box.appendChild(titleBox);
-	box.appendChild(icon);
-	box.appendChild(messageTextBox);
-	box.appendChild(lineBreak);
+		//organize elements
+		messageTextBox.appendChild(messageText);
+		titleBox.appendChild(title);
+		buttonOK.appendChild(buttonOKText);
+		
+		box.appendChild(titleBox);
+		box.appendChild(icon);
+		box.appendChild(messageTextBox);
+		box.appendChild(lineBreak);
 
-	//button bindings
-	buttonOK.onclick = function() {
-		//TODO ADD FADE OUT
-		container.removeChild(box);
-		if(typeof action !== 'undefined') {
-			if (isFunction(action)) {
-				action();
-			}
-
-			if (typeof action.ok !== 'undefined') {
-				action.ok();
-			}
-		}
-	};
-
-	buttonWrapper.appendChild(buttonOK);
-
-	//condition message buttons
-	if (boxType === 'alert') {
-		//possibly alert specific stuff
-
-	} else if (boxType === 'confirm') {
-		//cancel button
-		var buttonCancel = document.createElement('button');
-		var buttonCancelText = document.createTextNode('Cancel');
-		addClass(buttonCancel, 'message-box-button, message-btn-cancel, small-button');
-		buttonCancel.appendChild(buttonCancelText);
-		buttonWrapper.appendChild(buttonCancel);
-
-		buttonCancel.onclick = function() {
+		//button bindings
+		buttonOK.onclick = function() {
 			//TODO ADD FADE OUT
 			container.removeChild(box);
+			messageShowing = false;
 			if(typeof action !== 'undefined') {
-				//get cancel function from object
-				if (typeof action.cancel !== 'undefined') {
-					action.cancel();
+				if (isFunction(action)) {
+					action();
+				}
+
+				if (typeof action.ok !== 'undefined') {
+					action.ok();
 				}
 			}
 		};
-	}
-	
-	box.appendChild(buttonWrapper);
 
-	//TODO ADD FADE IN
-	container.appendChild(box);
+		buttonWrapper.appendChild(buttonOK);
+
+		//condition message buttons
+		if (boxType === 'alert') {
+			//possibly alert specific stuff
+
+		} else if (boxType === 'confirm') {
+			//cancel button
+			var buttonCancel = document.createElement('button');
+			var buttonCancelText = document.createTextNode('Cancel');
+			addClass(buttonCancel, 'message-box-button, message-btn-cancel, small-button');
+			buttonCancel.appendChild(buttonCancelText);
+			buttonWrapper.appendChild(buttonCancel);
+
+			buttonCancel.onclick = function() {
+				//TODO ADD FADE OUT
+				container.removeChild(box);
+				messageShowing = false;
+				if(typeof action !== 'undefined') {
+					//get cancel function from object
+					if (typeof action.cancel !== 'undefined') {
+						action.cancel();
+					}
+				}
+			};
+		}
+		
+		box.appendChild(buttonWrapper);
+
+		//TODO ADD FADE IN
+		container.appendChild(box);
+	}
 };
 
 //set language on visual components
@@ -146,7 +154,12 @@ var setLanguageVC = function(language) {
 
 //set background visual component
 var setBackgroundVC = function(bg) {
-	//TODO - SET BACKGROUDN VISUALLY
+	//TODO - ADD FADE EFFECT ON BACKGROUND CHANGE
+	var bgSky = document.getElementById('game-bg-sky');
+	removeClass(bgSky, 'bg-sky-sunny');
+	removeClass(bgSky, 'bg-sky-cloudy');
+	removeClass(bgSky, 'bg-sky-sunset');
+	addClass(bgSky, 'bg-sky-' + bg);
 };
 
 
@@ -170,7 +183,6 @@ var loadUser = function(user, selectScreen, menuScreen, sessionBar) {
 
 	//set options - language, background, sound
 	setLanguageVC(currentUser.options.language);
-
 	setBackgroundVC(currentUser.options.background);
 
 };
