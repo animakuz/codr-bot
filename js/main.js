@@ -1,25 +1,32 @@
+//-- MAIN SCRIPT FILE -----------------------------------------------------------
+//-- ASSIGNMENTS OF REFERENCES TO VISUAL COMPONENTS
+//-- EVENT BINDINGS AND INITIALIZATIONS
+
 // Project Title: Programaquina y los Secretos del Planeta Algoritmus
 // Author: Marcus Baptiste - ID: R0032401
-
-//MAIN SCRIPT FILE - MAKE ASSIGNMENTS OF REFERENCES TO VISUAL COMPONENTS, BIND EVENTS AND BRING 
-//TOGETHER THE DIFFERENT PARTS OF THE SOFTWARE
 
 /* TODO 
 	- FIX STUFF COMMENTED WITH TODO
 	- KEEP WORKING AND FINISH THIS SHIIIIIT
-
 */
+
 window.onload = function() {
-	//interface elements
-	//main divisions
-	var wrapper = document.getElementsByClassName('wrapper')[0];
-	var appContainer = document.getElementsByClassName('app-container')[0];
+//--MAIN INTERFACE ELEMENT ASSIGNMENTS------------------------------------------
+	//--Main divisions
+	var loaderContainer = document.getElementById('loader-container');
+	var contentWrapper = document.getElementById('content-wrapper');
 	var logoContainer = document.getElementsByClassName('logo-container')[0];
+	var appContainer = document.getElementsByClassName('app-container')[0];
+	var dimensionWrapper = document.getElementsByClassName('dimension-wrapper')[0];
 
-	//background elements outside of main game canvas
+	//--Background elements outside of main game canvas
+	var gameBGSky = document.getElementById('game-bg-sky');
+	var gameBGUnderground = document.getElementById('game-bg-underground');
+	var gameBGClouds = document.getElementById('game-bg-clouds-canvas');
+	var gameBGLandsLeft = document.getElementById('game-bg-lands-left');
+	var gameBGLandsRight = document.getElementById('game-bg-lands-right');
 
-
-	//gui overlay
+	//--Gui overlay
 	var guiOverlay = document.getElementsByClassName('gui-overlay')[0];
 	var userCreate = document.getElementsByClassName('user-create')[0];
 	var userSelect = document.getElementsByClassName('user-select')[0];
@@ -31,7 +38,7 @@ window.onload = function() {
 	var creditsPage = document.getElementsByClassName('credits-page')[0];
 	var levelSelect = document.getElementsByClassName('level-select')[0];
 
-	//code panel
+	//--Code panel
 	var cpGUI = document.getElementsByClassName('code-panel');
 	var cpViewToggle = document.getElementsByClassName('cp-view-toggle')[0];
 	var cpAdd = document.getElementsByClassName('cp-add')[0];
@@ -39,12 +46,13 @@ window.onload = function() {
 	var cpRun = document.getElementsByClassName('cp-run')[0];
 	var cpContent = document.getElementsByClassName('cp-content')[0];
 
-	//game view
-	var gameCanvas = document.getElementsByClassName('game-canvas')[0];
-	// var gameLandsCanvas = document.getElementsByClassName('game-lands-canvas')[0];
-	// var gameObjectsCanvas = document.getElementsByClassName('game-objects-canvas')[0];
+	//--Game view
+	// var gameCanvas = document.getElementById('game-canvas');
+	// var gameLandsCanvas = document.getElementById('game-lands-canvas');
+	// var gameObjectsCanvas = document.getElementById('game-objects-canvas');
+//-- END MAIN INTERFACE ELEMENT ASSIGNMENTS-------------------------------------
 
-	//specific items identified by id (specific buttons, fields, etc)
+//--SPECIFIC ELEMENT ASSIGNMENTS (specific buttons, fields, etc) ---------------
 	//login form send button
 	var btnLogin = document.getElementById('btn-login');
 
@@ -92,13 +100,12 @@ window.onload = function() {
 
 	//tab title bars
 	var tabTitles = document.querySelectorAll('.gui-tab-title');
+//--END SPECIFIC ELEMENT ASSIGNMENTS -------------------------------------------
 
-
-
-	// -- BINDINGS AND EVENTS -----------------------------------------------------------------
+//-- BINDINGS AND EVENTS -------------------------------------------------------
 	
-	//-- CODE PANEL -------------------------------------------------------------------
-		//toggle view - open and close 
+	//--Code Panel--------------------------------------------------------------
+		//toggle view button - open and close 
 		cpViewToggle.onclick = function() {
 			if (codePanel.viewState === 'open') {
 				Velocity(cpGUI, {width: '100px'}, {duration: 300,  complete: function() {
@@ -111,8 +118,7 @@ window.onload = function() {
 			}
 		};
 
-		//control buttons
-		//add code bits
+		//add code bit button
 		cpAdd.onclick = function() {
 			if (codePanel.viewState === 'open') {
 				if (codePanel.numCodeBits < 8) {
@@ -125,7 +131,7 @@ window.onload = function() {
 			}
 		};
 
-		//delete code bits
+		//delete code bit button
 		cpDelete.onclick = function() {
 			if (codePanel.viewState === 'open') {
 				//delete selected 
@@ -137,14 +143,13 @@ window.onload = function() {
 			}
 		};
 
-		//run code bits
+		//run code sequence button
 		cpRun.onclick = function() {
 			console.log('running'); //TODO - ADD FUNCTIONALITY
 		};
+	//--------------------------------------------------------------------------
 
-	//------END CODE PANEL ----------------
-
-	//-- USER CREATE ------------------------------------------------------------------
+	//--Create User ------------------------------------------------------------
 		btnCreateUser.onclick = function() {
 			//get values
 			var inputs = userCreate.querySelectorAll('input');
@@ -184,9 +189,9 @@ window.onload = function() {
 				showMessageBox(respMessage, 'alert', 'error');
 			}
 		};
-	//--------END USER CREATE ------------------
+	//--------------------------------------------------------------------------
 
-	//-- USER SELECT -----------------------------------------------------------------
+	//--Select User ------------------------------------------------------------
 		btnLogin.onclick = function() {
 			loginProc(userSelect, gameMenu, userSession);
 		};
@@ -198,8 +203,7 @@ window.onload = function() {
 			}
 		});
 
-
-		//LINK TO CREATE USER PAGE
+		//link to create user page
 		linkCreateUser.onclick = function() {
 			//clear fields in case there was text
 			clearFields(userSelect);
@@ -207,16 +211,15 @@ window.onload = function() {
 			//switch active to user create
 			switchScreens(userSelect, userCreate);
 		};
+	//--------------------------------------------------------------------------
 
-	//---------END USER SELECT ---------------
-
-	//-- USER SESSION ----------------------------------------------------------------
+	//--User Session------------------------------------------------------------
+		//open and close user info bar
 		userSessionBar.onclick = function() {
-			//open and close user info bar
 			toggleClass(this.parentNode, 'user-session-open');
 		};
 
-		//Show profile
+		//show profile
 		linkSessionProfile.onclick = function () {
 			//update user profile to match info contained in current user object
 			profileUsername.innerHTML = currentUser.user;
@@ -233,13 +236,13 @@ window.onload = function() {
 			removeClass(userSession, 'user-session-open');
 		};
 
-		//Exit
+		//exit user session
 		linkSessionExit.onclick = function() {
 			exitUserSession(userSelect);
 		};
-	//--------END USER SESSION -----------------
+	//--------------------------------------------------------------------------
 
-	//-- USER PROFILE ---------------------------------------------------------------
+	//--User Profile------------------------------------------------------------
 		//display info on levels cleared
 		bindMultiple(profileLevels, 'onclick', function(ele) {
 			console.log(ele.className); //TODO - ADD FUNCTIONALITY
@@ -250,13 +253,14 @@ window.onload = function() {
 			console.log(ele.className); //TODO - ADD FUNCTIONALITY
 		});
 
+		//close profile view
 		btnCloseProfile.onclick = function() {
 			removeClass(userProfile, 'gui-active');
 		};
-	//--------END USER PROFILE ----------------
+	//--------------------------------------------------------------------------
 
-
-	//-- START MENU ------------------------------------------------------------------
+	//--Start Menu--------------------------------------------------------------
+		//show game start screen (level select)
 		btnStartGame.onclick = function() {
 			//switch to level select screen
 			switchScreens(gameMenu, levelSelect);
@@ -265,6 +269,7 @@ window.onload = function() {
 			//TODO MAKE LOAD LEVELS ACCORDING TO CURRENTLY PASSED ETC
 		};
 
+		//show options screen
 		btnGameOptions.onclick = function() {
 			//hide start menu 
 			removeClass(gameMenu, 'gui-active');
@@ -300,41 +305,39 @@ window.onload = function() {
 			addClass(gameOptions, 'gui-active');
 		};
 
+		//show credits screen
 		btnCredits.onclick = function() {
 			//switch to credits page
 			switchScreens(gameMenu, creditsPage);
 		};
 
+		//exit user session
 		btnExit.onclick = function() {
 			exitUserSession(userSelect);
 		};
-	//-------END START MENU -------------------
+	//--------------------------------------------------------------------------
 
-
-	//-- OPTIONS MENU ----------------------------------------------------------------
-		//CHANGE LANGUAGE
+	//--Options Menu------------------------------------------------------------
+		//change language
 		bindMultiple(langOptionButtons, 'onclick', function(ele) {
 			changeLang(ele);
 		});
 
-		//CHANGE BACKGROUND
+		//change background
 		bindMultiple(bgOptionButtons, 'onclick', function(ele) {
 			changeBackground(ele);
 		});
 
+		//CHANGE SOUND FUNCTION IN CHECK-BOX CODE
+	//--------------------------------------------------------------------------
 
-		//change sound option in check-box code
-
-	//------END OPTIONS MENU-------------------
-
-
-	//-- LEVEL SELECT ----------------------------------------------------------------
+	//--Level Select------------------------------------------------------------
 		//click level select buttons
 		bindMultiple(levelSelectThumbs, 'onclick', function(ele) {
 			selectLevel(ele);
 		});
 
-		//click start game level button
+		//click start game button
 		btnStartLevel.onclick = function() {
 			showMessageBox('Starting Game with a very long text for testing purposes', 'alert', 'success', 
 			function() {
@@ -342,10 +345,9 @@ window.onload = function() {
 			});
 			console.log('starting level'); //TODO - ADD FUNCTIONALITY
 		};
-	//------END LEVEL SELECT ------------------
+	//--------------------------------------------------------------------------
 
-
-	//--- OTHER GUI ELEMENTS ----------------------------------------------------------
+	//--Other GUI Elements------------------------------------------------------
 		//check boxes
 		bindMultiple(checkBoxes, 'onclick', function (ele) { 
 			toggleClass(ele, 'check-box-checked'); 
@@ -357,7 +359,6 @@ window.onload = function() {
 						toggleSound();
 					break;
 			}
-
 		});
 
 		//tabs
@@ -377,15 +378,13 @@ window.onload = function() {
 			addClass(ele, 'active-tab-title');
 			addClass(document.getElementById(activeTab), 'active-tab');
 		});
-	//------END OTHER GUI ELEMENTS --------------
+	//--------------------------------------------------------------------------
 
-
-	//-- NAVIGATION-------------------------------------------------------------
-		//BACK BUTTONS
+	//--Navigation Elements-----------------------------------------------------
+		//back buttons
 		bindMultiple(backButtons, 'onclick', function(ele){
 			var currentScreen = ele.getAttribute('data-screen');
 
-			//TODO - ADD CASES FOR DIFFERENT SECTIONS AS YOU NEED THEM
 			switch(currentScreen) {
 				case 'user-create' :
 					//empty fields in case they had anything
@@ -408,12 +407,17 @@ window.onload = function() {
 					switchScreens(creditsPage, gameMenu);
 					break;
 			};
-	
 		});
-	//------END NAVIGATION --------------
+	//--------------------------------------------------------------------------
+
+//--END BINDINGS AND EVENTS-----------------------------------------------------
 	
-	//--- FINAL INITIALIZATIONS-----------------------------
-		//CHECK FOR LOGGED IN USER AND LOAD
+//--FINAL INITIALIZATIONS-------------------------------------------------------
+	//SHOW LOGO
+	window.initializeApp = function() {
+		//initialize game graphics external to game
+		setLands([1,3,0,2,1,1,3,0,2,1]);
+		setClouds();
 		
 		var loggedUserName = localStorage.getItem('currentUser');
 		if (loggedUserName) {
@@ -424,6 +428,6 @@ window.onload = function() {
 			//no user logged - show user select screen
 			addClass(userSelect, 'gui-active');
 		}
-	//------END FINAL INITIALIZATIONS -----------
-
+	};
+//--END FINAL INITIALIZATIONS---------------------------------------------------
 };

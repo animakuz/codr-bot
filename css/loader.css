@@ -1,0 +1,32 @@
+/*LOADER THAT BLOCKS SCREEN UNTIL ALL ASSETS LOADED - ALSO SHOWS LOADING ANIMATION*/
+	/* container for loader */
+	.loader-container { 
+		display: block;
+		position: absolute;
+		width: 100%; height: 100%;
+		background-color: #666;
+	}
+		/*TODO - MODIFY DIMENSIONS ACCORDING TO SCREEN SIZE*/
+		.loader-bar {
+			display: block;
+			position: relative;
+			top: 50%;
+			border: 2px solid #eee;
+			padding: 2px;
+			width: 150px; height: 20px;
+			margin: -15px auto 0;
+			text-align: center;
+			-moz-border-radius: 25px;
+			-webkit-border-radius: 25px;
+			border-radius: 25px;
+		}
+
+		.loader-inner {
+			height: 100%; width: 0;
+			background-color: white;
+			-webkit-border-radius: 25px;
+			-moz-border-radius: 25px;
+			border-radius: 25px;
+	
+		}
+

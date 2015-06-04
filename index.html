@@ -3,50 +3,54 @@
 		Autor: Marcus Baptiste - ID: R0032401; -->
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, user-scalable=no" />
-	<meta charset="utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content=""/>
+	<meta name='viewport' content='width=device-width, user-scalable=no' />
+	<meta charset='utf-8' />
+	<meta name='description' content='' />
+	<meta name='keywords' content=''/>
 	<title> Programaquina </title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css"/>
+	<link rel='stylesheet' type='text/css' href='css/loader.css'/>
+	<link rel='stylesheet' type='text/css' href='css/styles.css'/>
 	<link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
 </head>
 
 <body>
-	<!-- realitvely static background elements created outside of the game canvas for performance -->
-	<div class='game-bg-sky bg-sky-cloudy' id='game-bg-sky'></div>
-	<div class='game-bg-underground'></div>
-	<canvas class='game-bg-clouds' id='game-bg-clouds-canvas'></canvas>
-	
-
-	<div class='game-bg-lands-wrapper'>
-		<div class='bg-lands-left' id='game-bg-lands-left'></div>
-	</div>
-
-	<div class="wrapper">
-		<div class="app-container">
-			<!-- main game graphics -->
-			<canvas class="game-canvas" width="800"  height="400">
-				<span class="message-error">
-					<span class='lang-eng'>You can't run this game with this browser.<br>
-					Speak with an adult to update!</span>
-					<span class='lang-esp'>No puedes correr este juego con este navegador.<br>
-					Hable con un adulto para actualizar!</span>
-				</span>
-				<!-- better idea would be to check for availability and if not show splash screen -->
+	<div class='content-wrapper hidden' id='content-wrapper'>
+		<!-- this div will surround the entire application (everything except logo and small-screen error) -->
+		<div class='app-container'>
+			<!-- realitvely static background elements created outside of the game canvas for performance -->
+			<div class='game-bg-sky bg-sky-cloudy' id='game-bg-sky'></div>
+			<div class='game-bg-underground' id='game-bg-underground'></div>
+			<canvas class='game-bg-clouds' id='game-bg-clouds-canvas' width ='800px' height='168px'>
 			</canvas>
+			<div class='game-bg-lands-wrapper'>
+				<div class='bg-lands-left' id='game-bg-lands-left'></div>
+			</div>
 
-			<!-- game 'lands' graphics  -->
-<!-- 			<canvas class='game-lands-canvas' width='800' height='400'>
-			</canvas>
- -->
-			<!-- game objects graphics -->
-<!-- 			<canvas class='game-objects-canvas' width='800' height='400'>
-			</canvas> -->
+			<!-- this div will surround anything that will be limited by the specific dimension limitations -->
+			<div class='dimension-wrapper'>
+				<!-- main game graphics -->
+				<canvas class='game-canvas' id='game-canvas' width='800'  height='400'>
+					<span class='message-error'>
+						<span class='lang-eng'>You can't run this game with this browser.<br>
+						Speak with an adult to update!</span>
+						<span class='lang-esp'>No puedes correr este juego con este navegador.<br>
+						Hable con un adulto para actualizar!</span>
+					</span>
+					<!-- better idea would be to check for availability and if not show splash screen -->
+				</canvas>
 
-			<div class="gui-overlay">
+				<!-- game 'lands' graphics  -->
+				<canvas class='game-lands-canvas' id='game-lands-canvas' width='800' height='80'>
+				</canvas>
+
+				<!-- game objects graphics -->
+	<!-- 			<canvas class='game-objects-canvas' id='game-objects-canvas' width='800' height='400'>
+				</canvas> -->
+			</div> <!-- end dimensions wrapper -->
+
+			<div class='gui-overlay'>
 				<!-- create new profile screen -->
-				<div class="user-create">
+				<div class='user-create'>
 					<h2 class='gui-page-title'>
 						<span class='lang-esp'>Crear Usuario</span><span class='lang-eng'>Create Profile</span>
 					</h2>
@@ -54,28 +58,28 @@
 						<label>
 							<span class='lang-eng'>First Name:</span><span class='lang-esp'>Nombre:</span>
 						</label>
-						<input type="text" name="firstName" />
+						<input type='text' name='firstName' />
 					</div>
 
 					<div class='input-group-wrapper'>
 						<label>
 							<span class='lang-eng'>Last Name:</span><span class='lang-esp'>Apellido:</span>
 						</label>
-						<input type="text" name="lasName" />
+						<input type='text' name='lasName' />
 					</div>
 
 					<div class='input-group-wrapper'>
 						<label>
 							<span class='lang-eng'>Username:</span><span class='lang-esp'>Usuario:</span>
 						</label>
-						<input type="text" name="user" />
+						<input type='text' name='user' />
 					</div>
 
 					<div class='input-group-wrapper'>
 						<label>
 							<span class='lang-eng'>Password:</span><span class='lang-esp'>Clave:</span>
 						</label>
-						<input type="password" name="pass" />
+						<input type='password' name='pass' />
 					</div>
 
 					<div class='button-wrapper'>					
@@ -91,14 +95,14 @@
 				</div>
 				
 				<!-- select user screen (login)-->
-				<div class="user-select">
+				<div class='user-select'>
 					<h2 class='gui-page-title'>
 						<span class='lang-eng'>Login</span><span class='lang-esp'>Ingresar</span>
 					</h2>
 					<label><span class='lang-eng'>Username</span><span class='lang-esp'>Usuario</span></label>
-					<input type="text" name="user" id='txt-user' />
+					<input type='text' name='user' id='txt-user' />
 					<label><span class='lang-eng'>Password</span><span class='lang-esp'>Clave</span></label>
-					<input type="password" name="pass" id='txt-pass' />
+					<input type='password' name='pass' id='txt-pass' />
 					<div class='button-wrapper'>					
 						<button class='gui-button small-button green-button' id='btn-login'>
 							<span class='lang-eng'>Enter</span><span class='lang-esp'>Entrar</span>
@@ -111,7 +115,7 @@
 				</div>
 				
 				<!-- game main (start) menu -->
-				<div class="game-menu">
+				<div class='game-menu'>
 					<div class='button-wrapper'>
 						<button class='gui-button large-button green-button' id='btn-start-game'>
 							<span class='lang-eng'>Start</span><span class='lang-esp'>Iniciar</span>
@@ -135,7 +139,7 @@
 				</div>
 
 				<!-- game options select screen -->
-				<div class="game-options">
+				<div class='game-options'>
 					<!-- HERE HERE HERE -->
 					<h3 class='gui-item-title'>
 						<span class='lang-eng'>Language</span>
@@ -174,7 +178,7 @@
 				</div>
 
 				<!-- level select screen (will be generated with javascript) -->
-				<div class="level-select">
+				<div class='level-select'>
 					<h2 class='gui-page-title'>
 						<span class='lang-esp'>Seleccionar Nivel</span><span class='lang-eng'>Level Select</span>
 					</h2>
@@ -215,15 +219,15 @@
 				</div>
 				
 				<!-- panel where code-bits will be placed -->
-				<div class="code-panel">
-					<div class="cp-content"></div>
-					<div class="cp-left-side center-bg-full">
-						<div class="cp-view-toggle center-bg-full"></div>
+				<div class='code-panel'>
+					<div class='cp-content'></div>
+					<div class='cp-left-side center-bg-full'>
+						<div class='cp-view-toggle center-bg-full'></div>
 					</div>
-					<div class="cp-right-side center-bg-full">
-						<div class="cp-add"></div>
-						<div class="cp-delete"></div>
-						<div class="cp-run"></div>
+					<div class='cp-right-side center-bg-full'>
+						<div class='cp-add'></div>
+						<div class='cp-delete'></div>
+						<div class='cp-run'></div>
 					</div>
 				</div>
 
@@ -261,7 +265,7 @@
 								<span class='lang-esp'>Logros</span>
 							</span>
 						</div>
-		
+			
 						<div class='gui-tab-content active-tab' id='profile-levels-cleared'>
 							<div class='level-thumb th-profile-level level-passed'></div>
 							<div class='level-thumb th-profile-level level-passed'></div>
@@ -278,68 +282,109 @@
 						<span class='lang-esp'>Cerrar</span>
 					</button>
 				</div>
+			</div> <!-- end gui overlay -->
 
+			<div class='game-bg-lands-wrapper'>
+				<div class='bg-lands-right' id='game-bg-lands-right'></div>
 			</div>
-		</div>
-		<div class="logo-container">
+
+			<!-- current user information (put outside so it's not affected by the limits of the wrapper) -->
+			<div class='user-session unselectable'>
+				<div class='user-session-bar '>
+					<span class='gui-icon small-icon icon-user visible-small'></span>
+					<span class='gui-icon med-icon icon-user visible-med'></span>
+					<span class='gui-icon large-icon icon-user visible-large'></span>
+					<span class='user-name'>User</span>
+					<span class='gui-icon small-icon icon-arrow-down visible-small'></span>
+					<span class='gui-icon med-icon icon-arrow-down visible-med'></span>
+					<span class='gui-icon large-icon icon-arrow-down visible-large'></span>
+				</div>
+				<div class='user-session-options'> 	
+					<a href='#' class='menu-option' id='link-session-profile'>
+						<span class='gui-icon small-icon icon-user visible-small'></span>
+						<span class='gui-icon med-icon icon-user visible-med'></span>
+						<span class='gui-icon large-icon icon-user visible-large'></span>
+						<span class='lang-eng'>Profile</span>
+						<span class='lang-esp'>Perfil</span>
+					</a>
+					<a href='#' class='menu-option' id='link-session-exit'>
+						<span class='gui-icon small-icon icon-user visible-small'></span>
+						<span class='gui-icon med-icon icon-user visible-med'></span>
+						<span class='gui-icon large-icon icon-user visible-large'></span>
+						<span class='lang-eng'>Exit</span>
+						<span class='lang-esp'>Salir</span>
+					</a>
+				</div>
+			</div>
+
+		</div> <!-- end app container -->
+		
+		<div class='logo-container'>
 			<!-- logo parts  -->
-			<div class="part0"> </div>
-			<div class="part1"> </div>
-			<div class="part2"> </div>
-			<div class="part3"> </div>
+			<div class='part0'> </div>
+			<div class='part1'> </div>
+			<div class='part2'> </div>
+			<div class='part3'> </div>
 		</div>
-	</div> <!-- end wrapper -->
+	</div> <!-- end content wrapper -->
 
-	<div class='game-bg-lands-wrapper'>
-		<div class='bg-lands-right' id='game-bg-lands-right'></div>
-	</div>
-
-	<!-- current user information (put outside so it's not affected by the limits of the wrapper) -->
-	<div class="user-session unselectable">
-		<div class='user-session-bar '>
-			<span class='gui-icon small-icon icon-user visible-small'></span>
-			<span class='gui-icon med-icon icon-user visible-med'></span>
-			<span class='gui-icon large-icon icon-user visible-large'></span>
-			<span class='user-name'>User</span>
-			<span class='gui-icon small-icon icon-arrow-down visible-small'></span>
-			<span class='gui-icon med-icon icon-arrow-down visible-med'></span>
-			<span class='gui-icon large-icon icon-arrow-down visible-large'></span>
-		</div>
-		<div class='user-session-options'> 	
-			<a href='#' class='menu-option' id='link-session-profile'>
-				<span class='gui-icon small-icon icon-user visible-small'></span>
-				<span class='gui-icon med-icon icon-user visible-med'></span>
-				<span class='gui-icon large-icon icon-user visible-large'></span>
-				<span class='lang-eng'>Profile</span>
-				<span class='lang-esp'>Perfil</span>
-			</a>
-			<a href='#' class='menu-option' id='link-session-exit'>
-				<span class='gui-icon small-icon icon-user visible-small'></span>
-				<span class='gui-icon med-icon icon-user visible-med'></span>
-				<span class='gui-icon large-icon icon-user visible-large'></span>
-				<span class='lang-eng'>Exit</span>
-				<span class='lang-esp'>Salir</span>
-			</a>
+	<!-- loader  -->
+	<div class='loader-container' id='loader-container'>
+		<div class='loader-bar' id='loader-bar'>
+			<div class='loader-inner' id='loader-inner'></div>
 		</div>
 	</div>
 
+	<!-- show error for screens with insufficient width -->
 	<h2 class='screen-too-small page-title'>
-		<!-- show error for screens with insufficient width -->
 		<span class='lang-eng'>This application is unable to display at this screen size</span>
 		<span class='lang-esp'>Esta aplicación no está compatible con este tamaño de pantalla</span>
 	</h2>
 
-	<!-- <script src="js/phonegap.js"></script> -->
-
-	<!-- velocity  -->
-	<script src="js/velocity.min.js"></script>
+	<!-- <script src='js/phonegap.js'></script> -->
 	
-	<!-- main scripts -->
-	<script src="js/base.js"></script>
-	<script src="js/game.js"></script>
-	<script src="js/user.js"></script>
-	<script src="js/main.js"></script>
-</body>
+	<!-- base functions and data -->
+	<script src='js/base.js'></script>
+	<script>
+		//loader and display switcher on load complete
+		var progress = 0;
+    	var loader = document.getElementById('loader-container');
+    	var loaderBar = document.getElementById('loader-bar');
+    	var loaderInner = document.getElementById('loader-inner');
+    	var content = document.getElementById('content-wrapper');
 
+		var everythingLoaded = setInterval(function() {
+		  if (/loaded|complete/.test(document.readyState)) {
+		    clearInterval(everythingLoaded);
+	    	// set bar to full (in case it wasn't finished loading)
+	    	loaderInner.style.width = '100%';
+	    	//initialize basic background content and app defaults 
+
+	    	initializeApp();
+
+	    	setTimeout(function() {
+		    	//TODO - ADD FADE OUT
+	    		addClass(loader, 'hidden');
+	    		removeClass(content, 'hidden');
+	    	}, 500);
+		  } else {
+		  	progress+= 2;
+		  	loaderInner.style.width = progress + '%';
+		  }
+		}, 100);
+	</script>
+	<!-- velocity  -->
+	<script src='js/velocity.min.js'></script>
+	<!-- easel.js -->
+	<script src='js/easel.js'></script>
+	<!-- external data loader (mostly graphics) -->
+	<script src='js/data.js'></script>
+	<!-- game based functions and data -->
+	<script src='js/game.js'></script>
+	<!-- user based (GUI) functions and data -->
+	<script src='js/user.js'></script>
+	<!-- main script that puts everything together -->
+	<script src='js/main.js'></script>
+</body>
 
 </html>

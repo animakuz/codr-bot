@@ -16,9 +16,8 @@
 }
 
 body { 
-	display: table;
 	margin: 0; padding: 0;
-	position: relative; 
+	position: absolute; 
 	width: 100%; height: 100%;
 	background-color: #333; 
 	color: #333; 
@@ -26,30 +25,32 @@ body {
 	overflow:hidden;
 }
 
-/*remove defaults on elements */
-a { text-decoration: none; }
-hr { padding: 0; margin: 0; }
+/*--Remove defaults on elements------------------------------------------*/
+	a { text-decoration: none; }
+	hr { padding: 0; margin: 0; }
+/*-----------------------------------------------------------------------*/
 
-/* Language options - (spanish language option by default) */
+/*--Language options - (spanish language option by default)--------------*/
 	.lang-eng { display: none; }
 	.lang-esp { }
-/*----------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
 
-/* GENERAL PROPERTY MODIFIERS */
+/*--GENERAL PROPERTY MODIFIERS-------------------------------------------*/
+	/* centered background scaled to fit element */
 	.center-bg-full {
-		/* centered background scaled to fit element */
 		background-repeat: no-repeat; 
 		background-position: 50% 50%; 
 		background-size: 100% 100%;
 	}
 
+	/* bolded text general class (for more advanced styling and responsive) */
 	.bold { 
-		/* bolded text general class (for more advanced styling and responsive) */
 		font-size: 1.5em; 
 		font-weight: 600; 
 		color: #000; 
 	}
 
+	/*prevent selection of text in certain elements*/
 	.unselectable {
 	   -moz-user-select: -moz-none;
 	   -khtml-user-select: none;
@@ -61,15 +62,14 @@ hr { padding: 0; margin: 0; }
 	   -ms-user-select: none;
 	   user-select: none;
 	}
-/*-------------------------------------------------------------------------------------*/
+/*--END GENERAL PROPERTY MODIFIERS---------------------------------------*/
 
-/*page content*/
+/*--Page content---------------------------------------------------------*/
 	.gui-page-title {
 		margin: 0; 
 		padding: 0;
 		text-align: center;
 	}
-
 
 	.gui-item-title {
 		width: 100%;
@@ -94,7 +94,7 @@ hr { padding: 0; margin: 0; }
 	}
 /*-----------------------------------------------------------------------*/
 
-/*-- tabs ---------------------------------------------------------------*/
+/*--Tabs ----------------------------------------------------------------*/
 	.gui-tab-group {
 		width: 100%; 
 		position: relative;
@@ -138,9 +138,9 @@ hr { padding: 0; margin: 0; }
 		.active-tab {
 			display: block;
 		}
-/*-------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
 
-/*pop-up messages boxes*/
+/*--Pop-up messages boxes------------------------------------------------*/
 	.gui-message-box {
 		position: absolute;
 		top: 25%; left: 25%;
@@ -209,10 +209,9 @@ hr { padding: 0; margin: 0; }
 				background-color: #cf0404; 
 				color: #ddd;	
 			}
-/*-------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
 
-
-/*gui buttons */
+/*--Gui buttons----------------------------------------------------------*/
 	.gui-button {
 		display: inline-block; 
 	 	font-family: "Century Gothic", Century;
@@ -286,9 +285,9 @@ hr { padding: 0; margin: 0; }
 			display: block;
 			margin: 1% auto;
 		}
-/*-------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
 
-/*gui icons*/
+/*--Gui icons------------------------------------------------------------*/
 	.gui-icon {
 		display: inline-block;
 		background-image: url("../img/icon-user.png");
@@ -312,9 +311,9 @@ hr { padding: 0; margin: 0; }
 		.icon-arrow-down { background-image: url("../img/icon-arrow-down.png"); }
 		.icon-arrow-up { background-image: url("../img/icon-arrow-up.png"); }
 		.icon-user { background-image: url("../img/icon-user.png"); }
-/*-------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
 
-/*gui block links (button-like links)*/
+/*--Gui block links (button-like links)----------------------------------*/
 	.gui-block-link {
 		text-decoration: none; 
 		font-weight: bold; 
@@ -334,9 +333,9 @@ hr { padding: 0; margin: 0; }
 		background-color: rgba(20,20,20,0.5); 
 		color: #eee;
 	}
-/*-------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
 
-/*gui checkboxes*/
+/*--Gui checkboxes-------------------------------------------------------*/
 	.gui-check-box {
 		display: block;
 		width: 120px;
@@ -368,11 +367,12 @@ hr { padding: 0; margin: 0; }
 				background-color: rgba(50,50,50,0.8);
 				border: 2px solid rgba(240,240,240,0.8);
 			}
-/*--------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
 
-/*thumbnail previews for levels in level select and showing cleared levels in profile*/
+/*--Thumbnail previews---------------------------------------------------*/
+	/*Preview for levels in level select and showing cleared levels in profile*/*/
 	.level-thumb {
-		/* TODO - dimensions will vary according to screen size*/
+		/* TODO - vary dimensions according to screen size*/
 		width: 80px; height: 60px;
 		border: 2px solid rgba(25,50,25,0.2);
 		display: inline-table;
@@ -384,9 +384,9 @@ hr { padding: 0; margin: 0; }
 	}
 /*-----------------------------------------------------------------------*/
 
-/*thumbnail previews for acheivements */
+/*--Thumbnail previews for acheivements----------------------------------*/
+	/* TODO - make dimensions vary according to screen size according to screen size*/
 	.acheive-thumb {
-		/* TODO - dimensions will vary according to screen size*/
 		width: 80px; height: 60px;
 		border: 2px solid rgba(25,50,25,0.2);
 		background-color: rgba(25,60,120, 0.8);
@@ -398,543 +398,571 @@ hr { padding: 0; margin: 0; }
 		outline: 2px solid rgba(90,120,90,0.8);
 		background-color: rgba(50,80,150, 0.8);
 	}
-/*-------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
 
-/* wrapper for all content (will set size of all display elements except for possible a 
-	background canvas for displaying background elements to take up all screen) */
-.wrapper { 
-	position: relative;
-
-	width: 480px; height: 240px;
-	-webkit-transform-style: preserve-3d;
-  	-moz-transform-style: preserve-3d;
-  	transform-style: preserve-3d;
-/*  	background-image: url("../img/bg_test.png"); 
-  	background-repeat: no-repeat;
-  	background-position: 50% 50%;
-  	background-size: 100% 130%;*/
-/*  	outline: 2px solid red;*/
-}
-
-/*background elements*/
-.game-bg-sky {
-	position: absolute; 
-	top: 0; left: 0;
-	width: 100%; height: 240px;
-}
-	.bg-sky-sunny {
-		background: #f0f9ff; /* Old browsers */
-		background: -moz-linear-gradient(top,  #f0f9ff 0%, #a1dbff 90%, #a1dbff 90%, #b17f57 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f9ff), color-stop(90%,#a1dbff), color-stop(90%,#a1dbff), color-stop(100%,#b17f57)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top,  #f0f9ff 0%,#a1dbff 90%,#a1dbff 90%,#b17f57 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top,  #f0f9ff 0%,#a1dbff 90%,#a1dbff 90%,#b17f57 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top,  #f0f9ff 0%,#a1dbff 90%,#a1dbff 90%,#b17f57 100%); /* IE10+ */
-		background: linear-gradient(to bottom,  #f0f9ff 0%,#a1dbff 90%,#a1dbff 90%,#b17f57 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#b17f57',GradientType=0 ); /* IE6-9 */
-	}
-
-	.bg-sky-cloudy {
-		background: #226fa3; /* Old browsers */
-		background: -moz-linear-gradient(top,  #226fa3 0%, #65acc6 87%, #b17f57 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#226fa3), color-stop(87%,#65acc6), color-stop(100%,#b17f57)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top,  #226fa3 0%,#65acc6 87%,#b17f57 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top,  #226fa3 0%,#65acc6 87%,#b17f57 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top,  #226fa3 0%,#65acc6 87%,#b17f57 100%); /* IE10+ */
-		background: linear-gradient(to bottom,  #226fa3 0%,#65acc6 87%,#b17f57 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#226fa3', endColorstr='#b17f57',GradientType=0 ); /* IE6-9 */
-	}
-
-	.bg-sky-sunset {
-		background: #464b73; /* Old browsers */
-		background: -moz-linear-gradient(top,  #464b73 0%, #c36565 50%, #fd5c26 77%, #ef7d26 90%, #b17f57 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#464b73), color-stop(50%,#c36565), color-stop(77%,#fd5c26), color-stop(90%,#ef7d26), color-stop(100%,#b17f57)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top,  #464b73 0%,#c36565 50%,#fd5c26 77%,#ef7d26 90%,#b17f57 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top,  #464b73 0%,#c36565 50%,#fd5c26 77%,#ef7d26 90%,#b17f57 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top,  #464b73 0%,#c36565 50%,#fd5c26 77%,#ef7d26 90%,#b17f57 100%); /* IE10+ */
-		background: linear-gradient(to bottom,  #464b73 0%,#c36565 50%,#fd5c26 77%,#ef7d26 90%,#b17f57 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#464b73', endColorstr='#b17f57',GradientType=0 ); /* IE6-9 */
-	}
-
-.game-bg-clouds {	
-	position: absolute;
-}
-
-.game-bg-lands-wrapper {
-	position: relative;
-	display: table-cell;
- 	width: 500px;
-}
-	
-	.bg-lands-left, .bg-lands-right{
-		background-image: url("../img/bg_lands.png"); 
-		background-repeat: repeat-x;
-		background-size: 80px 80px;
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		height: 80px;
-	}
-
-	.bg-lands-left {
-		background-position: top right;
-		right: 0;	
-	}
-
-	.bg-lands-right {
-		background-position: top left;
-		left: 0;
-	}
-
-.game-bg-underground {
-	position: absolute;
-	top: 240px;
-	height: 200px;
-	width: 100%;
-	background: #b17f57; /* Old browsers */
-	background: -moz-linear-gradient(top,  #b17f57 0%, #333333 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b17f57), color-stop(100%,#333333)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #b17f57 0%,#333333 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #b17f57 0%,#333333 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #b17f57 0%,#333333 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #b17f57 0%,#333333 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b17f57', endColorstr='#333333',GradientType=0 ); /* IE6-9 */
-
-}
-
-/* main subdivisions */
-/*incase i decide to make a loader??*/
-.loader { display: none;}
-
-/* container for all the elements of the app */
-.app-container { 
-	display: block; 
-	position: absolute;
-	width: 100%; height: 100%; 
-}
-
-/* container for the elements of the logo */
-.logo-container { 
-	display: none; 
-	width: 100%; height: 100%; 
-	position: absolute;  
-	background-color: black;
-}
-
-/* logo parts */
-	/*	.part0 { }
-		.part1 { }
-		.part2 { }*/
-/*-----------------------------------------------------------*/
-
-/* GUI interface elements*/
-
-.gui-overlay { 
-	display: block; 
-	position: absolute;	
-	width: 100%; height: 100%; 
-	top: 0; left: 0;
-}
-
-/*generally aplicable styles (will apply to all user interfaces)*/
-	.user-select, .user-create {
+/*--MAIN SUBDIVISIONS----------------------------------------------------*/
+	/* wrapper for everything that is not the loader or the small screen error*/
+	.content-wrapper {
+		display: block;
 		position: relative;
-		height: auto;
+		margin: 0 auto;
+		width: auto; height: auto;
+	}
+
+	/* loader css in separate file */
+
+	/* container for all the elements of the app */
+	.app-container { 
+		display: table; 
+		position: absolute;
+		width: 100%; height: 100%;
+		background-color: red;
+	}
+
+	/* container for logo */
+	.logo-container { 
+		display: none; 
+		width: 100%; height: 100%; 
+		position: absolute;  
+		background-color: black;
+	}
+
+		/* logo parts */
+		/*	.part0 { }
+			.part1 { }
+			.part2 { }*/
+
+	/* wrapper for all content  that will be affected by dimension limitations */
+	.dimension-wrapper { 
+		display: block;
+		position: relative;
+		margin: 20px 0 0 0;
+		width: 480px; height: 240px;
+	/*	-webkit-transform-style: preserve-3d;
+	  	-moz-transform-style: preserve-3d;
+	  	transform-style: preserve-3d;*/
+	/*  	background-image: url("../img/bg_test.png"); 
+	  	background-repeat: no-repeat;
+	  	background-position: 50% 50%;
+	  	background-size: 100% 130%;*/
+	}
+/*--END MAIN SUBDIVISIONS------------------------------------------------*/
+
+/*--Background elements--------------------------------------------------*/
+	/*gradient that defines sky setting (sunny*/
+	.game-bg-sky, .game-bg-clouds {
+		position: absolute; 
+		top: 0; left: 0;
+		width: 100%; 
+	}
+
+	.game-bg-sky {height: 260px;}
+	
+		.bg-sky-sunny {
+			background: #f0f9ff; /* Old browsers */
+			background: -moz-linear-gradient(top,  #f0f9ff 0%, #a1dbff 90%, #a1dbff 90%, #b17f57 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f9ff), color-stop(90%,#a1dbff), color-stop(90%,#a1dbff), color-stop(100%,#b17f57)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  #f0f9ff 0%,#a1dbff 90%,#a1dbff 90%,#b17f57 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  #f0f9ff 0%,#a1dbff 90%,#a1dbff 90%,#b17f57 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  #f0f9ff 0%,#a1dbff 90%,#a1dbff 90%,#b17f57 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  #f0f9ff 0%,#a1dbff 90%,#a1dbff 90%,#b17f57 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#b17f57',GradientType=0 ); /* IE6-9 */
+		}
+
+		.bg-sky-cloudy {
+			background: #226fa3; /* Old browsers */
+			background: -moz-linear-gradient(top,  #226fa3 0%, #65acc6 87%, #b17f57 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#226fa3), color-stop(87%,#65acc6), color-stop(100%,#b17f57)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  #226fa3 0%,#65acc6 87%,#b17f57 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  #226fa3 0%,#65acc6 87%,#b17f57 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  #226fa3 0%,#65acc6 87%,#b17f57 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  #226fa3 0%,#65acc6 87%,#b17f57 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#226fa3', endColorstr='#b17f57',GradientType=0 ); /* IE6-9 */
+		}
+
+		.bg-sky-sunset {
+			background: #464b73; /* Old browsers */
+			background: -moz-linear-gradient(top,  #464b73 0%, #c36565 50%, #fd5c26 77%, #ef7d26 90%, #b17f57 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#464b73), color-stop(50%,#c36565), color-stop(77%,#fd5c26), color-stop(90%,#ef7d26), color-stop(100%,#b17f57)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  #464b73 0%,#c36565 50%,#fd5c26 77%,#ef7d26 90%,#b17f57 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  #464b73 0%,#c36565 50%,#fd5c26 77%,#ef7d26 90%,#b17f57 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  #464b73 0%,#c36565 50%,#fd5c26 77%,#ef7d26 90%,#b17f57 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  #464b73 0%,#c36565 50%,#fd5c26 77%,#ef7d26 90%,#b17f57 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#464b73', endColorstr='#b17f57',GradientType=0 ); /* IE6-9 */
+		}
+
+	/*canvas that displays cloud graphics*/
+	.game-bg-clouds {	
+		height: 104px;
+		/*background-color: rgba(255,20,20,0.5);*/
+	}
+
+	/*wrapper for lands graphics outside of lands canvas*/
+	/*this will ensure that the lands graphics flows seamlessly from one end of the screen to the otherh*/
+	.game-bg-lands-wrapper {
+		position: relative;
+		display: table-cell;
+	 	width: 500px;
 	}
 		
+		.bg-lands-left, .bg-lands-right{
+			background-image: url("../img/sprite-bg-lands.png"); 
+			background-repeat: repeat-x;
+			background-size: 80px 240px;
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			height: 80px;
+		}
+
+		.bg-lands-left {
+			background-position:top right;
+			right: 0;	
+		}
+
+		.bg-lands-right {
+			background-position:top left;
+			left: 0;
+		}
+
+	/*gradient that creates a seemless blend from the lands graphics to dark body background*/
+	.game-bg-underground {
+		position: absolute;
+		top: 260px;
+		height: 200px;
+		width: 100%;
+		background: #b17f57; /* Old browsers */
+		background: -moz-linear-gradient(top,  #b17f57 0%, #333333 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b17f57), color-stop(100%,#333333)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  #b17f57 0%,#333333 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  #b17f57 0%,#333333 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  #b17f57 0%,#333333 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  #b17f57 0%,#333333 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b17f57', endColorstr='#333333',GradientType=0 ); /* IE6-9 */
+	}
+/*-----------------------------------------------------------------------*/
+
+/*--Game display---------------------------------------------------------*/
+	/*game characters and actions*/
+	.game-canvas { 
+		display: block; 
+		position: absolute;
+		top: 0; left: 0; 
+		/*background-color: rgba(255,0,0,0.4);*/
+		width: 480px; height: 240px;
+	}
+
+	/*game lands*/
+	.game-lands-canvas {
+		display: block;
+		position: absolute;
+		top: 0; left-0;
+		width: 480px; height: 240px;
+	}
+
+	/*game objects*/
+	.game-objects-canvas {
+
+	}
+/*-----------------------------------------------------------------------*/
+
+/*--GUI INTERFACE ELEMENTS-----------------------------------------------*/
+
+	/*--Main container for all gui elements (except user-session bar)----*/
+		.gui-overlay { 
+			display: block; 
+			position: absolute;	
+			width: 100%; height: 100%; 
+			top: 0; left: 0;
+			z-index: 2;
+		}
+	/*-------------------------------------------------------------------*/
+
+	/*--Generally aplicable styles (will apply to all user interfaces)---*/
+		.user-select, .user-create, .game-menu, 
+		.game-options, .credits-page, .level-select {
+			display: none;
+			position: relative;
+			top: 50%;
+			height: auto;
+			margin: 0 auto;
+			-webkit-transform: translateY(-50%);
+			-ms-transform: translateY(-50%);
+			-moz-transform: translateY(-50%);
+			transform: translateY(-50%);
+		}
+
 		.button-wrapper {
 			position: relative;
 			height: 40px;
 			margin: 10px auto 0;
 			display: block;
 		}
-/*---------------------------------------------------------------*/
+	/*-------------------------------------------------------------------*/
 
-/*select user (login)*/
-	.user-select { 
-		display: none; 
-		width: 300px; 
-		margin:-115px auto 0; 
-		top: 50% ;
-	}
-		.user-select label, .user-select input { 
-			width: 200px; 
-			margin: 0 auto;
+	/*--Select user (login)----------------------------------------------*/
+		.user-select { 
+			width: 300px; 
 		}
-		.user-select label { 
-			padding: 10px 0 0 0; 
-			width: 220px;
-			font-weight: bold;
-			display: block;
-		}
-		.user-select input { 
-			margin-top: 0;
-			display: block;
-		}
-		.user-select .button-wrapper {
-			width: 220px;
+			.user-select label, .user-select input { 
+				width: 200px; 
+				margin: 0 auto;
+			}
+			.user-select label { 
+				padding: 10px 0 0 0; 
+				width: 220px;
+				font-weight: bold;
+				display: block;
+			}
+			.user-select input { 
+				margin-top: 0;
+				display: block;
+			}
+			.user-select .button-wrapper {
+				width: 220px;
+			}
+
+			.user-select .gui-button {
+				position: absolute;
+				right: 0;
+			}
+
+			#link-create-user {
+				position: relative;
+				display: block;
+				margin: 10px auto 0;
+			}
+	/*-------------------------------------------------------------------*/
+
+	/*--Create user------------------------------------------------------*/
+		.user-create {
+			width: 400px; 
 		}
 
-		.user-select .gui-button {
+			.user-create .button-wrapper {
+				width: 300px;
+			}
+
+			.input-group-wrapper {
+				width: 300px;
+				margin: 5px auto 0;
+			}
+
+			.input-group-wrapper label {
+				width: 100px;
+				position: relative; top: 4px;
+				text-align: right;
+			}
+
+			#btn-create-user {
+				position: absolute;
+				right: 0;
+			}
+	/*-------------------------------------------------------------------*/
+
+	/*--User session-----------------------------------------------------*/
+		.user-session { 
+			display: none; 
 			position: absolute;
-			right: 0;
-		}
-
-		#link-create-user {
-			position: relative;
-			display: block;
-			margin: 10px auto 0;
-		}
-/*---------------------------------------------------------------*/
-
-/*create user */
-	.user-create {
-		display: none;
-		width: 400px; 
-		margin:-115px auto 0; 
-		top: 50% ;
-	}
-
-		.user-create .button-wrapper {
-			width: 300px;
-		}
-
-		.input-group-wrapper {
-			width: 300px;
-			margin: 5px auto 0;
-		}
-
-		.input-group-wrapper label {
-			width: 100px;
-			position: relative; top: 4px;
-			text-align: right;
-		}
-
-		#btn-create-user {
-			position: absolute;
-			right: 0;
-		}
-/*---------------------------------------------------------------*/
-
-/*user session*/
-	.user-session { 
-		display: none; 
-		position: absolute;
-		top: 2px; right: 5px;
-		width: auto; height: 20px;
-		padding: 2px 5px;
-		font-family: "Century Gothic", Century;
-		font-size: 16px;  line-height: 24px;
-		background-color: rgba(250,250,255,0.5);
-		border: 2px solid rgba(25,25,75,0.4);
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-		border-radiusus: 5px;
-		cursor: pointer;
-		overflow: hidden;
-		z-index: 2;
-	}	
-		
-		.user-session-open {
-			height: 80px; 
-		}
-
-		.user-session-bar {
-
-		}
-
-		.user-session-options {
-			width: 100%; height: auto;
-		}
-
-		.menu-option {
-			display: block;
-		}
-
-		.user-name {
-			margin-right: 20px;
-		}
-
-		.user-name, .user-session .lang-eng, .user-session .lang-esp {
-			position: relative;
-			top: -2px;
-		}
-/*---------------------------------------------------------------*/
-
-/*user profile*/
-	.user-profile {
-		display: none;
-		position: absolute;
-		padding: 0 3%;
-		top: 10%; left: 5%;
-		background-color: white;
-		width: 84%; height: 90%;
-		border-radius: 1%;
-		-webkit-border-radius: 1%;
-		-moz-border-radius: 1%;
-	}
-		
-		.user-profile .gui-page-title {
-			background-color: #aab;
-		}
-
-		.profile-user-info {
-			position: relative;
-		}
-
-		.profile-user-info div {
-			display: inline-block;
+			top: 2px; right: 5px;
+			width: auto; height: 20px;
+			padding: 2px 5px;
+			font-family: "Century Gothic", Century;
+			font-size: 16px;  line-height: 24px;
+			background-color: rgba(250,250,255,0.5);
+			border: 2px solid rgba(25,25,75,0.4);
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			cursor: pointer;
+			overflow: hidden;
+			z-index: 2;
+		}	
 			
+			.user-session-open {
+				height: 80px; 
+			}
+
+			.user-session-bar {
+
+			}
+
+			.user-session-options {
+				width: 100%; height: auto;
+			}
+
+			.menu-option {
+				display: block;
+			}
+
+			.user-name {
+				margin-right: 20px;
+			}
+
+			.user-name, .user-session .lang-eng, .user-session .lang-esp {
+				position: relative;
+				top: -2px;
+			}
+	/*-------------------------------------------------------------------*/
+
+	/*--User profile-----------------------------------------------------*/
+		.user-profile {
+			display: none;
+			position: absolute;
+			padding: 0 3%;
+			width: 84%; height: 90%;
+			top: 10%; left: 5%;
+			background-color: white;
+			-webkit-border-radius: 1%;
+			-moz-border-radius: 1%;
+			border-radius: 1%;
 		}
+			
+			.user-profile .gui-page-title {
+				background-color: #aab;
+			}
 
-		.profile-user-info div:first-child {vertical-align: top; }
-		.profile-user-info div:last-child { margin-left: 10%;}
+			.profile-user-info {
+				position: relative;
+			}
 
-		.profile-user-info img{
-			float: left;
-			width: 32px; height: 32px;
-		}
+			.profile-user-info div {
+				display: inline-block;
+				
+			}
 
-		.user-profile .gui-button {
-			display: block;
-			margin: 1% auto 0;
-		}
+			.profile-user-info div:first-child {vertical-align: top; }
+			.profile-user-info div:last-child { margin-left: 10%;}
 
-		.user-profile .gui-tab-group {
-			margin-top: 1.5%;
-			position: relative;
-			height: 50%;
-		}
+			.profile-user-info img{
+				float: left;
+				width: 32px; height: 32px;
+			}
 
-		.user-profile .gui-tab-title-bar {
-			height: 20%;
-		}
-/*---------------------------------------------------------------*/
+			.user-profile .gui-button {
+				display: block;
+				margin: 1% auto 0;
+			}
 
-/*game menu*/
-	.game-menu { 
-		display: none;
-		position: relative;
-		top: 50%;
-		margin-top: -110px;
-	}
+			.user-profile .gui-tab-group {
+				margin-top: 1.5%;
+				position: relative;
+				height: 50%;
+			}
 
-		.game-menu .button-wrapper {
-			height: auto;
-		}
+			.user-profile .gui-tab-title-bar {
+				height: 20%;
+			}
+	/*-------------------------------------------------------------------*/
 
-		.game-menu .gui-button {
-			display: block;
-			margin: 20px auto;	
-		}
-/*---------------------------------------------------------------*/
-
-/*game options*/
-	.game-options { 
-		display: none;
-		position: relative;
-		top: 50%;
-		width: 400px;
-		margin: -100px auto 0;
-	}
-		.game-options .button-wrapper {
-			text-align: center;
-			margin: 0 0 10px;
-			height: auto;
-		}	
-
-		.game-options .gui-item-title {
-
-		}
-
-		.bg-thumb {
-			/*dimensions will vary according to screen size*/
-			width: 80px; height: 60px;
-			border: 2px solid rgba(25,50,25,0.2);
-			display: inline-block;
-			margin: 0 5px;
-			background-color: rgba(200,150,90,0.5);
-		}
-
-		.bg-thumb:hover {
-			border: 2px dashed rgba(100,150,100,0.5);
-			outline: 2px solid rgba(90,120,90,0.8);
-		}
-
-		.bg-selected {
-			outline: 2px solid rgba(90,120,90,0.8);
-		}
-
-		/*language options*/
-		.btn-change-lang {
-			border: 2px solid rgba(25,25,25,0.6);
-		}
-
-		.btn-change-lang:hover, .btn-change-lang:active {
-			outline: 2px solid rgba(50,100,50,0.5);
-		}
-
-		.active-lang {
-			border: 2px solid rgba(25,75,50,0.7);
-			background-color: #99efac;
-		}
-/*---------------------------------------------------------------*/
-
-/*credits page*/
-	.credits-page {
-		display: none;
-		text-align: center;
-		position: relative;
-		top: 50%;
-		margin-top: -80px;
-	}
-/*--------------------'------------------------------------------*/
-
-/*level select*/
-	.level-select {
-		display: none;
-		text-align: center;
-		position: relative;
-		top: 50%;
-		margin-top: -80px;
-	}
-		.level-select .gui-page-title {
-			margin-bottom: 20px;
-		}
-
-		.level-passed {
-			background-color: rgba(200,250,200,0.8);
-		}
-
-		.level-open {
-			background-color: rgba(200,200,250,0.8);
-		}
-
-		.level-selected {
-			background-color: rgba(150,255,220, 0.9);
-			outline: 2px solid rgba(90,120,90,0.8);
-		}
-
-		.level-locked {
-			background-color: rgba(200,120,100,0.8);
-		}
-
-		.level-select .button-wrapper {
-			height: auto;
-		}
-
-		.level-select .gui-button {
-			display: block;
-			margin: 10px auto 0;
-		}	
-
-		/*scroll arrows for showing levels that cannot be shown on screen because of space restrictions*/
-		.level-scroll-left, .level-scroll-right {
+	/*--Game menu--------------------------------------------------------*/
+		.game-menu { 
 			display: none;
 		}
-/*---------------------------------------------------------------*/
 
-/* Code panel elements */
-	.code-panel { 
-		width: 400px; height: 200px;
-		position: absolute; 
-		top: 0; left: 0;
-		overflow: hidden; 
+			.game-menu .button-wrapper {
+				height: auto;
+			}
+
+			.game-menu .gui-button {
+				display: block;
+				margin: 20px auto;	
+			}
+	/*-------------------------------------------------------------------*/
+
+	/*--Game options-----------------------------------------------------*/
+		.game-options { 
+			width: 400px;
+		}
+			.game-options .button-wrapper {
+				text-align: center;
+				margin: 0 0 10px;
+				height: auto;
+			}	
+
+			.game-options .gui-item-title {
+
+			}
+
+			.bg-thumb {
+				/*dimensions will vary according to screen size*/
+				width: 80px; height: 60px;
+				border: 2px solid rgba(25,50,25,0.2);
+				display: inline-block;
+				margin: 0 5px;
+				background-color: rgba(200,150,90,0.5);
+			}
+
+			.bg-thumb:hover {
+				border: 2px dashed rgba(100,150,100,0.5);
+				outline: 2px solid rgba(90,120,90,0.8);
+			}
+
+			.bg-selected {
+				outline: 2px solid rgba(90,120,90,0.8);
+			}
+
+			/*language options*/
+			.btn-change-lang {
+				border: 2px solid rgba(25,25,25,0.6);
+			}
+
+			.btn-change-lang:hover, .btn-change-lang:active {
+				outline: 2px solid rgba(50,100,50,0.5);
+			}
+
+			.active-lang {
+				border: 2px solid rgba(25,75,50,0.7);
+				background-color: #99efac;
+			}
+	/*-------------------------------------------------------------------*/
+
+	/*--Credits page-----------------------------------------------------*/
+		.credits-page {
+			text-align: center;
+		}
+	/*-------------------------------------------------------------------*/
+
+	/*--Level select-----------------------------------------------------*/
+		.level-select {
+			text-align: center;
+		}
+			.level-select .gui-page-title {
+				margin-bottom: 20px;
+			}
+
+			.level-passed {
+				background-color: rgba(200,250,200,0.8);
+			}
+
+			.level-open {
+				background-color: rgba(200,200,250,0.8);
+			}
+
+			.level-selected {
+				background-color: rgba(150,255,220, 0.9);
+				outline: 2px solid rgba(90,120,90,0.8);
+			}
+
+			.level-locked {
+				background-color: rgba(200,120,100,0.8);
+			}
+
+			.level-select .button-wrapper {
+				height: auto;
+			}
+
+			.level-select .gui-button {
+				display: block;
+				margin: 10px auto 0;
+			}	
+
+			/*scroll arrows for showing levels that cannot be shown on screen because of space restrictions*/
+			.level-scroll-left, .level-scroll-right {
+				display: none;
+			}
+	/*-------------------------------------------------------------------*/
+
+	/*--Code panel elements----------------------------------------------*/
+		.code-panel { 
+			display: none;
+			width: 400px; height: 200px;
+			position: absolute; 
+			top: 4px; left: 4px;
+			overflow: hidden; 
+		}
+
+			.cp-left-side, .cp-right-side { 
+				position: absolute;
+			}
+
+			.cp-left-side {
+				width: 42px; height: 180px;
+				top: 0; left: 0;
+				background-image: url("../img/code-panel-left-side.png");
+			}
+
+			.cp-right-side {
+				width: 60px; height: 180px;
+				top: 0; right: 0; 
+				background-image: url("../img/code-panel-right-side.png");
+			}
+
+			.cp-view-toggle { 
+				width: 25px; height: 50px;
+				position: relative;
+				top: 64px; left: 8px;
+				background-image: url("../img/cp-view-toggle.png");
+				cursor: pointer;
+			}
+			
+			.cp-add, .cp-delete, .cp-run { 
+				width: 40px; height: 40px; 
+				position: relative;
+				background-image: url("../img/cp-buttons.png");
+				background-repeat: no-repeat; 
+				background-size: 120px 40px;
+				cursor: pointer; left: 16px;
+			}
+
+			.cp-add { 
+				top: 24px;
+				 background-position: 0 0;
+			}
+			.cp-delete { 
+				top: 32px; 
+				height: 32px; 
+				background-position: -40px 50%;
+			}
+			.cp-run {
+				top: 40px; 
+				background-position: -80px 0;
+			}
+
+			.cp-content {
+				position: relative; 
+				top: 12px; left: 20px;
+				width: 80%; height: 142px; 	
+				padding: 5px 2%;
+				-webkit-border-radius: 10px;
+				-moz-border-radius: 10px;
+				border-radius: 10px;
+				border-top: 2px solid black;
+				border-bottom: 2px solid black;
+				background-color: rgba(250,250,255,0.5);
+			}
+	/*-------------------------------------------------------------------*/
+
+	/*section of gui that is currently active*/
+	.gui-active {
+		display: block;
+	}
+
+	/*hidden elements*/
+	.hidden {
 		display: none;
 	}
 
-		.cp-left-side, .cp-right-side { 
-			position: absolute;
-		}
+/*--END GUI INTERFACE ELEMENTS-------------------------------------------*/
 
-		.cp-left-side {
-			width: 42px; height: 180px;
-			top: 0; left: 0;
-			background-image: url("../img/code-panel-left-side.png");
-		}
-
-		.cp-right-side {
-			width: 60px; height: 180px;
-			top: 0; right: 0; 
-			background-image: url("../img/code-panel-right-side.png");
-		}
-
-		.cp-view-toggle { 
-			width: 25px; height: 50px;
-			position: relative;
-			top: 64px; left: 8px;
-			background-image: url("../img/cp-view-toggle.png");
-			cursor: pointer;
-		}
-		
-		.cp-add, .cp-delete, .cp-run { 
-			width: 40px; height: 40px; 
-			position: relative;
-			background-image: url("../img/cp-buttons.png");
-			background-repeat: no-repeat; 
-			background-size: 120px 40px;
-			cursor: pointer; left: 16px;
-		}
-
-		.cp-add { 
-			top: 24px;
-			 background-position: 0 0;
-		}
-		.cp-delete { 
-			top: 32px; 
-			height: 32px; 
-			background-position: -40px 50%;
-		}
-		.cp-run {
-			top: 40px; 
-			background-position: -80px 0;
-		}
-
-		.cp-content {
-			position: relative; 
-			top: 12px; left: 20px;
-			width: 80%; height: 142px; 	
-			padding: 5px 2%;
-			-webkit-border-radius: 10px;
-			-moz-border-radius: 10px;
-			border-radius: 10px;
-			border-top: 2px solid black;
-			border-bottom: 2px solid black;
-			background-color: rgba(250,250,255,0.5);
-		}
-/*---------------------------------------------------------------*/
-
-/*game display */
-	.game-canvas { 
-		display: block; 
-		position: absolute;
-		top: 0; left: 0; 
-/*		background-color: #f00;
-		background-color: rgba(255,0,0,0.4);*/
-		width: 480px; height: 240px;
-	}
-/*---------------------------------------------------------------*/
-
-.gui-active {
-	/*section of gui that is currently active*/
-	display: block;
-}
-
-
-/*error for screen sizes too small*/
+/*--Error for screen sizes too small-------------------------------------*/
 	.screen-too-small {
 		display: none;
 		position: absolute;
-		top: 120px;
+		top: 40%;
+		-webkit-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		-moz-transform: translateY(-50%);
+		transform: translateY(-50%);
 		color: #666;
-		vertical-align: middle;
 		text-align: center;
 		font-size: 1.4em;
 		font-weight: normal;
 		font-family: arial, sans-serif;
 	}
-/*---------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
 
-/*media queries for small, med and large visible options (with upper and lower bounds)*/
+/*--Media queries for small, med and large visible options---------------*/
 	@media only screen and (min-width: 200px) and (max-width: 699px) {
 		.visible-med, .visible-large { 
 			display: none;
@@ -952,359 +980,454 @@ hr { padding: 0; margin: 0; }
 			display: none;
 		}
 	}
-/*---------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
 
-@media only screen and (max-width: 499px) {
-	/*screens with insufficient width*/
-	body {
-		background-color: #fff;
-	}
-
-	.screen-too-small {
-		display: block;
-
-	}
-
-	.wrapper, .game-bg-sky, .game-bg-lands, .user-session {
-		display: none;
-	}
-}
-
-@media only screen and (min-width: 500px) {
-	/*css styles for screen size adaptations (responsiveness)*/
-	/*SMALL SIZE LOWER LIMIT*/
-	body { 
-		font-size: 1.1em;
-	}
-
-	.wrapper, .game-canvas {
-		width: 480px;
-		height: 240px;
-	}
-
-	.game-bg-sky {
-		height: 240px;
-	}
-
-	.bg-lands-left, .bg-lands-right{
-		background-size: 48px 48px;
-		height: 48px;
-	}
-
-	.game-bg-underground {
-		top: 240px;
-		height: 200px;
-	}
-
-}
-
-@media only screen and (min-width: 600px) {
-	/*css styles for screen size adaptations (responsiveness)*/
-	body { 
-		font-size: 1.2em;
-	}
-
-	.wrapper, .game-canvas {
-		width: 560px;
-		height: 280px;
-	}
-
-	.game-bg-sky {
-		height: 280px;
-	}
-
-	.bg-lands-left, .bg-lands-right{
-		background-size: 56px 56px;
-		height: 56px;
-	}
-
-	.game-bg-underground {
-		top: 280px;
-		height: 200px;
-	}
-}
-
-@media only screen and (min-width: 700px) {
-	/*css styles for screen size adaptations (responsiveness)*/
-	/*MEDIUM SIZE LOWER LIMIT*/
-	body { 
-		font-size: 1.2em;
-	}
-
-	.small-button {
-		padding: 5px 10px; 
-		line-height: 20px; 
-		font-size: 20px;
-		border-radius: 5px;
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-	}
-
-	.large-button {
-		padding: 8px 20px; 
-		line-height: 26px; 
-		font-size: 26px;
-		border-radius: 8px;
-		-moz-border-radius: 8px;
-		-webkit-border-radius: 8px;
-	}
-
-	.gui-tab-content {
-		height: 70%;
-	}
-
-	.user-session { 
-		top: 4px; right: 5px;
-		height: 26px;
-		padding: 4px 10px;
-		font-size: 18px;  line-height:28px;
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-		border-radiusus: 5px;
-	}	
-		.user-session-open {
-			height: 100px; 
-		}
-		.user-name, .user-session .lang-eng, .user-session .lang-esp {
-			top: -4px;
+/*--Screens with insufficient width--------------------------------------*/
+	@media only screen and (max-width: 499px) {
+		body {
+			background-color: #fff;
 		}
 
-	.user-profile {
-
-	}
-		.profile-user-info img{
-			width: 48px; height: 48px;
-		}
-		.user-profile .gui-tab-title-bar {
-			height: 15%;
-		}
-		.user-profile .gui-tab-group {
-			height: 55%;
+		.content-wrapper, .loader-container {
+			display: none;
 		}
 
-	.wrapper, .game-canvas {
-		width: 640px;
-		height: 320px;
-	}
-
-	.game-bg-sky {
-		height: 320px;
-	}
-
-	.bg-lands-left, .bg-lands-right{
-		background-size: 64px 64px;
-		height: 64px;
-	}
-	.game-bg-underground {
-		top: 320px;
-		height: 200px;
-	}
-}
-
-@media only screen and (min-width: 750px) {
-	/*css styles for screen size adaptations (responsiveness)*/
-	body { 
-		font-size: 1.2em;
-	}
-
-	.gui-block-link {
-		width: 250px;
-	}
-
-	.wrapper, .game-canvas {
-		width: 720px;
-		height: 360px;
-	}
-
-	.game-bg-sky {
-		height: 360px;
-	}
-
-	.bg-lands-left, .bg-lands-right{
-		background-size: 72px 72px;
-		height: 72px;
-	}
-
-	.game-bg-underground {
-		top: 360px;
-		height: 200px;
-	}
-}
-
-@media only screen and (min-width: 840px) {
-	/*css styles for screen size adaptations (responsiveness)*/
-	body { 
-		font-size: 1.5em;
-	}
-
-	.wrapper, .game-canvas {
-		width: 800px;
-		height: 400px;
-	}
-
-	.game-bg-sky {
-		height: 400px;
-	}
-
-	.bg-lands-left, .bg-lands-right{
-		background-size: 80px 80px;
-		height: 80px;
-	}
-
-	.game-bg-underground {
-		top: 400px;
-		height: 200px;
-	}
-
-}
-
-@media only screen and (min-width: 900px) {
-	/*css styles for screen size adaptations (responsiveness)*/
-	body { 
-		font-size: 1.5em;
-	}
-
-	.gui-block-link {
-		width: 300px;
-	}
-
-	.wrapper, .game-canvas {
-		width: 880px;
-		height: 440px;
-	}
-
-	.game-bg-sky {
-		height: 440px;
-	}
-
-	.bg-lands-left, .bg-lands-right{
-		background-size: 88px 88px;
-		height: 88px;
-	}
-
-	.game-bg-underground {
-		top: 440px;
-		height: 200px;
-	}
-
-}
-
-
-@media only screen and (min-width: 1000px) {
-	/*css styles for screen size adaptations (responsiveness)*/
-	/*LARGE SIZE LOWER LIMIT*/
-	body { 
-		font-size: 1.5em;
-	}
-
-	.gui-tab-content {
-		height: 80%;
-	}
-
-	.user-session { 
-		top: 4px; right: 5px;
-		height: 30px;
-		padding: 5px 10px;
-		font-size: 20px;  line-height:32px;
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-		border-radiusus: 5px;
-	}	
-		
-		.user-session-open {
-			height: 120px; 
+		.screen-too-small {
+			display: block;
 		}
+	}
+/*-----------------------------------------------------------------------*/
 
-		.user-name, .user-session .lang-eng, .user-session .lang-esp {
-			top: -6px;
+/*--CSS STYLES FOR SCREEN SIZE ADAPTATIONS-------------------------------*/
+
+	/*--Small sized screens lower limit (500px and up)-------------------*/
+		@media only screen and (min-width: 500px) {
+			body { 
+				font-size: 1.1em;
+			}
+
+			.dimension-wrapper, .game-canvas{
+				width: 480px;
+				height: 240px;
+			}
+
+			.game-lands-canvas {
+				top: 192px;
+				width: 480px;
+				height: 48px;
+			}
+
+			.game-bg-sky {
+				height: 260px;
+			}
+
+			.game-bg-clouds {
+				height: 104px;
+			}
+
+			.bg-lands-left, .bg-lands-right{
+				background-size: 48px 144px;
+				height: 48px;
+			}
+
+			.game-bg-underground {
+				top: 260px;
+				height: 200px;
+			}
 		}
+	/*-------------------------------------------------------------------*/
 
-	.user-profile {
+	/*--Screens 600px and up---------------------------------------------*/
+		@media only screen and (min-width: 600px) {
+			body { 
+				font-size: 1.2em;
+			}
 
-	}
-		.profile-user-info img{
-			width: 64px; height: 64px;
+			.dimension-wrapper, .game-canvas {
+				width: 560px;
+				height: 280px;
+			}
+
+			.game-lands-canvas {
+				top: 224px;
+				width: 560px;
+				height: 56px;
+			}
+
+			.game-bg-sky {
+				height: 300px;
+			}
+
+			.game-bg-lands {
+				height: 120px;
+			}
+
+			.bg-lands-left, .bg-lands-right{
+				background-size: 56px 168px;
+				height: 56px;
+			}
+
+			.game-bg-underground {
+				top: 300px;
+				height: 200px;
+			}
 		}
+	/*-------------------------------------------------------------------*/
 
-		.user-profile .gui-tab-title-bar {
-			height: 10%;
+	/*--Screens 700px and up---------------------------------------------*/
+		@media only screen and (min-width: 700px) {
+			/*MEDIUM SIZE LOWER LIMIT*/
+			body { 
+				font-size: 1.2em;
+			}
+
+			.small-button {
+				padding: 5px 10px; 
+				line-height: 20px; 
+				font-size: 20px;
+				border-radius: 5px;
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+			}
+
+			.large-button {
+				padding: 8px 20px; 
+				line-height: 26px; 
+				font-size: 26px;
+				border-radius: 8px;
+				-moz-border-radius: 8px;
+				-webkit-border-radius: 8px;
+			}
+
+			.gui-tab-content {
+				height: 70%;
+			}
+
+			.user-session { 
+				top: 4px; right: 5px;
+				height: 26px;
+				padding: 4px 10px;
+				font-size: 18px;  line-height:28px;
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				border-radiusus: 5px;
+			}	
+				.user-session-open {
+					height: 100px; 
+				}
+				.user-name, .user-session .lang-eng, .user-session .lang-esp {
+					top: -4px;
+				}
+
+			.user-profile {
+
+			}
+				.profile-user-info img{
+					width: 48px; height: 48px;
+				}
+				.user-profile .gui-tab-title-bar {
+					height: 15%;
+				}
+				.user-profile .gui-tab-group {
+					height: 55%;
+				}
+
+			.dimension-wrapper, .game-canvas {
+				width: 640px;
+				height: 320px;
+			}
+
+			.game-lands-canvas {
+				top: 256px;
+				width: 640px;
+				height: 64px;
+			}
+
+			.game-bg-sky {
+				height: 340px;
+			}
+
+			.game-bg-clouds {
+				height: 136px;
+			}
+
+			.bg-lands-left, .bg-lands-right{
+				background-size: 64px 192px;
+				height: 64px;
+			}
+			.game-bg-underground {
+				top: 340px;
+				height: 200px;
+			}
 		}
+	/*-------------------------------------------------------------------*/
 
-		.user-profile .gui-tab-group {
-			height: 60%;
+	/*--Screens 750px and up---------------------------------------------*/
+		@media only screen and (min-width: 750px) {
+			body { 
+				font-size: 1.2em;
+			}
+
+			.gui-block-link {
+				width: 250px;
+			}
+
+			.dimension-wrapper, .game-canvas {
+				width: 720px;
+				height: 360px;
+			}
+
+			.game-lands-canvas {
+				top: 288px;
+				width: 720px;
+				height: 72px;
+			}
+
+			.game-bg-sky{
+				height: 380px;
+			}
+
+			.game-bg-clouds {
+				height: 152px;
+			}
+
+			.bg-lands-left, .bg-lands-right{
+				background-size: 72px 216px;
+				height: 72px;
+			}
+
+			.game-bg-underground {
+				top: 380px;
+				height: 200px;
+			}
 		}
+	/*-------------------------------------------------------------------*/
 
-	.wrapper, .game-canvas {
-		width: 960px;
-		height: 480px;
-	}
+	/*--Screens 840px and up---------------------------------------------*/
+		@media only screen and (min-width: 840px) {
+			body { 
+				font-size: 1.5em;
+			}
 
-	.game-bg-sky {
-		height: 480px;
-	}
+			.dimension-wrapper, .game-canvas{
+				width: 800px;
+				height: 400px;
+			}
 
-	.bg-lands-left, .bg-lands-right{
-		background-size: 96px 96px;
-		height: 96px;
-	}
+			.game-lands-canvas {
+				top: 320px;
+				width: 800px;
+				height: 80px;			
+			}
 
-	.game-bg-underground {
-		top: 480px;
-		height: 200px;
-	}
-}
+			.game-bg-sky {
+				height: 420px;
+			}
 
+			.game-bg-clouds {
+				height: 168px;
+			}
 
-@media only screen and (min-width: 1200px) {
-	/*css styles for screen size adaptations (responsiveness)*/
-	body { 
-		font-size: 2em;
-	}
+			.bg-lands-left, .bg-lands-right{
+				background-size: 80px 240px;
+				height: 80px;
+			}
 
-	.wrapper, .game-canvas {
-		width: 1120px;
-		height: 560px;
-	}
+			.game-bg-underground {
+				top: 420px;
+				height: 200px;
+			}
+		}
+	/*-------------------------------------------------------------------*/
 
-	.game-bg-sky {
-		height: 560px;
-	}
+	/*--Screens 900px and up---------------------------------------------*/
+		@media only screen and (min-width: 900px) {
+			body { 
+				font-size: 1.5em;
+			}
 
-	.bg-lands-left, .bg-lands-right{
-		background-size: 112px 112px;
-		height: 112px;
-	}
+			.gui-block-link {
+				width: 300px;
+			}
 
-	.game-bg-underground {
-		top: 560px;
-		height: 200px;
-	}
+			.dimension-wrapper, .game-canvas {
+				width: 880px;
+				height: 440px;
+			}
 
-}
+			.game-lands-canvas {
+				top: 352px;
+				width: 880px;
+				height: 88px;
+			}
 
-@media only screen and (min-width: 1300px) {
-	/*css styles for screen size adaptations (responsiveness)*/
-	body { 
-		font-size: 2em;
-	}
+			.game-bg-sky {
+				height: 460px;
+			}
 
-	.wrapper, .game-canvas {
-		width: 1200px;
-		height: 600px;
-	}
+			.game-bg-clouds {
+				height: 184px;
+			}
 
-	.game-bg-sky {
-		height: 600px;
-	}
+			.bg-lands-left, .bg-lands-right{
+				background-size: 88px 264px;
+				height: 88px;
+			}
 
-	.bg-lands-left, .bg-lands-right{
-		background-size: 120px 120px;
-		height: 120px;
-	}
+			.game-bg-underground {
+				top: 460px;
+				height: 200px;
+			}
+		}
+	/*-------------------------------------------------------------------*/
 
-	.game-bg-underground {
-		top: 600px;
-		height: 200px;
-	}
+	/*--Screens 1000px and up--------------------------------------------*/
+		@media only screen and (min-width: 1000px) {
+			/*LARGE SIZE LOWER LIMIT*/
+			body { 
+				font-size: 1.5em;
+			}
 
-}
+			.gui-tab-content {
+				height: 80%;
+			}
+
+			.user-session { 
+				top: 4px; right: 5px;
+				height: 30px;
+				padding: 5px 10px;
+				font-size: 20px;  line-height:32px;
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				border-radiusus: 5px;
+			}	
+				
+				.user-session-open {
+					height: 120px; 
+				}
+
+				.user-name, .user-session .lang-eng, .user-session .lang-esp {
+					top: -6px;
+				}
+
+			.user-profile {
+
+			}
+				.profile-user-info img{
+					width: 64px; height: 64px;
+				}
+
+				.user-profile .gui-tab-title-bar {
+					height: 10%;
+				}
+
+				.user-profile .gui-tab-group {
+					height: 60%;
+				}
+
+			.dimension-wrapper, .game-canvas {
+				width: 960px;
+				height: 480px;
+			}
+
+			.game-lands-canvas {
+				top: 384px;
+				width: 960px;
+				height: 96px;
+			}
+
+			.game-bg-sky {
+				height: 500px;
+			}
+
+			.game-bg-clouds {
+				height: 200px;
+			}
+
+			.bg-lands-left, .bg-lands-right{
+				background-size: 96px 288px;
+				height: 96px;
+			}
+
+			.game-bg-underground {
+				top: 500px;
+				height: 200px;
+			}
+		}
+	/*-------------------------------------------------------------------*/
+
+	/*--Screens 1200px and up--------------------------------------------*/
+		@media only screen and (min-width: 1200px) {
+			body { 
+				font-size: 2em;
+			}
+
+			.dimension-wrapper, .game-canvas {
+				width: 1120px;
+				height: 560px;
+			}
+
+			.game-lands-canvas {
+				top: 448px;
+				width: 1120px;
+				height: 112px;
+			}
+
+			.game-bg-sky{
+				height: 580px;
+			}
+
+			.game-bg-clouds {
+				height: 232px;
+			}
+
+			.bg-lands-left, .bg-lands-right{
+				background-size: 112px 336px;
+				height: 112px;
+			}
+
+			.game-bg-underground {
+				top: 580px;
+				height: 200px;
+			}
+		}
+	/*-------------------------------------------------------------------*/
+
+	/*--Screens 1300px and up--------------------------------------------*/
+		@media only screen and (min-width: 1300px) {
+			body { 
+				font-size: 2em;
+			}
+
+			.dimension-wrapper, .game-canvas {
+				width: 1200px;
+				height: 600px;
+			}
+
+			.game-lands-canvas {
+				top: 480px;
+				width: 1200px;
+				height: 120px;
+			}
+
+			.game-bg-sky {
+				height: 620px;
+			}
+
+			.game-bg-clouds {
+				height: 248px;
+			}
+
+			.bg-lands-left, .bg-lands-right{
+				background-size: 120px 360px;
+				height: 120px;
+			} 
+
+			.game-bg-underground {
+				top: 620px;
+				height: 200px;
+			}
+		}
+	/*-------------------------------------------------------------------*/
+
+/*--END STYLES FOR SCREEN SIZE ADAPTATIONS-------------------------------*/
