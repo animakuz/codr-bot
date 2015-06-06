@@ -47,7 +47,7 @@ window.onload = function() {
 	var cpContent = document.getElementsByClassName('cp-content')[0];
 
 	//--Game view
-	// var gameCanvas = document.getElementById('game-canvas');
+	// var gameObjectsCanvas = document.getElementById('game-objects-canvas');
 	// var gameLandsCanvas = document.getElementById('game-lands-canvas');
 	// var gameObjectsCanvas = document.getElementById('game-objects-canvas');
 //-- END MAIN INTERFACE ELEMENT ASSIGNMENTS-------------------------------------
@@ -418,6 +418,7 @@ window.onload = function() {
 		//initialize game graphics external to game
 		setLands([1,3,0,2,1,1,3,0,2,1]);
 		setClouds();
+		setGameObjects();
 		
 		var loggedUserName = localStorage.getItem('currentUser');
 		if (loggedUserName) {

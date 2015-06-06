@@ -8,15 +8,7 @@
 //--------------------------------------------------------------
 
 //-- Game objects ----------------------------------------------
-	var createGameObjects = function(xPos, yPos, tipo) {
-		//these objects will only store information on the game object. The game engine
-		//will be responsible for rendering the visual element
-		return {
-			xPos: xPos,
-			yPos: yPos,
-			tipo: tipo
-		};
-	};
+
 //--------------------------------------------------------------
 
 //-- Game levels -----------------------------------------------
@@ -149,46 +141,64 @@
 		[570,200,840,290]
 	];
 
-	var createCloud = function(imageRef, context) {
-		var cloudInd = getRandomInt(0,4);
-		var cloudInfo = cloudList[cloudInd];
-		var speed = getRandomInt(1,2) - 0.5;
-		var direction = getRandomInt(0,1);
-		var x, y = getRandomInt(-10, 50);
-		var scaleFactor = 0.6;
-
-		//direction options
-		if (direction === 0) {
-			//cloud moves left
-			x = context.canvas.clientWidth + (cloudInfo[2] * scaleFactor) + (cloudInfo[2] * Math.random());
-			speed = -speed; //velocity (direction 0 == left, 1 == right)
-		} else if (direction === 1) {
-			//cloud moves right
-			x = -(cloudInfo[2] * scaleFactor);
-		}
-
+	var createCloud = function() {
 		return {
-			posX: x,
-			posY: y,
-			vX: speed, 
-			scaleX: cloudInfo[2] * scaleFactor, //3rd value of cloud info sub-array = width of image
-			scaleY: cloudInfo[3] * scaleFactor, //4th value = height of image (scaled according to a randomly 
-												//generated scale factro)
+			posX: 0,
+			posY: 0,
+			vX: 0, 
+			scaleX: 0,
+			scaleY: 0,
+			direction: 0,
 			image: { //image slice properties for getting from sprite sheet
-				sX: cloudInfo[0], //slice x
-				sY: cloudInfo[1], //slice y
-				sW: cloudInfo[2], //slice width
-				sH: cloudInfo[3]  //slice height
+				img: undefined,
+				sX: 0,
+				sY: 0,
+				sW: 0,
+				sH: 0
 			},
-			offScreen: function() {
-				if (direction === 0) {
+			initialize: function(context, imageRef, cloudData) {
+				var cloudInd = getRandomInt(0,4);
+				var cloudInfo = cloudData[cloudInd];
+				var scaleFactor = 0.6;
+
+				this.posY = getRandomInt(-10, 50);
+				this.vX = getRandomInt(1,2) - 0.5;
+				this.direction = getRandomInt(0,1);
+				this.scaleX = cloudInfo[2] * scaleFactor, //3rd value of cloud info sub-array = width of image
+				this.scaleY = cloudInfo[3] * scaleFactor, //4th value = height of image 
+				this.image.img = imageRef;
+				this.image.sX = cloudInfo[0], //slice x
+				this.image.sY = cloudInfo[1], //slice y
+				this.image.sW = cloudInfo[2], //slice width
+				this.image.sH = cloudInfo[3]  //slice height
+
+				//direction options
+				if (this.direction === 0) {
+					//cloud starts at right edge and moves left
+					this.posX = context.canvas.clientWidth + (cloudInfo[2] * scaleFactor) + (cloudInfo[2] * Math.random());
+					this.vX = -this.vX; //velocity (direction 0 == left, 1 == right)
+				} else if (this.direction === 1) {
+					//cloud starts at left edge and moves right
+					this.posX = -(cloudInfo[2] * scaleFactor);
+				}
+			},
+			move: function() {
+				this.posX += this.vX;
+				//console.log('velocity: ' + this.vX + ' pos: ' + this.posX);
+			},
+			draw: function(context) {
+				context.drawImage(this.image.img, this.image.sX, this.image.sY, this.image.sW, this.image.sH, 
+					this.posX, this.posY, this.scaleX, this.scaleY);
+			},
+			offScreen: function(context) {
+				if (this.direction === 0) {
 					//cloud moves left - goes offscreen at left
 					if (this.posX < 0 - this.scaleX) {
 						return true;
 					} else {
 						return false;
 					}
-				} else if (direction === 1) {
+				} else if (this.direction === 1) {
 					//cloud moves right and goes offscreen at right
 					if (this.posX > context.canvas.clientWidth) {
 						return true;
@@ -196,14 +206,6 @@
 						return false;
 					}
 				}
-			},
-			move: function() {
-				this.posX += this.vX;
-				//console.log('velocity: ' + this.vX + ' pos: ' + this.posX);
-			},
-			draw: function() {
-				context.drawImage(imageRef, this.image.sX, this.image.sY, this.image.sW, this.image.sH, 
-					this.posX, this.posY, this.scaleX, this.scaleY);
 			}
 		};
 	};
@@ -215,18 +217,16 @@
 		var ctx = bgCloudCanvas.getContext('2d');
 		var width = bgCloudCanvas.width;
 		var nextInterval;
-		var i = 0;
-		//initialize clouds variables
 		var numClouds = 0;
 		var clouds = [];
 
 		//push out 10 clouds at variable intervals - each cloud will behave according to its properties
 		var makeClouds = function() {
 			//create clouds
-			clouds.push(createCloud(sprites.clouds, ctx));
+			clouds.push(createCloud());
+			clouds[numClouds].initialize(ctx, sprites.clouds, cloudList);
 			numClouds++;
-			i++;
-			if (i<5) {
+			if (numClouds<5) {
 				nextInterval = getRandomInt(1000,2000);
 				// console.log('new cloud');
 				setTimeout(makeClouds, nextInterval);
@@ -237,16 +237,15 @@
 		//call function
 		var animateClouds = function() {
 			var i;
-			width = bgCloudCanvas.width;
 			ctx.clearRect(0, 0, width, 168);
 			for (i=0; i<numClouds; i++) {
 				clouds[i].move();
-				clouds[i].draw();
+				clouds[i].draw(ctx);
 
 				//reset clouds when off screen
-				if (clouds[i].offScreen()) {
+				if (clouds[i].offScreen(ctx)) {
 					//console.log('cloud reset');
-					clouds[i] = createCloud(sprites.clouds, ctx);
+					clouds[i].initialize(ctx, sprites.clouds, cloudList);
 				}
 			}
 
@@ -254,12 +253,68 @@
 		};
 
 		animateClouds();
-
 	};
 //--------------------------------------------------------------
 
 
-//-- GAME GRAPHICS ---------------------------------------------
+//-- GAME ELEMENTS ---------------------------------------------
+
+	//all this code should probably go in game engine object
+
+	//create game objects (temporarily here - will be placed in level initialization)
+	var createGameObject = function(type, unitPos) {
+		return {
+			posX: 0,
+			posY: 0,
+			scaleX: 0,
+			scaleY: 0,
+			image: {
+				img: undefined,
+			},
+			initialize: function(spriteList) {
+				this.image.img = spriteList[type];
+				this.posX = ((unitPos - 1) * unitDistance);
+				this.posY = 80;
+				this.scaleX = spriteList[type].width * 0.5;
+				this.scaleY = spriteList[type].width * 0.5;
+			},
+			draw: function(context) {
+				context.drawImage(this.image.img, this.posX, this.posY, this.scaleX, this.scaleY);
+			}
+		};
+	};
+
+	//set game objects and correspondig graphics
+	var setGameObjects = function(objectList) {
+		var gameObjectsCanvas = document.getElementById('game-objects-canvas');
+		var ctx = gameObjectsCanvas.getContext('2d');
+		var width = gameObjectsCanvas.width;
+		var height = gameObjectsCanvas.height;
+		var i;
+		// var len = objectList.length;
 
 
-//-- END GAME GRAPHICS -----------------------------------------
+		//create test game objects (in actual use case this values would be taken from objectList)
+		var gameObjectsTest = [];
+		gameObjectsTest.push(createGameObject('bridge', 1));
+		gameObjectsTest[0].initialize(sprites);
+		gameObjectsTest.push(createGameObject('lever', 7));
+		gameObjectsTest[1].initialize(sprites);
+
+		ctx.clearRect(0, 0, width, height);
+		//mark distance units with random colors
+		for (i=0; i<10; i++) {
+			var blueOffset = getRandomInt(5,25);
+			var redOffset = getRandomInt(5,25);
+			var color = 'rgba(' + redOffset*i + ',' + 25*i + ',' + blueOffset*i + ', 0.5)';
+			ctx.fillStyle = color;
+			ctx.fillRect(i*unitDistance, 0, unitDistance, 200);
+		}
+
+		//draw game objects to canvas
+		for (i=0; i<2; i++) {
+			gameObjectsTest[i].draw(ctx);
+		}
+	};
+
+//-- END GAME ELEMENTS -----------------------------------------

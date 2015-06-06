@@ -28,20 +28,14 @@
 
 			<!-- this div will surround anything that will be limited by the specific dimension limitations -->
 			<div class='dimension-wrapper'>
-				<!-- main game graphics -->
-				<canvas class='game-canvas' id='game-canvas' width='800'  height='400'>
-					<span class='message-error'>
-						<span class='lang-eng'>You can't run this game with this browser.<br>
-						Speak with an adult to update!</span>
-						<span class='lang-esp'>No puedes correr este juego con este navegador.<br>
-						Hable con un adulto para actualizar!</span>
-					</span>
-					<!-- better idea would be to check for availability and if not show splash screen -->
-				</canvas>
-
 				<!-- game 'lands' graphics  -->
 				<canvas class='game-lands-canvas' id='game-lands-canvas' width='800' height='80'>
 				</canvas>
+
+				<!-- game object graphics -->
+				<canvas class='game-objects-canvas' id='game-objects-canvas' width='800'  height='200'>
+				</canvas>
+
 
 				<!-- game objects graphics -->
 	<!-- 			<canvas class='game-objects-canvas' id='game-objects-canvas' width='800' height='400'>
@@ -376,7 +370,7 @@
 	<!-- velocity  -->
 	<script src='js/velocity.min.js'></script>
 	<!-- easel.js -->
-	<script src='js/easel.js'></script>
+	<script src='js/easeljs-0.8.1.min.js'></script>
 	<!-- external data loader (mostly graphics) -->
 	<script src='js/data.js'></script>
 	<!-- game based functions and data -->
