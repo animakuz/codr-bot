@@ -370,7 +370,7 @@ body {
 /*-----------------------------------------------------------------------*/
 
 /*--Thumbnail previews---------------------------------------------------*/
-	/*Preview for levels in level select and showing cleared levels in profile*/*/
+	/*Preview for levels in level select and showing cleared levels in profile*/
 	.level-thumb {
 		/* TODO - vary dimensions according to screen size*/
 		width: 80px; height: 60px;
@@ -379,8 +379,8 @@ body {
 	}
 
 	.level-thumb:hover, .level-thumb:active{
-		border: 2px dashed rgba(100,150,100,0.5);
-		outline: 2px solid rgba(90,120,90,0.8);
+		border: 2px dashed rgba(100,200,100,0.5);
+		outline: 2px solid rgba(90,250,90,0.8);
 	}
 /*-----------------------------------------------------------------------*/
 
@@ -839,13 +839,13 @@ body {
 				background-color: rgba(200,200,250,0.8);
 			}
 
-			.level-selected {
-				background-color: rgba(150,255,220, 0.9);
-				outline: 2px solid rgba(90,120,90,0.8);
-			}
-
 			.level-locked {
 				background-color: rgba(200,120,100,0.8);
+			}
+
+			.level-selected {
+				/*background-color: rgba(150,255,220, 0.9);*/
+				outline: 2px solid rgba(90,250,90,0.8);
 			}
 
 			.level-select .button-wrapper {
@@ -1068,6 +1068,10 @@ body {
 
 			.game-bg-sky {
 				height: 300px;
+			}
+
+			.game-bg-clouds {
+				height: 118px;
 			}
 
 			.game-bg-lands {

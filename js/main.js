@@ -1,3 +1,4 @@
+'use strict';
 //-- MAIN SCRIPT FILE -----------------------------------------------------------
 //-- ASSIGNMENTS OF REFERENCES TO VISUAL COMPONENTS
 //-- EVENT BINDINGS AND INITIALIZATIONS
@@ -9,7 +10,6 @@
 	- FIX STUFF COMMENTED WITH TODO
 	- KEEP WORKING AND FINISH THIS SHIIIIIT
 */
-
 window.onload = function() {
 //--MAIN INTERFACE ELEMENT ASSIGNMENTS------------------------------------------
 	//--Main divisions
@@ -334,15 +334,16 @@ window.onload = function() {
 	//--Level Select------------------------------------------------------------
 		//click level select buttons
 		bindMultiple(levelSelectThumbs, 'onclick', function(ele) {
+			modifyMultiple(levelSelectThumbs, function(element) {
+				removeClass(element, 'level-selected');
+			});
+			addClass(ele, 'level-selected');
 			selectLevel(ele);
 		});
 
 		//click start game button
 		btnStartLevel.onclick = function() {
-			showMessageBox('Starting Game with a very long text for testing purposes', 'alert', 'success', 
-			function() {
-				showMessageBox('That\'s right son', 'alert', 'success');
-			});
+			theGame.initialize();
 			console.log('starting level'); //TODO - ADD FUNCTIONALITY
 		};
 	//--------------------------------------------------------------------------
@@ -416,10 +417,9 @@ window.onload = function() {
 	//SHOW LOGO
 	window.initializeApp = function() {
 		//initialize game graphics external to game
-		setLands([1,3,0,2,1,1,3,0,2,1]);
-		setClouds();
-		setGameObjects();
-		
+		bgGraphics.setLands([1,3,0,2,1,1,3,0,2,1]);
+		bgGraphics.setClouds();
+			
 		var loggedUserName = localStorage.getItem('currentUser');
 		if (loggedUserName) {
 			//user already logged - automatically load start menu

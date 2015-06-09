@@ -178,11 +178,12 @@
 					</h2>
 					<!-- will be populated with javascript - the following are the prototypes
 					of the different options  that will exist -->
-
-					<div class='level-thumb th-level-select level-passed' data-level='level1'></div>
-					<div class='level-thumb th-level-select level-open' data-level='level2'></div>
-					<div class='level-thumb th-level-select level-selected' data-level='level3'></div>
-					<div class='level-thumb th-level-select level-locked' data-level='level4'></div>
+					<div class='level-select-levels' id='level-select-levels'>
+						<div class='level-thumb th-level-select level-passed' data-level='level1'></div>
+						<div class='level-thumb th-level-select level-open' data-level='level2'></div>
+						<div class='level-thumb th-level-select level-selected level-open' data-level='level3'></div>
+						<div class='level-thumb th-level-select level-locked' data-level='level4'></div>
+					</div>
 					<!-- possibly include level name here  -->
 					<div class='button-wrapper'>
 						<button class='gui-button large-button green-button' id='btn-start-level'>
@@ -259,12 +260,15 @@
 								<span class='lang-esp'>Logros</span>
 							</span>
 						</div>
-			
+						
+						<!-- will be populated with javascript -->
 						<div class='gui-tab-content active-tab' id='profile-levels-cleared'>
 							<div class='level-thumb th-profile-level level-passed'></div>
 							<div class='level-thumb th-profile-level level-passed'></div>
 							<div class='level-thumb th-profile-level level-passed'></div>
-						</div>						
+						</div>
+
+						<!-- will be populated with javascript-->
 						<div class='gui-tab-content' id='profile-acheivements'>
 							<div class='acheive-thumb'></div>
 							<div class='acheive-thumb'></div>

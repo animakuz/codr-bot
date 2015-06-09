@@ -1,3 +1,4 @@
+"use strict";
 //-- USER BASED FUNCTIONS AND DATA ----------------------------------------------
 //-- ALL FUNCTIONS AND DATA HAVING TO DO WITH USER ----------------------------
 
@@ -10,11 +11,12 @@ var messageShowing = false;
 
 //User level info prototype ( for showing in completed levels part of profile)
 	var UserLevel = {
-		id: -1,
+		name: '',
 		title: '',
 		preview: '', //image link to preview
 		description: '',
 		grade: 0, //0 =failed, 1 = bronze, 2 = silver, 3 = gold
+		//consider adding solution as array of code bits used to solve level
 	};
 //--------------------------------------------------------------
 
@@ -208,8 +210,8 @@ var messageShowing = false;
 		//clear all the fields in a certain parent
 		var inputs = parentContainer.querySelectorAll('input');
 		var i;
-		for (j=0; j<inputs.length; j++) {
-			inputs[j].value = '';
+		for (i=0; i<inputs.length; i++) {
+			inputs[i].value = '';
 		}
 	};
 //--------------------------------------------------------------

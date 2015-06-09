@@ -1,11 +1,14 @@
+"use strict";
 //-- BASE FUNCTIONS AND DATA ----------------------------------------------------
 
 //-- GENERAL GLOBAL DATA ---------------------------------------
 	//default messages
+	var GAME_WIDTH = 800;
 	var msgEng = 'All Good!';
 	var msgEsp = 'Todo Bien!';
 	var msgErrorEng = 'There was an error!';
 	var msgErrorEsp = 'Hubo un error!';
+
 //-- END GLOBAL DATA -------------------------------------------
 
 //-- Result object prototype -----------------------------------
