@@ -16,6 +16,7 @@
 		rock: 'img/sprite-game-object-rock.png',
 		target: 'img/sprite-game-object-target.png',
 		wall: 'img/sprite-game-object-wall.png',
+		pbot: 'img/sprite-character-p-bot.png'
 	};
 
 	// count number of images

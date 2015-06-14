@@ -10,13 +10,14 @@ var defaultLanguage = 'Esp';
 var messageShowing = false;
 
 //User level info prototype ( for showing in completed levels part of profile)
-	var UserLevel = {
+	var userLevel = {
+		id: -1, //index of level in levels array
 		name: '',
 		title: '',
 		preview: '', //image link to preview
 		description: '',
-		grade: 0, //0 =failed, 1 = bronze, 2 = silver, 3 = gold
-		//consider adding solution as array of code bits used to solve level
+		grade: 0, //0 =open, 1 = bronze, 2 = silver, 3 = gold
+		solution: [] //solution made to the level
 	};
 //--------------------------------------------------------------
 
@@ -34,8 +35,8 @@ var messageShowing = false;
 			},
 			data: {
 				totalPoints: 0,
-				levelsCleared: [], //array of levels objects with specific values	
-				achievements: [],	//array of achievement objects with specific values	   
+				levelsCleared: [],  //array of data objects representing levels already passed
+				achievements: [],	//array of data objects representing acheivements obtained
 			}
 		};
 	};
@@ -53,13 +54,14 @@ var messageShowing = false;
 		if (!messageShowing) {
 			messageShowing = true;
 			//create elements
-			var container = document.getElementsByClassName('gui-overlay')[0];
+			var lang = (typeof currentUser === 'object') ? currentUser.options.language : defaultLanguage;
+			var container = document.getElementsByClassName('app-container')[0];
 			var box = document.createElement('div');
 			var titleBox = document.createElement('h3');
 			var title = document.createTextNode(messageType.toUpperCase() + "!");
 			var icon = document.createElement('div');
 			var messageTextBox = document.createElement('span');
-			var messageText = document.createTextNode(message);
+			var messageText = document.createTextNode(message[lang]);
 			var lineBreak = document.createElement('br');
 			var buttonWrapper = document.createElement('div');
 			var buttonOK = document.createElement('button');
@@ -299,13 +301,6 @@ var messageShowing = false;
 	};
 //--------------------------------------------------------------
 
-//--Select level -----------------------------------------------
-	var selectLevel = function(levelThumb) {
-		//TODO - ADD FUNCTIONALITY
-		console.log(levelThumb.getAttribute('data-level'));
-	};
-//--------------------------------------------------------------
-
 //--Load user interface with user specific options and data-----
 	var loadUser = function(user, selectScreen, menuScreen, sessionBar) {
 		//switch to start page 
@@ -334,9 +329,13 @@ var messageShowing = false;
 	//this function will serve for both exit buttons in session bar and options menu
 	var exitUserSession = function(returnScreen) {
 		//get confirmation
-		showMessageBox('Are you sure you want to exit?', 'confirm', 'warning', {
+		showMessageBox({ Eng: 'Are you sure you want to exit?', Esp: 'Esta seguro que quieres salir?' },
+			'confirm', 'warning', {
 			ok: function() {
 				//exit confirmed - exit procedure
+				//clear game object and game character stages
+				gameObjMngr.clearGameObjects();
+				pBot.clearBot();
 
 				//remove current user
 				currentUser = null;
@@ -397,7 +396,7 @@ var messageShowing = false;
 							break;
 					}
 
-					showMessageBox(respMessage, 'alert', 'success'); 
+					// showMessageBox({ Eng: respMessage, Esp: respMessage }, 'alert', 'success'); 
 
 					//clear inputs
 					clearFields(selectScreen);
@@ -415,7 +414,7 @@ var messageShowing = false;
 							break;
 					}
 
-					showMessageBox(respMessage, 'alert', 'error');
+					showMessageBox( { Eng: respMessage, Esp: respMessage }, 'alert', 'error');
 				}
 			} else {
 				//error - user doesn't exist
@@ -429,10 +428,10 @@ var messageShowing = false;
 						break;
 				}
 
-				showMessageBox(respMessage, 'alert', 'error');
+				showMessageBox( { Eng: respMessage, Esp: respMessage }, 'alert', 'error');
 			}
 		} else {
-			showMessageBox(respMessage, 'alert', 'error');
+			showMessageBox({ Eng: respMessage, Esp: respMessage }, 'alert', 'error');
 		}
 
 	};

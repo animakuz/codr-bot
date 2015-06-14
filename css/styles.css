@@ -374,6 +374,7 @@ body {
 	.level-thumb {
 		/* TODO - vary dimensions according to screen size*/
 		width: 80px; height: 60px;
+		margin: 0 1%;
 		border: 2px solid rgba(25,50,25,0.2);
 		display: inline-table;
 	}
@@ -450,13 +451,20 @@ body {
 
 /*--Background elements--------------------------------------------------*/
 	/*gradient that defines sky setting (sunny*/
-	.game-bg-sky, .game-bg-clouds {
+	.game-bg-sky {
 		position: absolute; 
 		top: 0; left: 0;
 		width: 100%; 
+		height: 260px;
 	}
 
-	.game-bg-sky {height: 260px;}
+	.game-bg-clouds {
+		position: absolute; 
+		top: 0; left: 0;
+		width: 100%;
+		height: 104px;
+		/*background-color: rgba(255,20,20,0.5);*/
+	}
 	
 		.bg-sky-sunny {
 			background: #f0f9ff; /* Old browsers */
@@ -491,11 +499,6 @@ body {
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#464b73', endColorstr='#b17f57',GradientType=0 ); /* IE6-9 */
 		}
 
-	/*canvas that displays cloud graphics*/
-	.game-bg-clouds {	
-		height: 104px;
-		/*background-color: rgba(255,20,20,0.5);*/
-	}
 
 	/*wrapper for lands graphics outside of lands canvas*/
 	/*this will ensure that the lands graphics flows seamlessly from one end of the screen to the otherh*/
@@ -503,6 +506,7 @@ body {
 		position: relative;
 		display: table-cell;
 	 	width: 500px;
+	 	z-index: 0;
 	}
 		
 		.bg-lands-left, .bg-lands-right{
@@ -543,53 +547,66 @@ body {
 /*-----------------------------------------------------------------------*/
 
 /*--Game display---------------------------------------------------------*/
-	/*game characters and actions*/
-	.game-objects-canvas { 
-		display: block; 
+	.game-objects-canvas, .game-lands-canvas, .game-characters-canvas {
+		display: block;
 		position: absolute;
-		top: 120px; left: 0; 
-		outline: 2px solid red;
-		width: 480px; height: 120px;
+		width: 480px;
+		left: 0;
+	}
+
+	/*game objects*/
+	.game-objects-canvas { 
+		top: 120px;
+		height: 120px;
+	}
+
+	.game-characters-canvas {
+		top: 96px;
+		height: 144px;
 	}
 
 	/*game lands*/
 	.game-lands-canvas {
-		display: block;
-		position: absolute;
-		top: 0; left: 0;
-		width: 480px; height: 240px;
+		top: 192px;
+		height: 48px;
 	}
 
-	/*game objects*/
-	.game-objects-canvas {
-
+	/*game characters*/
+	.game-characters-canvas {
+		outline: 2px solid red;
 	}
+
 /*-----------------------------------------------------------------------*/
 
 /*--GUI INTERFACE ELEMENTS-----------------------------------------------*/
 
 	/*--Main container for all gui elements (except user-session bar)----*/
-		.gui-overlay { 
+/*		.gui-overlay { 
 			display: block; 
 			position: absolute;	
 			width: 100%; height: 100%; 
 			top: 0; left: 0;
-			z-index: 2;
-		}
+		}*/
 	/*-------------------------------------------------------------------*/
 
 	/*--Generally aplicable styles (will apply to all user interfaces)---*/
 		.user-select, .user-create, .game-menu, 
 		.game-options, .credits-page, .level-select {
 			display: none;
-			position: relative;
-			top: 50%;
+			position: absolute;
+			top: 20%; left: 50%;
+			/*top: 50%;*/
 			height: auto;
-			margin: 0 auto;
+			/*margin: 0 auto;*/
 			-webkit-transform: translateY(-50%);
 			-ms-transform: translateY(-50%);
 			-moz-transform: translateY(-50%);
 			transform: translateY(-50%);
+
+			-webkit-transform: translateX(-50%);
+			-ms-transform: translateX(-50%);
+			-moz-transform: translateX(-50%);
+			transform: translateX(-50%);
 		}
 
 		.button-wrapper {
@@ -716,6 +733,7 @@ body {
 			-webkit-border-radius: 1%;
 			-moz-border-radius: 1%;
 			border-radius: 1%;
+			z-index: 1;
 		}
 			
 			.user-profile .gui-page-title {
@@ -826,6 +844,8 @@ body {
 	/*--Level select-----------------------------------------------------*/
 		.level-select {
 			text-align: center;
+			width: 80%;
+			outline: 2px solid red;
 		}
 			.level-select .gui-page-title {
 				margin-bottom: 20px;
@@ -865,7 +885,7 @@ body {
 
 	/*--Code panel elements----------------------------------------------*/
 		.code-panel { 
-			display: none;
+			display: block;
 			width: 400px; height: 200px;
 			position: absolute; 
 			top: 4px; left: 4px;
@@ -1017,6 +1037,12 @@ body {
 				height: 120px;
 			}
 
+			.game-characters-canvas {
+				top: 96px;
+				width: 480px;
+				height: 144px;
+			}
+
 			.game-lands-canvas {
 				top: 192px;
 				width: 480px;
@@ -1058,6 +1084,12 @@ body {
 				top: 140px;
 				width: 560px;
 				height: 140px;
+			}
+
+			.game-characters-canvas {
+				top: 112px;
+				width: 560px;
+				height: 168px;
 			}
 
 			.game-lands-canvas {
@@ -1159,6 +1191,12 @@ body {
 				height: 160px;
 			}
 
+			.game-characters-canvas {
+				top: 128px;
+				width: 640px;
+				height: 192px;
+			}
+
 			.game-lands-canvas {
 				top: 256px;
 				width: 640px;
@@ -1205,6 +1243,12 @@ body {
 				height: 180px;
 			}
 
+			.game-characters-canvas {
+				top: 144px;
+				width: 720px;
+				height: 216px;
+			}
+
 			.game-lands-canvas {
 				top: 288px;
 				width: 720px;
@@ -1246,6 +1290,12 @@ body {
 				top: 200px;
 				width: 800px;
 				height: 200px;
+			}
+
+			.game-characters-canvas {
+				top: 160px;
+				width: 800px;
+				height: 240px;
 			}
 
 			.game-lands-canvas {
@@ -1293,6 +1343,12 @@ body {
 				top: 220px;
 				width: 880px;
 				height: 220px;
+			}
+
+			.game-characters-canvas {
+				top: 176px;
+				width: 880px;
+				height: 264px;
 			}
 
 			.game-lands-canvas {
@@ -1376,6 +1432,12 @@ body {
 				height: 240px;
 			}
 
+			.game-characters-canvas {
+				top: 192px;
+				width: 960px;
+				height: 288px;
+			}
+
 			.game-lands-canvas {
 				top: 384px;
 				width: 960px;
@@ -1419,6 +1481,12 @@ body {
 				height: 280px;
 			}
 
+			.game-characters-canvas {
+				top: 224px;
+				width: 1120px;
+				height: 336px;
+			}
+
 			.game-lands-canvas {
 				top: 448px;
 				width: 1120px;
@@ -1460,6 +1528,12 @@ body {
 				top: 300px;
 				width: 1200px;
 				height: 300px;
+			}
+
+			.game-characters-canvas {
+				top: 240px;
+				width: 1200px;
+				height: 360px;
 			}
 
 			.game-lands-canvas {

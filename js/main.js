@@ -73,8 +73,8 @@ window.onload = function() {
 	var  btnExit = document.getElementById('btn-exit');
 
 	//level select elements 
-	var levelSelectThumbs = document.querySelectorAll('.th-level-select');
 	var btnStartLevel = document.getElementById('btn-start-level');
+	var levelSelectLevels = document.getElementById('level-select-levels');
 
 	//game options elements
 	var langOptionButtons = document.querySelectorAll('.btn-change-lang');
@@ -175,7 +175,7 @@ window.onload = function() {
 
 				var res = storeUserData(newUser, true);
 				respMessage = res['message'+ defaultLanguage];
-				showMessageBox(respMessage , 'alert', 'success');
+				showMessageBox({ Eng: respMessage , Esp: respMessage},  'alert', 'success');
 				//hide user create and show login - TODO - ADD FADE IN FADE OUT EFFECT
 				if (res.success)  {
 					//clear inputs
@@ -186,7 +186,7 @@ window.onload = function() {
 				}
 			} else {
 				//show error
-				showMessageBox(respMessage, 'alert', 'error');
+				showMessageBox({ Eng: respMessage, Esp: respMessage}, 'alert', 'error');
 			}
 		};
 	//--------------------------------------------------------------------------
@@ -264,9 +264,60 @@ window.onload = function() {
 		btnStartGame.onclick = function() {
 			//switch to level select screen
 			switchScreens(gameMenu, levelSelect);
+			//show levels
+			var i = 0;
+			var numLevels = gameLevels.length;
+			var levelStatus = 'passed';
+			var addLevelThumb = function(status, index, levelData) {
+				var levelThumbCont = document.createElement('div');
+				levelThumbCont.className = 'level-thumb th-level-select level-' + status;
+				levelThumbCont.setAttribute('data-level', index);
 
-			//show level select 
-			//TODO MAKE LOAD LEVELS ACCORDING TO CURRENTLY PASSED ETC
+				//possibly other info
+
+				levelSelectLevels.appendChild(levelThumbCont);
+			};
+
+			//delete current items
+			empty(levelSelectLevels);
+
+			while(i < numLevels) {
+				if (levelStatus === 'passed') {
+					//still checking levels cleared 
+					if (currentUser.data.levelsCleared[i]) {
+						//load level thumbnail as cleared with corresponding data
+						addLevelThumb('passed', i, gameLevels[i]);
+						i++;
+					} else {
+						//change status to keep checking other levels
+						levelStatus = 'open';
+					}					
+				} else if (levelStatus === 'open') {
+					//load level as open
+					addLevelThumb('open', i, gameLevels[i]);
+					//change status to locked - only one level after all cleared levels is open
+					levelStatus = 'locked';
+					i++;
+				} else if (levelStatus === 'locked') {
+					//load level as locked
+					addLevelThumb('locked', i, gameLevels[i]);
+					i++;
+				}
+			}
+
+			var levelSelectThumbs = document.querySelectorAll('.th-level-select');
+
+			//bind events for click of level select buttons
+			bindMultiple(levelSelectThumbs, 'onclick', function(ele) {
+				if (!(classCheck(ele, 'level-locked'))) {
+					modifyMultiple(levelSelectThumbs, function(element) {
+						removeClass(element, 'level-selected');
+					});
+					addClass(ele, 'level-selected');
+				} else {
+					//TODO - SHOW MESSAGE THAT LEVEL IS LOCKED
+				}
+			});
 		};
 
 		//show options screen
@@ -332,19 +383,20 @@ window.onload = function() {
 	//--------------------------------------------------------------------------
 
 	//--Level Select------------------------------------------------------------
-		//click level select buttons
-		bindMultiple(levelSelectThumbs, 'onclick', function(ele) {
-			modifyMultiple(levelSelectThumbs, function(element) {
-				removeClass(element, 'level-selected');
-			});
-			addClass(ele, 'level-selected');
-			selectLevel(ele);
-		});
-
 		//click start game button
 		btnStartLevel.onclick = function() {
-			theGame.initialize();
-			console.log('starting level'); //TODO - ADD FUNCTIONALITY
+			var levelSelected = levelSelect.querySelectorAll('.level-selected')[0];
+
+			if (levelSelected) {
+				var level = levelSelected.getAttribute('data-level');
+				//remove level select screen to display game
+				removeClass(levelSelect, 'gui-active');
+
+				theGame.initialize(gameLevels[level]);
+			} else {
+				//no level selected
+				showMessageBox( { Eng: 'Please select a level', Esp: 'Por favor seleccione un nivel' }, 'alert', 'warning');
+			}
 		};
 	//--------------------------------------------------------------------------
 
@@ -417,8 +469,7 @@ window.onload = function() {
 	//SHOW LOGO
 	window.initializeApp = function() {
 		//initialize game graphics external to game
-		bgGraphics.setLands([1,3,0,2,1,1,3,0,2,1]);
-		bgGraphics.setClouds();
+		bgGraphics.initializeGraphics();
 			
 		var loggedUserName = localStorage.getItem('currentUser');
 		if (loggedUserName) {
