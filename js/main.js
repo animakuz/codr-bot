@@ -107,14 +107,16 @@ window.onload = function() {
 	//--Code Panel--------------------------------------------------------------
 		//toggle view button - open and close 
 		cpViewToggle.onclick = function() {
+			console.log('toggling');
 			if (codePanel.viewState === 'open') {
-				Velocity(cpGUI, {width: '100px'}, {duration: 300,  complete: function() {
-					codePanel.viewState = 'closed';
-				}});
+				// CHANGE CODE TO MAKE DROP DOWN INSTEAD OF SLIDE ACROSSS
+				// Velocity(cpGUI, {width: '100px'}, {duration: 300,  complete: function() {
+				// 	codePanel.viewState = 'closed';
+				// }});
 			} else {
-				Velocity(cpGUI, {width: '400px'}, {duration: 300,  complete: function() {
-					codePanel.viewState = 'open';
-				}});
+				// Velocity(cpGUI, {width: '400px'}, {duration: 300,  complete: function() {
+				// 	codePanel.viewState = 'open';
+				// }});
 			}
 		};
 
