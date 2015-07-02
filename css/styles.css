@@ -216,6 +216,15 @@ body {
 		display: inline-block; 
 	 	font-family: "Century Gothic", Century;
 		cursor: pointer;
+		-moz-user-select: -moz-none;
+	   	-khtml-user-select: none;
+	   	-webkit-user-select: none;
+	   	/*
+	     	Introduced in IE 10.
+	    	 See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+	   	*/
+	   	-ms-user-select: none;
+	   	user-select: none;
 	}
 
 		.small-button {
@@ -377,6 +386,9 @@ body {
 		margin: 0 1%;
 		border: 2px solid rgba(25,50,25,0.2);
 		display: inline-table;
+		cursor: pointer;
+		line-height: 60px;
+		font-weight: bold;
 	}
 
 	.level-thumb:hover, .level-thumb:active{
@@ -392,6 +404,7 @@ body {
 		border: 2px solid rgba(25,50,25,0.2);
 		background-color: rgba(25,60,120, 0.8);
 		display: inline-table;
+		cursor: pointer;
 	}
 
 	.acheive-thumb:hover, .acheive-thumb:active {
@@ -554,13 +567,8 @@ body {
 		left: 0;
 	}
 
-	/*game objects*/
-	.game-objects-canvas { 
-		top: 120px;
-		height: 120px;
-	}
-
-	.game-characters-canvas {
+	/*game objects and game characters canvas elements*/
+	.game-objects-canvas, .game-characters-canvas {
 		top: 96px;
 		height: 144px;
 	}
@@ -573,21 +581,11 @@ body {
 
 	/*game characters*/
 	.game-characters-canvas {
-		outline: 2px solid red;
+		/*outline: 2px solid red;*/
 	}
-
 /*-----------------------------------------------------------------------*/
 
 /*--GUI INTERFACE ELEMENTS-----------------------------------------------*/
-
-	/*--Main container for all gui elements (except user-session bar)----*/
-/*		.gui-overlay { 
-			display: block; 
-			position: absolute;	
-			width: 100%; height: 100%; 
-			top: 0; left: 0;
-		}*/
-	/*-------------------------------------------------------------------*/
 
 	/*--Generally aplicable styles (will apply to all user interfaces)---*/
 		.user-select, .user-create, .game-menu, 
@@ -728,7 +726,7 @@ body {
 			position: absolute;
 			padding: 0 3%;
 			width: 84%; height: 90%;
-			top: 10%; left: 5%;
+			top: 5%; left: 5%;
 			background-color: white;
 			-webkit-border-radius: 1%;
 			-moz-border-radius: 1%;
@@ -754,6 +752,7 @@ body {
 
 			.profile-user-info img{
 				float: left;
+				margin: 2px;
 				width: 32px; height: 32px;
 			}
 
@@ -845,7 +844,6 @@ body {
 		.level-select {
 			text-align: center;
 			width: 80%;
-			outline: 2px solid red;
 		}
 			.level-select .gui-page-title {
 				margin-bottom: 20px;
@@ -884,9 +882,16 @@ body {
 	/*-------------------------------------------------------------------*/
 
 	/*--Code panel elements----------------------------------------------*/
+		.code-bit-list {
+			display: none; width: 170px; height: 100px;
+			position: absolute; top: 22px; left: 205px;
+			overflow: hidden; 
+			background-color: rgba(210,220,250,0.8);
+		}
+
 		.code-panel { 
-			display: block;
-			width: 400px; height: 240px;
+			display: none;
+			width: 200px; height: 120px;
 			position: absolute; 
 			top: 4px; left: 4px;
 			overflow: hidden; 
@@ -894,66 +899,198 @@ body {
 		}
 
 			.cp-title-bar {
-				width: 400px; height: 40px;
+				width: 200px; height: 20px;
 				background-color: blue;
+				clear: both;
 			}
 				.cp-title {
 					color: white;
 				}
 				.cp-view-toggle { 
-					width: 40px; height: 40px;
+					width: 20px; height: 20px;
 					display: inline-block;
 					position: absolute;
 					right: 0; top: 0;
 					background-image: url("../img/cp-view-toggle-icon.png");
+					background-size: 40px;
 					background-position: 0 0;
 					cursor: pointer;
 				}
 				.cp-view-toggle:hover, .cp-view-toggle:active {
-					background-position: 40px 0;
+					background-position: 20px 0;
 				}
 
-			.cp-content {
-				position: relative; 
-				padding: 5px 2%;
-				width: 350px; height: 200px;
-				background-color: rgba(250,250,255,0.5);
+				.cp-view-toggle-up {
+					background-position: 0 -20px;
+				}
+
+				.cp-view-toggle-up:hover, .cp-view-toggle-up:active {
+					background-position: 20px -20px;
+				}
+
+			.cp-content-wrapper, .cp-scroll, .cp-controls {
+				margin: 0; padding: 0; border: 0;
+				display: block;
+				position: relative;
+				float: left;
 			}
+
+			.cp-content-wrapper { 
+				width: 165px; height: 99px;
+				background-color: rgba(250,250,255,0.5);
+				overflow: hidden;
+			}
+				.cp-content {
+					background-color: white;
+					position: absolute;
+					padding-top: 4px; 
+					width: 160px; height: auto;
+					top: 0; left:2px;
+				}
+
+				.code-bit {
+					position: relative;
+					margin: 0 auto;
+					width: 160px; height: 15px;
+					border-top: 2px solid #666;
+					border-bottom: 2px solid #666;
+					background-color: #fea;
+					cursor: pointer;
+					color: #666;
+					font-size: 12px;
+					text-indent: 6px;
+					line-height: 20px;
+					font-weight: bold;
+					text-transform: uppercase;
+				}
+
+				.code-bit:hover, .code-bit:active {
+					background-color: #a95;
+					color: #eee;
+				}
+
+				.cb-selected {
+					border: 2px solid #afa;
+					background-color: #a95;
+					color: #eee;
+				}
+
+				.cb-executing {
+					border: 2px solid #9fa;
+					background-color: #ccc;
+					color: #afa;
+				}
 
 			.cp-scroll {
-
+				width: 13px; height: 100px;
+				background-color: #666;
 			}
 				.cp-scroll-bar {
+					display: none;
+					width: 11px; height: 20px;
+					position: absolute;
+					left: 2px; top: 0;
+					background-color: #ded;
+					cursor: pointer;
+				}
 
+				.cp-scroll-bar:hover, .cp-scroll-bar:active {
+					background-color: #bcb;
 				}
 
 			.cp-controls {
-				
+				width: 22px; height: 100px;
+				background-color: green;
 			}
 				.cp-add, .cp-delete, .cp-run { 
-					width: 40px; height: 40px; 
-					position: relative;
+					width: 20px; height: 20px; 
+					position: absolute;
+					left: 1px;
 					background-image: url("../img/cp-buttons.png");
 					background-repeat: no-repeat; 
-					background-size: 120px 40px;
-					cursor: pointer; left: 16px;
+					background-size: 60px 20px;
+					cursor: pointer; 
 				}
 				.cp-add { 
-					top: 24px;
-					 background-position: 0 0;
+					top: 5px;
+					background-position: 0 0;
 				}
 				.cp-delete { 
-					top: 32px; 
-					height: 32px; 
-					background-position: -40px 50%;
+					top: 30px;
+					height: 16px; 
+					background-position: -20px 25%;
 				}
 				.cp-run {
-					top: 40px; 
-					background-position: -80px 0;
+					top: 60px;
+					background-position: -40px 0;
 				}
-
 	/*-------------------------------------------------------------------*/
 
+	/*--Game info display - Puase Screen - Results Screen----------------*/
+		/*menu button that opens info as pause menu during gameplay*/
+		.btn-pause {
+			display: none;
+			position: absolute;
+			top: 4px; left:50%;
+			-webkit-transform: translateX(-50%);
+			-ms-transform: translateX(-50%);
+			-moz-transform: translateX(-50%);
+			transform: translateX(-50%);
+		}
+
+		.btn-unpause {
+			position: absolute;
+			bottom: 10px; left: 50%;
+			-webkit-transform: translateX(-50%);
+			-ms-transform: translateX(-50%);
+			-moz-transform: translateX(-50%);
+			transform: translateX(-50%);
+		}
+
+		.info-screen-wrapper {
+			display: none;
+			position: absolute;
+			top: 0; left: 0;
+			width: 100%; height: 300%;
+			background-color: rgba(0,0,0,0.4);
+		}
+
+			.info-screen-inner {
+				display: block;
+				position: absolute;
+				top: 8%; left: 50%;
+				-webkit-transform: translateY(-50%);
+				-ms-transform: translateY(-50%);
+				-moz-transform: translateY(-50%);
+				transform: translateY(-50%);
+
+				-webkit-transform: translateX(-50%);
+				-ms-transform: translateX(-50%);
+				-moz-transform: translateX(-50%);
+				transform: translateX(-50%);
+				width: 80%; height: auto; min-height: 200px;
+				background-color: rgba(100,100,100,0.8);
+			}
+
+			.info-screen-title {
+				width: 100%;
+				color: #eee;
+				font-size: 1.5em;
+				font-weight: bold;
+				text-align: center;
+			}
+
+			.info-screen-content, .pause-screen-content {
+				width: 90%; height: auto;
+				margin: 10px auto;
+				color: #eee;
+			}
+
+			.pause-screen-content {
+				display: none;
+			}
+	/*-------------------------------------------------------------------*/
+	
 	/*section of gui that is currently active*/
 	.gui-active {
 		display: block;
@@ -1032,13 +1169,7 @@ body {
 				height: 240px;
 			}
 
-			.game-objects-canvas {
-				top: 120px;
-				width: 480px;
-				height: 120px;
-			}
-
-			.game-characters-canvas {
+			.game-objects-canvas, .game-characters-canvas {
 				top: 96px;
 				width: 480px;
 				height: 144px;
@@ -1081,13 +1212,7 @@ body {
 				height: 280px;
 			}
 
-			.game-objects-canvas {
-				top: 140px;
-				width: 560px;
-				height: 140px;
-			}
-
-			.game-characters-canvas {
+			.game-objects-canvas, .game-characters-canvas {
 				top: 112px;
 				width: 560px;
 				height: 168px;
@@ -1186,13 +1311,7 @@ body {
 				height: 320px;
 			}
 
-			.game-objects-canvas {
-				top: 160px;
-				width: 640px;
-				height: 160px;
-			}
-
-			.game-characters-canvas {
+			.game-objects-canvas, .game-characters-canvas {
 				top: 128px;
 				width: 640px;
 				height: 192px;
@@ -1220,6 +1339,8 @@ body {
 				top: 340px;
 				height: 200px;
 			}
+
+			
 		}
 	/*-------------------------------------------------------------------*/
 
@@ -1238,13 +1359,7 @@ body {
 				height: 360px;
 			}
 
-			.game-objects-canvas {
-				top: 180px;
-				width: 720px;
-				height: 180px;
-			}
-
-			.game-characters-canvas {
+			.game-objects-canvas, .game-characters-canvas {
 				top: 144px;
 				width: 720px;
 				height: 216px;
@@ -1273,6 +1388,78 @@ body {
 				top: 380px;
 				height: 200px;
 			}
+
+			.code-bit-list {
+				width: 272px; height: 160px;
+				top: 35px; left: 328px;
+			}
+
+			.code-panel { 
+				width: 320px; height: 192px;
+			}
+
+				.cp-title-bar {
+					width: 320px; height: 32px;
+				}
+
+					.cp-view-toggle { 
+						width: 32px; height: 32px;
+						background-size: 64px;
+					}
+					.cp-view-toggle:hover, .cp-view-toggle:active {
+						background-position: 32px 0;
+					}
+
+					.cp-view-toggle-up {
+						background-position: 0 -32px;
+					}
+
+					.cp-view-toggle-up:hover, .cp-view-toggle-up:active {
+						background-position: 32px -32px;
+					}
+
+
+				.cp-content-wrapper { 
+					width: 264px; height: 158px;
+				}
+					.cp-content {
+						width: 256px; 
+					}
+
+					.code-bit {
+						width: 256px; height: 24px;
+						font-size: 16px;
+						text-indent: 10px;
+						line-height: 20px;
+					}
+
+				.cp-scroll {
+					width: 21px; height: 160px;
+				}
+					.cp-scroll-bar {
+						width: 17px; height: 32px;
+					}
+
+				.cp-controls {
+					width: 35px; height: 160px;
+				}
+					.cp-add, .cp-delete, .cp-run { 
+						width: 32px; height: 32px; 
+						background-size: 96px 32px;
+					}
+					.cp-add { 
+						top: 8px;
+						background-position: 0 0;
+					}
+					.cp-delete { 
+						top: 48px;
+						height: 26px; 
+						background-position: -32px 40%;
+					}
+					.cp-run {
+						top: 96px;
+						background-position: -64px 0;
+					}
 		}
 	/*-------------------------------------------------------------------*/
 
@@ -1287,13 +1474,7 @@ body {
 				height: 400px;
 			}
 
-			.game-objects-canvas {
-				top: 200px;
-				width: 800px;
-				height: 200px;
-			}
-
-			.game-characters-canvas {
+			.game-objects-canvas, .game-characters-canvas {
 				top: 160px;
 				width: 800px;
 				height: 240px;
@@ -1322,6 +1503,8 @@ body {
 				top: 420px;
 				height: 200px;
 			}
+
+
 		}
 	/*-------------------------------------------------------------------*/
 
@@ -1340,13 +1523,7 @@ body {
 				height: 440px;
 			}
 
-			.game-objects-canvas {
-				top: 220px;
-				width: 880px;
-				height: 220px;
-			}
-
-			.game-characters-canvas {
+			.game-objects-canvas, .game-characters-canvas {
 				top: 176px;
 				width: 880px;
 				height: 264px;
@@ -1375,6 +1552,78 @@ body {
 				top: 460px;
 				height: 200px;
 			}
+
+			.code-bit-list {
+				width: 340px; height: 200px;
+				top: 44px; left: 410px;
+			}
+
+			.code-panel { 
+				width: 400px; height: 240px;
+			}
+
+				.cp-title-bar {
+					width: 400px; height: 40px;
+				}
+
+					.cp-view-toggle { 
+						width: 40px; height: 40px;
+						background-size: 80px;
+					}
+					.cp-view-toggle:hover, .cp-view-toggle:active {
+						background-position: 40px 0;
+					}
+
+					.cp-view-toggle-up {
+						background-position: 0 -40px;
+					}
+
+					.cp-view-toggle-up:hover, .cp-view-toggle-up:active {
+						background-position: 40px -40px;
+					}
+
+
+				.cp-content-wrapper { 
+					width: 330px; height: 198px;
+				}
+					.cp-content {
+						width: 320px; 
+					}
+
+					.code-bit {
+						width: 320px; height: 30px;
+						font-size: 20px;
+						text-indent: 10px;
+						line-height: 40px;
+					}
+
+				.cp-scroll {
+					width: 26px; height: 200px;
+				}
+					.cp-scroll-bar {
+						width: 22px; height: 40px;
+					}
+
+				.cp-controls {
+					width: 44px; height: 200px;
+				}
+					.cp-add, .cp-delete, .cp-run { 
+						width: 40px; height: 40px; 
+						background-size: 120px 40px;
+					}
+					.cp-add { 
+						top: 10px;
+						background-position: 0 0;
+					}
+					.cp-delete { 
+						top: 60px;
+						height: 32px; 
+						background-position: -40px 50%;
+					}
+					.cp-run {
+						top: 120px;
+						background-position: -80px 0;
+					}
 		}
 	/*-------------------------------------------------------------------*/
 
@@ -1427,13 +1676,7 @@ body {
 				height: 480px;
 			}
 
-			.game-objects-canvas {
-				top: 240px;
-				width: 960px;
-				height: 240px;
-			}
-
-			.game-characters-canvas {
+			.game-objects-canvas, .game-characters-canvas {
 				top: 192px;
 				width: 960px;
 				height: 288px;
@@ -1476,13 +1719,7 @@ body {
 				height: 560px;
 			}
 
-			.game-objects-canvas {
-				top: 280px;
-				width: 1120px;
-				height: 280px;
-			}
-
-			.game-characters-canvas {
+			.game-objects-canvas, .game-characters-canvas {
 				top: 224px;
 				width: 1120px;
 				height: 336px;
@@ -1525,13 +1762,7 @@ body {
 				height: 600px;
 			}
 
-			.game-objects-canvas {
-				top: 300px;
-				width: 1200px;
-				height: 300px;
-			}
-
-			.game-characters-canvas {
+			.game-objects-canvas, .game-characters-canvas {
 				top: 240px;
 				width: 1200px;
 				height: 360px;

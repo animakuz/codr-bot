@@ -33,7 +33,7 @@
 				</canvas>
 
 				<!-- game object graphics -->
-				<canvas class='game-objects-canvas' id='game-objects-canvas' width='800'  height='200'>
+				<canvas class='game-objects-canvas' id='game-objects-canvas' width='800'  height='240'>
 				</canvas>
 
 				<!-- characters canvas -->
@@ -121,7 +121,7 @@
 							<span class='lang-eng'>Options</span><span class='lang-esp'>Opciones</span>
 						</button>
 					</div>
-					<div class='button-wrapper'>
+					<div class='button-wrapper hidden'>
 						<button class='gui-button large-button yellow-button' id='btn-credits'>
 							<span class='lang-eng'>Credits</span><span class='lang-esp'>Reconocimientos</span>
 						</button>
@@ -211,13 +211,13 @@
 				</div>
 				
 				<!-- panel where code-bits will be placed -->
-				<div class='code-panel'>
+				<div class='code-panel unselectable'>
 					<div class='cp-title-bar'>
 						<span class='cp-title'>Code Panel</span>
-						<span class='cp-view-toggle'></span>
+						<span class='cp-view-toggle cp-view-toggle-up'></span>
 					</div>
-					<div class='cp-content'>
-						<div class='code-bit'></div>
+					<div class='cp-content-wrapper'>
+						<div class='cp-content'></div>
 					</div>
 					<div class='cp-scroll'>
 						<div class='cp-scroll-bar'></div>
@@ -229,6 +229,10 @@
 					</div>
 				</div>
 
+				<!-- list of available code bits (for adding code bit) -->
+				<div class='code-bit-list unselectable'>
+				</div>
+
 				<!-- view of the user data  -->
 				<div class='user-profile'>
 					<h2 class='gui-page-title'>
@@ -237,7 +241,7 @@
 
 					<div class='profile-user-info'>
 						<div>
-							<img id='profile-user-icon' src='#'  />
+							<img id='profile-user-icon' src='img/avatar-user.png'  />
 						</div>
 						<div>
 							<span id='profile-username'>User</span><br>
@@ -315,6 +319,31 @@
 						<span class='lang-eng'>Exit</span>
 						<span class='lang-esp'>Salir</span>
 					</a>
+				</div>
+			</div>
+
+			<!-- pause button during gameplay -->
+			<div class='btn-pause gui-button small-button green-button' id='btn-pause'>
+				<span class='lang-eng'>Menu</span>
+				<span class='lang-esp'>Menu</span>
+			</div>
+
+			<!-- game info screen - pause menu and results screen -->
+			<div class='info-screen-wrapper' id='info-screen-wrapper'>
+				<div class='info-screen-inner'>					
+					<div class='info-screen-content' id='info-screen-content'>
+
+					</div>
+					<div class='pause-screen-content' id='pause-screen-content'>
+						<h2 class='info-screen-title' id='info-screen-title'>Menu</h2>
+						<p>
+							THIS IS THE MENU SCREEN CONTENT
+						</p>
+						<div class='btn-unpause gui-button small-button red-button' id='btn-unpause'>
+							<span class='lang-eng'>Close</span>
+							<span class='lang-esp'>Cerrar</span>
+						</div>
+					</div>
 				</div>
 			</div>
 

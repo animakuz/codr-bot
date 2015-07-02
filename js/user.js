@@ -9,18 +9,6 @@ var defaultLanguage = 'Esp';
 //--determines if a message box is currently showing or not
 var messageShowing = false;
 
-//User level info prototype ( for showing in completed levels part of profile)
-	var userLevel = {
-		id: -1, //index of level in levels array
-		name: '',
-		title: '',
-		preview: '', //image link to preview
-		description: '',
-		grade: 0, //0 =open, 1 = bronze, 2 = silver, 3 = gold
-		solution: [] //solution made to the level
-	};
-//--------------------------------------------------------------
-
 //--User prototype----------------------------------------------
 	var createUser = function() {
 		return {
@@ -35,6 +23,7 @@ var messageShowing = false;
 			},
 			data: {
 				totalPoints: 0,
+				codeBits: ['step'],
 				levelsCleared: [],  //array of data objects representing levels already passed
 				achievements: [],	//array of data objects representing acheivements obtained
 			}
@@ -54,7 +43,7 @@ var messageShowing = false;
 		if (!messageShowing) {
 			messageShowing = true;
 			//create elements
-			var lang = (typeof currentUser === 'object') ? currentUser.options.language : defaultLanguage;
+ 			var lang = (typeof currentUser === 'object') ? currentUser.options.language : defaultLanguage;
 			var container = document.getElementsByClassName('app-container')[0];
 			var box = document.createElement('div');
 			var titleBox = document.createElement('h3');
@@ -230,6 +219,26 @@ var messageShowing = false;
 	};
 //--------------------------------------------------------------
 
+//--Create language components function-------------------------
+	function generateLangOptions(container, langOptions) {
+		var langContEng = document.createElement('span');
+		var langContEsp = document.createElement('span');
+		var langTextEng = document.createTextNode(langOptions.Eng);
+		var langTextEsp = document.createTextNode(langOptions.Esp);
+		
+		langContEng.className='lang-eng';
+		langContEsp.className='lang-esp';
+
+		langContEng.appendChild(langTextEng);
+		langContEsp.appendChild(langTextEsp);
+
+		container.appendChild(langContEng);
+		container.appendChild(langContEsp);
+
+		setLanguageVC(currentUser.options.language);
+	}
+//--------------------------------------------------------------
+
 //--Set background visual component-----------------------------
 	var setBackgroundVC = function(bg) {
 		//TODO - ADD FADE EFFECT ON BACKGROUND CHANGE
@@ -338,7 +347,7 @@ var messageShowing = false;
 				pBot.clearBot();
 
 				//remove current user
-				currentUser = null;
+				currentUser = undefined;
 
 				//clear current user from local storage
 				localStorage.removeItem('currentUser');

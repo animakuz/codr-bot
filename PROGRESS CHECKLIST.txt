@@ -1,26 +1,28 @@
 -- NEXT TASKS TO TACKLE --
-	-- work on code panel
-		-- implement new design
-		-- make buttons work visually (actually add code bit html elements)
-		-- make also function that increments some solution object or something with the corresponding code bit names
-
-	HERES WHAT YOU HAFFI DO
-
-
-	- START MAKING GRAPHICS FOR GAME OBJECTS WITH DIFFERENT STATES AND ANIMATIONS (SIMPLE WITH LOW ANIMATION)
-	- IMPLEMENT ALL
-	- START WORKING ON CODE PANEL
+		-- implement game pausing
+		-- implement drag and drop for code bits
+		-- implement falling
+		-- implmenet level 2 with bridge and gap
+		-- implement game over and failed solution process
+		-- implement correct solution process
+		-- make corresponding actions (already have step) and apply them there
+		-- vary info screen top margin and dimensions with screen size
+		-- give proper css 
+		-- add buttons and functionality (end game button, reset game button, level select button)
+		-- work out how to add and switch content (adding pause button only for pause menu)
+		-- change how adding animations works 
+			-- use animation stack (array)
+			-- add animation to stack for every animation that needs to be displayed
+			-- diminish each number
+			-- pop from stack when 0
+			-- if stack 0 stop 
 DEVELOPMENT CHECKLIST
 
-
+	- MAKE RUN ACTION ON CODE PANEL RESET BOT 
 
 	Semana 4 - 6 – Diseño e Implementación de Funcionalidad Base del Juego
 -	Funcionalidad general
 
--	Code panel
-		o	Agregar code-bit
-		o	Eliminar code-bit
-		o	Correr 
 
 -	Acciones del robot
 		o	Esperar
@@ -30,7 +32,6 @@ DEVELOPMENT CHECKLIST
 		o	Alcanzar blanco
 
 -	Comandos (code-bits)
-		o	Paso
 		o	Interactuar
 		o	Esperar
 		o	Condición
@@ -39,7 +40,6 @@ DEVELOPMENT CHECKLIST
 -	Funcionalidad de objetos del juego
 		o	Herramientas
 			?	Palancas
-			?	Puentes
 			?	Detonadores
 			?	Bombas
 		o	Obstáculos

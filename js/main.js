@@ -39,14 +39,23 @@ window.onload = function() {
 	var levelSelect = document.getElementsByClassName('level-select')[0];
 
 	//--Code panel
-	var cpGUI = document.getElementsByClassName('code-panel');
+	var cpContainer = document.getElementsByClassName('code-panel');
 	var cpViewToggle = document.getElementsByClassName('cp-view-toggle')[0];
+	var cpScroll = document.getElementsByClassName('cp-scroll')[0];
+	var cpScrollBar = document.getElementsByClassName('cp-scroll-bar')[0];
+	var cpControls = document.getElementsByClassName('cp-controls')[0];
 	var cpAdd = document.getElementsByClassName('cp-add')[0];
 	var cpDelete = document.getElementsByClassName('cp-delete')[0];
 	var cpRun = document.getElementsByClassName('cp-run')[0];
+	var cpContentWrapper = document.getElementsByClassName('cp-content-wrapper')[0];
 	var cpContent = document.getElementsByClassName('cp-content')[0];
+	//Code-bit list
+	var codeBitList = document.getElementsByClassName('code-bit-list')[0];
 
 	//--Game view
+	var btnPause = document.getElementById('btn-pause');
+	var btnUnpause = document.getElementById('btn-unpause');
+	var infoScreenWrapper = document.getElementById('info-screen-wrapper');
 	// var gameObjectsCanvas = document.getElementById('game-objects-canvas');
 	// var gameLandsCanvas = document.getElementById('game-lands-canvas');
 	// var gameObjectsCanvas = document.getElementById('game-objects-canvas');
@@ -107,48 +116,83 @@ window.onload = function() {
 	//--Code Panel--------------------------------------------------------------
 		//toggle view button - open and close 
 		cpViewToggle.onclick = function() {
-			console.log('toggling');
-			if (codePanel.viewState === 'open') {
-				// CHANGE CODE TO MAKE DROP DOWN INSTEAD OF SLIDE ACROSSS
-				// Velocity(cpGUI, {width: '100px'}, {duration: 300,  complete: function() {
-				// 	codePanel.viewState = 'closed';
-				// }});
-			} else {
-				// Velocity(cpGUI, {width: '400px'}, {duration: 300,  complete: function() {
-				// 	codePanel.viewState = 'open';
-				// }});
+			if (codePanel.running === false && codePanel.enabled === true) {
+				if (codePanel.viewState === 'open') {
+					removeClass(codeBitList, 'gui-active');
+					var newHeight = this.clientHeight;
+					Velocity(cpContainer, {height: newHeight + 'px'}, {duration: 300,  complete: function() {
+						removeClass(cpViewToggle, 'cp-view-toggle-up');
+						codePanel.viewState = 'closed';
+					}});
+				} else {
+					codePanel.clearSelection();
+					var newHeight = this.clientHeight * 6;
+					Velocity(cpContainer, {height: newHeight + 'px'}, {duration: 300,  complete: function() {
+						addClass(cpViewToggle, 'cp-view-toggle-up');
+						codePanel.viewState = 'open';
+					}});
+				}
 			}
 		};
 
 		//add code bit button
 		cpAdd.onclick = function() {
-			if (codePanel.viewState === 'open') {
-				if (codePanel.numCodeBits < 8) {
-					//only allow 8 code bits (possibly make this a game object property that can be easily
-					//changed from there)
-					console.log('adding');  //TODO - ADD FUNCTIONALITY
-				} else {
-					console.log("you've reached the maximum number of code bits"); //TODO - ADD FUNCTIONALITY
-				}
+			if (codePanel.viewState === 'open' && (codePanel.running === false && codePanel.enabled === true)) {
+				codePanel.clearSelection();
+				toggleClass(codeBitList, 'gui-active');
 			}
 		};
 
 		//delete code bit button
 		cpDelete.onclick = function() {
-			if (codePanel.viewState === 'open') {
-				//delete selected 
-				console.log('deleting'); //TODO - ADD FUNCTIONALITY 
-			} else {
-				//don't allow deletion of code bits with code panel closed (possibly consider removing 
-				//buttons when panel closed)
-				console.log('no code bits selected'); //TODO - ADD FUNCTIONALITY 
+			if (codePanel.viewState === 'open' && (codePanel.running === false && codePanel.enabled === true)) {
+				codePanel.deleteCodeBit();				
 			}
 		};
 
 		//run code sequence button
 		cpRun.onclick = function() {
-			console.log('running'); //TODO - ADD FUNCTIONALITY
+			if (codePanel.running === false && codePanel.enabled === true) {
+				if (codePanel.numCodeBits > 0) {
+					codePanel.running = true;
+					codePanel.clearSelection();
+					removeClass(codeBitList, 'gui-active');
+
+					codePanel.runSequence();
+				} else {
+					showMessageBox( {Eng: 'There are no code bits to execute', Esp: 'No hay code bits para ejecutar'}, 
+						'alert', 'warning');
+				}
+			}
 		};
+
+		//scroll bar
+		cpScrollBar.onmousedown = function(event) {
+			//start scroll
+			if (codePanel.running === false) {
+				codePanel.scrolling = true;
+				codePanel.dragPos = event.clientY;
+				// codePanel.scrollOffset = (event.offsetY || event.layerY) + cpScroll.getBoundingClientRect().top;
+			}
+		};
+
+		cpScrollBar.onmouseup = function() {
+			//end scroll
+			codePanel.scrolling = false;
+			// codePanel.scrollStartPoint = 0;
+		};
+
+		cpScrollBar.onmousemove = function(event) {
+			if (codePanel.scrolling) {
+				codePanel.scroll(event.clientY - codePanel.dragPos);
+				codePanel.dragPos = event.clientY;
+
+			}
+		};
+
+		cpScrollBar.onmouseleave = function() {
+			codePanel.scrolling = false;
+		}
 	//--------------------------------------------------------------------------
 
 	//--Create User ------------------------------------------------------------
@@ -266,60 +310,9 @@ window.onload = function() {
 		btnStartGame.onclick = function() {
 			//switch to level select screen
 			switchScreens(gameMenu, levelSelect);
-			//show levels
-			var i = 0;
-			var numLevels = gameLevels.length;
-			var levelStatus = 'passed';
-			var addLevelThumb = function(status, index, levelData) {
-				var levelThumbCont = document.createElement('div');
-				levelThumbCont.className = 'level-thumb th-level-select level-' + status;
-				levelThumbCont.setAttribute('data-level', index);
-
-				//possibly other info
-
-				levelSelectLevels.appendChild(levelThumbCont);
-			};
-
-			//delete current items
-			empty(levelSelectLevels);
-
-			while(i < numLevels) {
-				if (levelStatus === 'passed') {
-					//still checking levels cleared 
-					if (currentUser.data.levelsCleared[i]) {
-						//load level thumbnail as cleared with corresponding data
-						addLevelThumb('passed', i, gameLevels[i]);
-						i++;
-					} else {
-						//change status to keep checking other levels
-						levelStatus = 'open';
-					}					
-				} else if (levelStatus === 'open') {
-					//load level as open
-					addLevelThumb('open', i, gameLevels[i]);
-					//change status to locked - only one level after all cleared levels is open
-					levelStatus = 'locked';
-					i++;
-				} else if (levelStatus === 'locked') {
-					//load level as locked
-					addLevelThumb('locked', i, gameLevels[i]);
-					i++;
-				}
-			}
-
-			var levelSelectThumbs = document.querySelectorAll('.th-level-select');
-
-			//bind events for click of level select buttons
-			bindMultiple(levelSelectThumbs, 'onclick', function(ele) {
-				if (!(classCheck(ele, 'level-locked'))) {
-					modifyMultiple(levelSelectThumbs, function(element) {
-						removeClass(element, 'level-selected');
-					});
-					addClass(ele, 'level-selected');
-				} else {
-					//TODO - SHOW MESSAGE THAT LEVEL IS LOCKED
-				}
-			});
+			
+			loadLevels();
+			
 		};
 
 		//show options screen
@@ -463,6 +456,19 @@ window.onload = function() {
 					break;
 			};
 		});
+	//--------------------------------------------------------------------------
+
+	//--Pause Button------------------------------------------------------------
+		btnPause.onclick = function() {
+			//show pause menu and hide button
+			switchScreens(btnPause, infoScreenWrapper);
+			createjs.Ticker.setPaused(true);
+		};
+
+		btnUnpause.onclick = function() {
+			switchScreens(infoScreenWrapper, btnPause);
+			createjs.Ticker.setPaused(false);
+		};
 	//--------------------------------------------------------------------------
 
 //--END BINDINGS AND EVENTS-----------------------------------------------------

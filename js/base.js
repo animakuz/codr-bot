@@ -4,18 +4,27 @@
 //-- GENERAL GLOBAL DATA ---------------------------------------
 	//default messages
 	var GAME_WIDTH = 800;
-	var msgEng = 'All Good!';
-	var msgEsp = 'Todo Bien!';
-	var msgErrorEng = 'There was an error!';
-	var msgErrorEsp = 'Hubo un error!';
+
+
+	//for future implementation of modifiable language files
+	var LANG_ENG = {
+		defMsg: 'All Good!',
+		defError: 'There was an error!'
+	};
+
+	var LANG_ESP = {
+		defMsg: 'Todo Bien!',
+		defError: 'Hubo un error!'
+	};
+
 
 //-- END GLOBAL DATA -------------------------------------------
 
 //-- Result object prototype -----------------------------------
 	var protoResult = { 
 		success: true,
-		messageEng: msgEng, 
-		messageEsp: msgEsp 
+		messageEng: LANG_ENG['defMsg'], 
+		messageEsp: LANG_ESP['defMsg'] 
 	};
 //--------------------------------------------------------------
 
@@ -79,10 +88,10 @@
 	}
 
 	//add a class or multiple classes to an element
-	function addClass(element, classToAdd) {
-		if (!(classCheck(element, classToAdd))) {
+	function addClass(element, classesToAdd) {
+		if (!(classCheck(element, classesToAdd))) {
 			//element doesn't have class - add it
-			var classes = classToAdd.replace(/\s+/g,'').split(",");
+			var classes = classesToAdd.replace(/\s+/g,'').split(",");
 			var ind = classes.length;
 			var newClass = element.className.trim();
 
@@ -96,10 +105,10 @@
 
 	//remove a class or multiple classes from an element (in the case of multiple classes
 	//the element must contain ALL the classes or the function fails)
-	function removeClass(element, classToRemove) { 
-		if (classCheck(element, classToRemove)) {
+	function removeClass(element, classesToRemove) { 
+		if (classCheck(element, classesToRemove)) {
 			//element has class - remove it
-			var classes = classToRemove.replace(/\s+/g,'').split(",");
+			var classes = classesToRemove.replace(/\s+/g,'').split(",");
 			var ind = classes.length;
 			var newClass = element.className;
 
