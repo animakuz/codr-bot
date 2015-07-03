@@ -1,5 +1,5 @@
 -- NEXT TASKS TO TACKLE --
-		-- implement game pausing
+
 		-- implement drag and drop for code bits
 		-- implement falling
 		-- implmenet level 2 with bridge and gap

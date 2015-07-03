@@ -890,17 +890,29 @@
 		}
 	};
 	
-	//event handler for adding code bit from code bit list
-	var addCodeBitEvent = function() {
+	//event handler for start dragging code bit from code bit list
+	var starDragCodeBit = function() {
 		var type = this.getAttribute('data-type');
 		var cpCodeBit = this.cloneNode(true);
+
+		
+
+	};
+
+	//event handler for dragging
+	var dragCodeBit = function() {
+
+	};
+
+	//event handler for drop (stop drag)
+	var dropCodeBit = function() {
 
 		cpCodeBit.addEventListener('click', selectCodeBitEvent);
 		codePanel.addCodeBit(cpCodeBit);
 		
 		//add visual component to code panel
 		codePanel.cpContent.appendChild(cpCodeBit);
-	};
+	}
 
 	//$Code panel control object
 	var codePanel = {
