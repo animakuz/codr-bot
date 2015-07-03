@@ -14,9 +14,9 @@
 </head>
 
 <body>
-	<div class='content-wrapper hidden' id='content-wrapper'>
+	<div class='content-wrapper unslectable hidden' id='content-wrapper'>
 		<!-- this div will surround the entire application (everything except logo and small-screen error) -->
-		<div class='app-container'>
+		<div class='app-container unselectable'>
 			<!-- realitvely static background elements created outside of the game canvas for performance -->
 			<div class='game-bg-sky bg-sky-cloudy' id='game-bg-sky'></div>
 			<div class='game-bg-underground' id='game-bg-underground'></div>
@@ -27,7 +27,7 @@
 			</div>
 
 			<!-- this div will surround anything that will be limited by the specific dimension limitations -->
-			<div class='dimension-wrapper'>
+			<div class='dimension-wrapper unselectable'>
 				<!-- game 'lands' graphics  -->
 				<canvas class='game-lands-canvas' id='game-lands-canvas' width='800' height='80'>
 				</canvas>
@@ -409,8 +409,16 @@
 	<script src='js/easeljs-0.8.1.min.js'></script>
 	<!-- external data loader (mostly graphics) -->
 	<script src='js/data.js'></script>
-	<!-- game based functions and data -->
+	<!-- level data and objects -->
+	<script src='js/levels.js'></script>
+	<!-- game background graphics -->
+	<script src='js/bg.js'></script>
+	<!-- game objects (in game interactable elements) -->
+	<script src='js/gameobjects.js'></script>
+	<!-- core game functions and data / character functions and data-->
 	<script src='js/game.js'></script>
+	<!-- code panel object, functions and data -->
+	<script src='js/codepanel.js'></script>
 	<!-- user based (GUI) functions and data -->
 	<script src='js/user.js'></script>
 	<!-- main script that puts everything together -->

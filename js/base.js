@@ -2,11 +2,14 @@
 //-- BASE FUNCTIONS AND DATA ----------------------------------------------------
 
 //-- GENERAL GLOBAL DATA ---------------------------------------
-	//default messages
 	var GAME_WIDTH = 800;
 
+	//pixel size of each distance unit
+	var UNIT_DISTANCE = 80;  
+	 // duration of unit time in frames (duration of every unit action and same as framerate)
+	var UNIT_TIME = 30;
 
-	//for future implementation of modifiable language files
+	//default messages - converted to separate objects for future implementation of modifiable language files
 	var LANG_ENG = {
 		defMsg: 'All Good!',
 		defError: 'There was an error!'
@@ -77,16 +80,11 @@
 
         while(ind--) {
 			var testTerm = new RegExp(newClasses[ind] +' ');
-            if (testTerm.test(currentClasses)) {
-                currentClasses = currentClasses.replace(testTerm,''); 
-            } else {
+            if (!testTerm.test(currentClasses)) {
                 hasClass = false;
                 break;
-            }                      
+            }  
  		}
-        if (currentClasses !== '') {
-            hasClass = false;
-        }
  		return hasClass;
  	}
 

@@ -1,5 +1,4 @@
 -- NEXT TASKS TO TACKLE --
-		-- MAKE ELEMENT SHOW IN DRAG - FIND OUT WHY IT'S NOT SHOWING (MAKE DRAG AND DROP WORK)
 		-- implement falling
 		-- implmenet level 2 with bridge and gap
 		-- implement game over and failed solution process
@@ -9,12 +8,7 @@
 		-- give proper css 
 		-- add buttons and functionality (end game button, reset game button, level select button)
 		-- work out how to add and switch content (adding pause button only for pause menu)
-		-- change how adding animations works 
-			-- use animation stack (array)
-			-- add animation to stack for every animation that needs to be displayed
-			-- diminish each number
-			-- pop from stack when 0
-			-- if stack 0 stop 
+
 DEVELOPMENT CHECKLIST
 
  
