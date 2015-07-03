@@ -68,69 +68,77 @@
 		}
 	}
 
-	//check if an element has a certain class
-	function classCheck(element, classToCheck) {
-		var classes = classToCheck.replace(/\s+/g,'').split(",");
-		var elementClass = element.className;
-		var hasClass = false;
-		var ind = classes.length;
+	//check if an element has a certain class or multiple classes
+	function classCheck(element, classesToCheck) {
+		var newClasses = classesToCheck.replace(/\s+/g,'').split(",");
+		var currentClasses = element.className.trim().replace(/\s+/g,' ') + ' ';
+		var ind = newClasses.length;
+		var hasClass = true;
 
-		while(ind--) {
-			var testStr = new RegExp(classes[ind]);
-			if (testStr.test(elementClass)) {
-				hasClass = true;
-			} else {
-				hasClass = false;
-				break;
-			}
-		}
-		return hasClass;
-	}
+        while(ind--) {
+			var testTerm = new RegExp(newClasses[ind] +' ');
+            if (testTerm.test(currentClasses)) {
+                currentClasses = currentClasses.replace(testTerm,''); 
+            } else {
+                hasClass = false;
+                break;
+            }                      
+ 		}
+        if (currentClasses !== '') {
+            hasClass = false;
+        }
+ 		return hasClass;
+ 	}
 
 	//add a class or multiple classes to an element
-	function addClass(element, classesToAdd) {
-		if (!(classCheck(element, classesToAdd))) {
-			//element doesn't have class - add it
-			var classes = classesToAdd.replace(/\s+/g,'').split(",");
-			var ind = classes.length;
-			var newClass = element.className.trim();
+ 	function addClass(element, classesToAdd) {		
+		var newClasses = classesToAdd.replace(/\s+/g,'').split(",");		
+		var newClassName = element.className.trim().replace(/\s+/g,' ') + ' ';
+        var len = newClasses.length;
+        var ind = 0;
+		while(ind < len) { 
+			var testTerm = new RegExp(newClasses[ind] + ' ');
+            if (!testTerm.test(newClassName)) {
+				//current className doesn't contain class - add it
+				newClassName += newClasses[ind] + ' ';			
+ 			}
+            ind++;
+ 		}
 
-			while(ind--) { //agregate separate classes
-				newClass += ' ' + classes[ind];			
-			}
-			
-			element.className = newClass;
+		element.className = newClassName.trim();
+ 	}
+
+	//remove a class or multiple classes from an element
+ 	function removeClass(element, classesToRemove) { 
+		var classes = classesToRemove.replace(/\s+/g,'').split(",");
+		var ind = classes.length;
+		var newClass = element.className.trim().replace(/\s+/g,' ') + ' ';
+		while(ind--) { 
+        //remove class
+			newClass = newClass.replace(classes[ind] + ' ','');
 		}
-	}
+		element.className = newClass.trim();
+ 	}
 
-	//remove a class or multiple classes from an element (in the case of multiple classes
-	//the element must contain ALL the classes or the function fails)
-	function removeClass(element, classesToRemove) { 
-		if (classCheck(element, classesToRemove)) {
-			//element has class - remove it
-			var classes = classesToRemove.replace(/\s+/g,'').split(",");
-			var ind = classes.length;
-			var newClass = element.className;
-
-			while(ind--) { //agregate separte classes
-				newClass = newClass.replace(classes[ind],'');
-			}
-			
-			element.className = newClass.trim();
-		}
-	}
-
-	//toggle class or multiple classes on and off - for multiple classes 
-	//element must either contain all classes supplied to toggle off or none of them to toggle on
-	function toggleClass(element, classToToggle) {
-		if (classCheck(element, classToToggle)) { 
-			//element has class  - remove it
-			removeClass(element, classToToggle);
-		} else {
-			//element doesn't have class add it
-			addClass(element, classToToggle);
-		}
-	}
+	//toggle class or multiple classes on and off 
+	function toggleClass(element, classesToToggle) {
+        var classes = classesToToggle.replace(/\s+/g,'').split(",")
+		var newClassName = element.className.trim().replace(/\s+/g,' ') + ' ';
+		var len = classes.length;
+        var ind = 0;
+        while (ind < len) {
+            var testTerm = new RegExp(classes[ind] + ' ');
+            if (testTerm.test(newClassName)) {
+                //class exists - remove it
+                newClassName = newClassName.replace(classes[ind] + ' ', '');
+            } else {
+                //class doesn't exist - add it
+                newClassName += classes[ind] + ' ';
+            }
+            ind++;
+        }
+        element.className = newClassName.trim();               
+    }
 
 	//modify multiple elements with similar function
 	function modifyMultiple(elements, process) {

@@ -1,6 +1,5 @@
 -- NEXT TASKS TO TACKLE --
-		-- implement game pausing
-		-- implement drag and drop for code bits
+		-- MAKE ELEMENT SHOW IN DRAG - FIND OUT WHY IT'S NOT SHOWING (MAKE DRAG AND DROP WORK)
 		-- implement falling
 		-- implmenet level 2 with bridge and gap
 		-- implement game over and failed solution process
@@ -18,7 +17,7 @@
 			-- if stack 0 stop 
 DEVELOPMENT CHECKLIST
 
-	- MAKE RUN ACTION ON CODE PANEL RESET BOT 
+ 
 
 	Semana 4 - 6 – Diseño e Implementación de Funcionalidad Base del Juego
 -	Funcionalidad general

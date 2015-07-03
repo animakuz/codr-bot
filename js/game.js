@@ -9,6 +9,7 @@
 
 	var UNIT_DISTANCE = 80;  //pixel size of each distance unit
 	var UNIT_TIME = 30; // duration of unit time in frames (duration of every unit action and same as framerate)
+	var container = document.getElementsByClassName('app-container')[0];
 
 	//set ticker properties
 	cjs.Ticker.timingOption = cjs.Ticker.RAF;
@@ -890,17 +891,46 @@
 		}
 	};
 	
-	//event handler for adding code bit from code bit list
-	var addCodeBitEvent = function() {
-		var type = this.getAttribute('data-type');
-		var cpCodeBit = this.cloneNode(true);
+	//drag code bits
+	var dragCodeBit = function(event) {
+		if (typeof codePanel.draggingCodeBit !== 'undefined') {
+			codePanel.draggingCodeBit.style.left = event.clientX;
+			codePanel.draggingCodeBit.style.top = event.clientY;
 
-		cpCodeBit.addEventListener('click', selectCodeBitEvent);
-		codePanel.addCodeBit(cpCodeBit);
-		
-		//add visual component to code panel
-		codePanel.cpContent.appendChild(cpCodeBit);
+			console.log(codePanel.draggingCodeBit.style.left);
+		}
 	};
+	
+	var dropCodeBit = function() {
+		codePanel.draggingCodeBit = undefined;
+		container.removeEventListener('mousemove', dragCodeBit);
+		container.removeEventListener('mouseup', dropCodeBit);
+
+		if (1 > 2) {
+			cpCodeBit.addEventListener('click', selectCodeBitEvent);
+			codePanel.addCodeBit(cpCodeBit);
+			
+			//add visual component to code panel
+			codePanel.cpContent.appendChild(cpCodeBit);
+		}
+	};
+
+	//event handler for adding code bit from code bit list
+	var startDragCodeBit = function(event) {
+		// var type = this.getAttribute('data-type');
+		var cpCodeBit = this.cloneNode(true);
+		cpCodeBit.style.position = 'absolute';
+		cpCodeBit.style.top = event.clientY;
+		cpCodeBit.style.left = event.clientX;
+		codePanel.draggingCodeBit = cpCodeBit;
+		console.log(codePanel.draggingCodeBit);
+		container.appendChild(cpCodeBit);
+		container.addEventListener('mousemove', dragCodeBit);
+		container.addEventListener('mouseup', dropCodeBit);
+		console.log('start drag');
+	};
+
+
 
 	//$Code panel control object
 	var codePanel = {
@@ -915,7 +945,8 @@
 		scrolling: false,
 		scrollPos: 0,
 		scrollMax: 0,
-		dragPos: 0,
+		scrollDragPos: 0,
+		draggingCodeBit: undefined,
 		cpContainer: undefined,
 		cpContent: undefined,
 		cpScroll: undefined,
@@ -955,7 +986,7 @@
 				codeBitCont.appendChild(codeBitText);
 				codeBitCont.className = 'code-bit cb-' + codeBitType;
 				codeBitCont.setAttribute('data-type', codeBitType);
-				codeBitCont.addEventListener('click', addCodeBitEvent);
+				codeBitCont.addEventListener('mousedown', startDragCodeBit);
 				this.codeBitList.appendChild(codeBitCont);
 
 				ind++;
