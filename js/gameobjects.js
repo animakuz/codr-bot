@@ -222,7 +222,7 @@
 			this.gameObjectStage.update();
 		},
 		resetGameObjects: function() {
-
+			//TODO - IMPLEMENT - set game objects back to their original states
 		},
 		clearGameObjects: function() {
 			if (typeof this.gameObjectStage !== 'undefined') {

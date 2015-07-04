@@ -1,13 +1,24 @@
 -- NEXT TASKS TO TACKLE --
+		-- implement loop special code bit 
+		-- implement if special code bit
+		-- fix scroll to accomodate for special sized code bits
+		-- fix up all game graphics (user icon = programaquina, drop down icon)
+			-code panel graphics
+			-message pop up graphics
+			- code bit graphics
+			- pause/play/rest/quit graphics (use reset/quit design - add hovers)
+			- fix start screen inputs positiong for other browsers
+			- put white faded box behind options so text can be seen no matter what background
+			- level select thumbs only show number
+			- fix profile graphics
 		-- implement falling
 		-- implmenet level 2 with bridge and gap
 		-- implement game over and failed solution process
 		-- implement correct solution process
 		-- make corresponding actions (already have step) and apply them there
-		-- vary info screen top margin and dimensions with screen size
+		-- vary info screen top margin and dimensions with screen size, also pause, quit and reset buttons
 		-- give proper css 
 		-- add buttons and functionality (end game button, reset game button, level select button)
-		-- work out how to add and switch content (adding pause button only for pause menu)
 
 DEVELOPMENT CHECKLIST
 

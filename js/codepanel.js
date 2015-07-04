@@ -69,7 +69,14 @@
 				codePanel.draggingCodeBit.style.position = 'relative';
 				codePanel.draggingCodeBit.style.left = 0;
 				codePanel.draggingCodeBit.style.top = 0;
+				removeClass(codePanel.draggingCodeBit, 'code-bit-drag');
 				codePanel.draggingCodeBit.addEventListener('click',selectCodeBitEvent);
+
+				//add special properties for loop and condif code bit
+				var codeBitType = codePanel.draggingCodeBit.getAttribute('data-type');
+				if (codeBitType === 'loop' || codeBitType === 'condIf') {
+					codePanel.draggingCodeBit.className += ' code-bit-block';
+				}
 				codePanel.cpContent.appendChild(codePanel.draggingCodeBit);
 			} else {
 				//code bit cannot be added - discard it
@@ -90,6 +97,7 @@
 	var startDragCodeBit = function(event) {
 		var newCodeBit = this.cloneNode(true);
 		newCodeBit.style.position = 'absolute';
+		addClass(newCodeBit, 'code-bit-drag');
 		container.appendChild(newCodeBit);
 		codePanel.draggingCodeBit = newCodeBit;
 		container.addEventListener('mousemove', dragCodeBit, false);
@@ -133,7 +141,7 @@
 			this.cpAdd = document.getElementsByClassName('cp-add')[0];
 			this.cpDelete = document.getElementsByClassName('cp-delete')[0];
 			this.cpRun = document.getElementsByClassName('cp-run')[0];
-			this.codeBitList = document.getElementsByClassName('code-bit-list')[0];
+			this.codeBitList = document.getElementsByClassName('code-bit-list-inner')[0];
 
 			this.maxCodeBits = maxCodeBits;
 
@@ -152,6 +160,7 @@
 				var codeBitText = document.createTextNode(codeBits.getCodeBit(codeBitType, currentUser.options.language));
 				codeBitCont.appendChild(codeBitText);
 				codeBitCont.className = 'code-bit cb-' + codeBitType;
+
 				codeBitCont.setAttribute('data-type', codeBitType);
 				codeBitCont.addEventListener('mousedown', startDragCodeBit, false);
 				this.codeBitList.appendChild(codeBitCont);

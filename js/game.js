@@ -282,6 +282,7 @@
 	var theGame = {
 		level: {},
 		codeBits: [],
+		paused: false,
 		initialize: function(level) {			
 			//set level
 			this.level = level;
@@ -324,7 +325,7 @@
 		},
 		reset: function() {
 			//set all game objects back to their original state defined by the level
-			//gameObjMngr.resetGameObjects();
+			gameObjMngr.resetGameObjects();
 
 			//clear code panel
 			codePanel.reset();

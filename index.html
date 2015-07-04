@@ -209,7 +209,13 @@
 						<span class='lang-esp'>Atras</span>
 					</button>
 				</div>
-				
+
+				<!-- list of available code bits (for adding code bit) -->
+				<div class='code-bit-list unselectable'>
+					<div class='code-bit-list-inner'>
+					</div>
+				</div>
+
 				<!-- panel where code-bits will be placed -->
 				<div class='code-panel unselectable'>
 					<div class='cp-title-bar'>
@@ -229,9 +235,7 @@
 					</div>
 				</div>
 
-				<!-- list of available code bits (for adding code bit) -->
-				<div class='code-bit-list unselectable'>
-				</div>
+
 
 				<!-- view of the user data  -->
 				<div class='user-profile'>
@@ -322,11 +326,7 @@
 				</div>
 			</div>
 
-			<!-- pause button during gameplay -->
-			<div class='btn-pause gui-button small-button green-button' id='btn-pause'>
-				<span class='lang-eng'>Menu</span>
-				<span class='lang-esp'>Menu</span>
-			</div>
+
 
 			<!-- game info screen - pause menu and results screen -->
 			<div class='info-screen-wrapper' id='info-screen-wrapper'>
@@ -336,15 +336,14 @@
 					</div>
 					<div class='pause-screen-content' id='pause-screen-content'>
 						<h2 class='info-screen-title' id='info-screen-title'>Menu</h2>
-						<p>
-							THIS IS THE MENU SCREEN CONTENT
-						</p>
-						<div class='btn-unpause gui-button small-button red-button' id='btn-unpause'>
-							<span class='lang-eng'>Close</span>
-							<span class='lang-esp'>Cerrar</span>
-						</div>
+						<div class='btn-reset-level'></div>
+						<div class='btn-quit-level'></div>
 					</div>
 				</div>
+			</div>
+
+			<!-- pause button during gameplay -->
+			<div class='btn-pause' id='btn-pause' data-paused='false'>
 			</div>
 
 		</div> <!-- end app container -->

@@ -884,9 +884,17 @@ body {
 	/*--Code panel elements----------------------------------------------*/
 		.code-bit-list {
 			display: none; width: 170px; height: 100px;
-			position: absolute; top: 22px; left: 205px;
+			position: absolute; top: 22px; left: 200px;
 			overflow: hidden; 
-			background-color: rgba(210,220,250,0.8);
+			background-image: url('../img/code-bit-list-bar-top.png'), url('../img/code-bit-list-bar-bottom.png');
+			background-repeat: no-repeat;
+			background-position: top right, bottom right;
+		}
+
+		.code-bit-list-inner {
+			position: absolute;
+			background-color: rgba(255,255,255,0.6);
+			border-right: 2px solid rgba(25,70,25,0.5);	
 		}
 
 		.code-panel { 
@@ -950,8 +958,8 @@ body {
 
 				.code-bit {
 					position: relative;
-					margin: 0 auto;
-					width: 160px; height: 15px;
+					margin-left: 1%;
+					width: 120px; height: 15px;
 					border-top: 2px solid #666;
 					border-bottom: 2px solid #666;
 					background-color: #fea;
@@ -964,7 +972,16 @@ body {
 					text-transform: uppercase;
 				}
 
+				.code-bit-block {
+					width: 160px; height: 30px;
+				}
+
 				.code-bit:hover, .code-bit:active {
+					background-color: #a95;
+					color: #eee;
+				}
+
+				.code-bit-drag {
 					background-color: #a95;
 					color: #eee;
 				}
@@ -1028,23 +1045,25 @@ body {
 
 	/*--Game info display - Puase Screen - Results Screen----------------*/
 		/*menu button that opens info as pause menu during gameplay*/
-		.btn-pause {
+		.btn-pause, .btn-play {
 			display: none;
 			position: absolute;
 			top: 4px; left:50%;
+			width: 64px; height: 64px;
 			-webkit-transform: translateX(-50%);
 			-ms-transform: translateX(-50%);
 			-moz-transform: translateX(-50%);
 			transform: translateX(-50%);
+			background-image: url('../img/btn-play-pause.png');
+			background-size: 200% 100%;
 		}
 
-		.btn-unpause {
-			position: absolute;
-			bottom: 10px; left: 50%;
-			-webkit-transform: translateX(-50%);
-			-ms-transform: translateX(-50%);
-			-moz-transform: translateX(-50%);
-			transform: translateX(-50%);
+		.btn-pause {
+			background-position: 64px 0;
+		}
+
+		.btn-play {
+			background-position: 0 0;
 		}
 
 		.info-screen-wrapper {
@@ -1058,7 +1077,7 @@ body {
 			.info-screen-inner {
 				display: block;
 				position: absolute;
-				top: 8%; left: 50%;
+				top: 5%; left: 50%;
 				-webkit-transform: translateY(-50%);
 				-ms-transform: translateY(-50%);
 				-moz-transform: translateY(-50%);
@@ -1088,6 +1107,23 @@ body {
 
 			.pause-screen-content {
 				display: none;
+				text-align: center;
+			}
+
+			.btn-quit-level, .btn-reset-level {
+				display: inline-table;
+				width: 64px; height: 64px;
+				margin: 0 20px;
+				background-size: 100%;
+				cursor: pointer;
+			}
+
+			.btn-quit-level {
+				background-image: url('../img/btn-quit.png');
+			}
+
+			.btn-reset-level {
+				background-image: url('../img/btn-reset.png');
 			}
 	/*-------------------------------------------------------------------*/
 	
@@ -1390,16 +1426,24 @@ body {
 			}
 
 			.code-bit-list {
-				width: 272px; height: 160px;
-				top: 35px; left: 328px;
+				width: 208px; height: 160px;
+				top: 35px; left: 290px;
+				background-size: 275px 18px;
+			}
+
+			.code-bit-list-inner {
+				width: 196px; height: 138px;
+				top: 11px; left: -3px;
+				padding-left: 5px;
+				border-radius: 8px;
 			}
 
 			.code-panel { 
-				width: 320px; height: 192px;
+				width: 288px; height: 192px;
 			}
 
 				.cp-title-bar {
-					width: 320px; height: 32px;
+					width: 288px; height: 32px;
 				}
 
 					.cp-view-toggle { 
@@ -1420,24 +1464,28 @@ body {
 
 
 				.cp-content-wrapper { 
-					width: 264px; height: 158px;
+					width: 232px; height: 158px;
 				}
 					.cp-content {
-						width: 256px; 
+						width: 224px; 
 					}
 
 					.code-bit {
-						width: 256px; height: 24px;
+						width: 192px; height: 24px;
 						font-size: 16px;
-						text-indent: 10px;
-						line-height: 20px;
+						text-indent: 8px;
+						line-height: 40px;
+					}
+
+					.code-bit-block {
+						width: 224px; height: 48px;
 					}
 
 				.cp-scroll {
 					width: 21px; height: 160px;
 				}
 					.cp-scroll-bar {
-						width: 17px; height: 32px;
+						width: 18px; height: 32px;
 					}
 
 				.cp-controls {
@@ -1453,11 +1501,11 @@ body {
 					}
 					.cp-delete { 
 						top: 48px;
-						height: 26px; 
+						height: 27px; 
 						background-position: -32px 40%;
 					}
 					.cp-run {
-						top: 96px;
+						top: 120px;
 						background-position: -64px 0;
 					}
 		}
@@ -1554,16 +1602,24 @@ body {
 			}
 
 			.code-bit-list {
-				width: 340px; height: 200px;
-				top: 44px; left: 410px;
+				width: 260px; height: 200px;
+				top: 44px; left: 364px;
+				background-size: 344px 22px;
+			}
+
+			.code-bit-list-inner {
+				width: 246px; height: 172px;
+				top: 14px; left: -4px;
+				padding-left: 6px;
+				border-radius: 10px;
 			}
 
 			.code-panel { 
-				width: 400px; height: 240px;
+				width: 360px; height: 240px;
 			}
 
 				.cp-title-bar {
-					width: 400px; height: 40px;
+					width: 360px; height: 40px;
 				}
 
 					.cp-view-toggle { 
@@ -1584,17 +1640,21 @@ body {
 
 
 				.cp-content-wrapper { 
-					width: 330px; height: 198px;
+					width: 290px; height: 198px;
 				}
 					.cp-content {
-						width: 320px; 
+						width: 280px; 
 					}
 
 					.code-bit {
-						width: 320px; height: 30px;
+						width: 240px; height: 30px;
 						font-size: 20px;
 						text-indent: 10px;
 						line-height: 40px;
+					}
+
+					.code-bit-block {
+						width: 280px; height: 60px;
 					}
 
 				.cp-scroll {

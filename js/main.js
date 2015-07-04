@@ -54,8 +54,9 @@ window.onload = function() {
 
 	//--Game view
 	var btnPause = document.getElementById('btn-pause');
-	var btnUnpause = document.getElementById('btn-unpause');
 	var infoScreenWrapper = document.getElementById('info-screen-wrapper');
+	var btnResetLevel = document.getElementsByClassName('btn-reset-level')[0];
+	var btnQuitLevel = document.getElementsByClassName('btn-quit-level')[0];
 	// var gameObjectsCanvas = document.getElementById('game-objects-canvas');
 	// var gameLandsCanvas = document.getElementById('game-lands-canvas');
 	// var gameObjectsCanvas = document.getElementById('game-objects-canvas');
@@ -459,15 +460,62 @@ window.onload = function() {
 	//--------------------------------------------------------------------------
 
 	//--Pause Button------------------------------------------------------------
-		btnPause.onclick = function() {
-			//show pause menu and hide button
-			switchScreens(btnPause, infoScreenWrapper);
-			createjs.Ticker.setPaused(true);
+		var pausePlay = function() {
+			var btn = this || btnPause;
+			if (btn.getAttribute('data-paused') === 'false') {
+				//show pause menu and switch button to play
+				addClass(infoScreenWrapper, 'gui-active');
+				toggleClass(btn,'btn-pause, btn-play');
+				btn.setAttribute('data-paused', true);
+				theGame.paused = true;
+				createjs.Ticker.setPaused(true);
+			} else {
+				//hide pause menu and switch button to pause
+				removeClass(infoScreenWrapper, 'gui-active');
+				toggleClass(btn,'btn-pause, btn-play');
+				btn.setAttribute('data-paused', false);
+				theGame.paused = false;
+				createjs.Ticker.setPaused(false);
+			}
 		};
 
-		btnUnpause.onclick = function() {
-			switchScreens(infoScreenWrapper, btnPause);
-			createjs.Ticker.setPaused(false);
+		btnPause.onclick = pausePlay;
+
+		//reset level button
+		btnResetLevel.onclick = function() {
+			if (theGame.paused) {
+				//get confirmation if on game paused
+				showMessageBox({ 
+						Eng: 'Are you sure you want to reset the level?', 
+						Esp: 'Estas seguro que quieres resetear el nivel?'
+					},
+					'confirm', 'warning', 
+					{
+						ok: function() { 
+							pausePlay();
+							theGame.reset(); 
+						},
+						cancel: function() { }
+				});
+			} else {
+				theGame.reset();
+			}
+		};
+
+		//quit level button
+		btnQuitLevel.onclick = function() {
+			showMessageBox({
+					Eng: 'Are you sure you want to quit the level?',
+					Esp: 'Estas seguro que quieres salir del nivel?'
+				},
+				'confirm','warning',
+				{
+					ok: function() { 
+						pausePlay();
+						theGame.end(); 
+					},
+					cancel: function() {}
+			});
 		};
 	//--------------------------------------------------------------------------
 
