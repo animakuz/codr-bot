@@ -1,7 +1,6 @@
 -- NEXT TASKS TO TACKLE --
 		-- implement loop special code bit 
 		-- implement if special code bit
-		-- fix scroll to accomodate for special sized code bits
 		-- fix up all game graphics (user icon = programaquina, drop down icon)
 			-code panel graphics
 			-message pop up graphics
@@ -19,7 +18,7 @@
 		-- vary info screen top margin and dimensions with screen size, also pause, quit and reset buttons
 		-- give proper css 
 		-- add buttons and functionality (end game button, reset game button, level select button)
-
+		-- make code panel drop down change top instead of height (optional)
 DEVELOPMENT CHECKLIST
 
  

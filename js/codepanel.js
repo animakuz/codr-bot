@@ -115,16 +115,10 @@
 		indexOfExecuted: 0,
 		enabled: true,
 		running: false,
-		scrolling: false,
-		scrollPos: 0,
-		scrollMax: 0,
-		scrollDragPos: 0,
 		draggingCodeBit: undefined,
 		cpContainer: undefined,
 		cpContent: undefined,
 		cpContentWrapper: undefined,
-		cpScroll: undefined,
-		cpScrollBar: undefined,
 		cpControls: undefined,
 		cpAdd: undefined,
 		cpDelete: undefined,
@@ -135,8 +129,6 @@
 			this.cpContainer = document.getElementsByClassName('code-panel')[0];
 			this.cpContent = document.getElementsByClassName('cp-content')[0];
 			this.cpContentWrapper = document.getElementsByClassName('cp-content-wrapper')[0];
-			this.cpScroll = document.getElementsByClassName('cp-scroll')[0];
-			this.cpScrollBar = document.getElementsByClassName('cp-scroll-bar')[0];
 			this.cpControls = document.getElementsByClassName('cp-controls')[0];
 			this.cpAdd = document.getElementsByClassName('cp-add')[0];
 			this.cpDelete = document.getElementsByClassName('cp-delete')[0];
@@ -186,51 +178,6 @@
 			this.indexOfExecuted = 0;
 			this.running = false;
 			this.enabled = true;
-			this.updateScroll();
-		},
-		scroll: function(change) {
-			if (change >= 0 ) {
-				//move scroll down
-				if (this.scrollPos < this.scrollMax) {
-					this.scrollPos += change;
-				} else {
-					this.scrollPos = this.scrollMax;
-				}
-			} else {
-				//move scroll up
-				if (this.scrollPos > 0) {
-					this.scrollPos += change;
-				} else {
-					this.scrollPos = 0;
-				}
-			}
-
-			this.cpScrollBar.style.top = this.scrollPos + 'px';
-			this.cpContent.style.top = (-this.scrollPos) + 'px';
-		},
-		resetScroll: function() {
-			//hide scroll bar
-			this.cpScrollBar.style.top = '0';
-			this.cpContent.style.top = 0;
-			this.scrollPos = 0;
-		},
-		updateScroll: function() {
-			if (this.numCodeBits >= 6) {
-				//show scroll bar if number of code bits = 6
-				if (this.numCodeBits === 6) {
-					this.cpScrollBar.style.display = 'block';
-				}
-				
-				//update size of scroll bar
-				var barHeight = 200 - ((this.numCodeBits - 5) * 30);
-				this.cpScrollBar.style.height = barHeight + 'px';
-				this.scrollMax = (this.numCodeBits - 5) * 30;
-			} else {
-				this.cpScrollBar.style.display = 'none';
-				this.resetScroll();
-			}
-
-			this.scroll(0);
 		},
 		clearSelection: function() {
 			if (this.indexOfSelected > -1) {
@@ -243,8 +190,6 @@
 				this.numCodeBits++;
 				this.codeBitSequence.push(codeBitRef.getAttribute('data-type'));
 				this.codeBits.push(codeBitRef);
-
-				this.updateScroll();
 				return true;
 			} else {
 				showMessageBox({ Eng: 'maximum number of code bits reache', Esp: 'numero maximo de code bits'}, 'alert', 'warning');
@@ -263,14 +208,14 @@
 				this.codeBitSequence.splice(ind, 1);
 				this.codeBits.splice(ind, 1);
 
-				this.updateScroll();
 			} else {
 				showMessageBox({ Eng: 'Please select a code bit', Esp: 'Por favor seleccione un code bit'}, 
 					'alert', 'warning');
 			}
 		},
 		runSequence: function() {
-			this.resetScroll();
+			//scroll to top
+			this.cpContentWrapper.scrollTop = 0;
 			pBot.reset();
 			//go through code bits and execute each one every second
 			var executionCycle = function() {
@@ -278,14 +223,18 @@
 					if (pBot.framesRemaining <= 0) {
 						//only execute when bot is ready for another animation
 						var ind = codePanel.indexOfExecuted;
+
 						if (ind < codePanel.numCodeBits) {
 							if (ind > 0) {
 								removeClass(codePanel.codeBits[ind - 1], 'cb-executing');
 							} 
 
-							if (ind >= 5) {
-								//scroll 
-								codePanel.scroll(30);
+							//scroll code bit being executed into view
+							var exRect = codePanel.codeBits[ind].getBoundingClientRect();
+							var cpRect = codePanel.cpContentWrapper.getBoundingClientRect();
+
+							if (exRect.bottom > cpRect.bottom - 20) {
+								Velocity(codePanel.codeBits[ind], 'scroll', { duration: 100, container: codePanel.cpContentWrapper});
 							}
 
 							//highlight code bit
@@ -304,7 +253,6 @@
 							removeClass(codePanel.codeBits[ind - 1], 'cb-executing');
 							codePanel.running = false;
 							codePanel.indexOfExecuted = 0;
-							codePanel.resetScroll();
 						}
 					} else {
 						setTimeout(executionCycle, 100);

@@ -41,8 +41,6 @@ window.onload = function() {
 	//--Code panel
 	var cpContainer = document.getElementsByClassName('code-panel');
 	var cpViewToggle = document.getElementsByClassName('cp-view-toggle')[0];
-	var cpScroll = document.getElementsByClassName('cp-scroll')[0];
-	var cpScrollBar = document.getElementsByClassName('cp-scroll-bar')[0];
 	var cpControls = document.getElementsByClassName('cp-controls')[0];
 	var cpAdd = document.getElementsByClassName('cp-add')[0];
 	var cpDelete = document.getElementsByClassName('cp-delete')[0];
@@ -120,14 +118,14 @@ window.onload = function() {
 			if (codePanel.running === false && codePanel.enabled === true) {
 				if (codePanel.viewState === 'open') {
 					removeClass(codeBitList, 'gui-active');
-					var newHeight = this.clientHeight;
+					var newHeight = this.parentNode.clientHeight;
 					Velocity(cpContainer, {height: newHeight + 'px'}, {duration: 300,  complete: function() {
 						removeClass(cpViewToggle, 'cp-view-toggle-up');
 						codePanel.viewState = 'closed';
 					}});
 				} else {
 					codePanel.clearSelection();
-					var newHeight = this.clientHeight * 6;
+					var newHeight = this.parentNode.clientHeight * 6;
 					Velocity(cpContainer, {height: newHeight + 'px'}, {duration: 300,  complete: function() {
 						addClass(cpViewToggle, 'cp-view-toggle-up');
 						codePanel.viewState = 'open';
@@ -166,34 +164,6 @@ window.onload = function() {
 				}
 			}
 		};
-
-		//scroll bar
-		cpScrollBar.onmousedown = function(event) {
-			//start scroll
-			if (codePanel.running === false) {
-				codePanel.scrolling = true;
-				codePanel.dragPos = event.clientY;
-				// codePanel.scrollOffset = (event.offsetY || event.layerY) + cpScroll.getBoundingClientRect().top;
-			}
-		};
-
-		cpScrollBar.onmouseup = function() {
-			//end scroll
-			codePanel.scrolling = false;
-			// codePanel.scrollStartPoint = 0;
-		};
-
-		cpScrollBar.onmousemove = function(event) {
-			if (codePanel.scrolling) {
-				codePanel.scroll(event.clientY - codePanel.dragPos);
-				codePanel.dragPos = event.clientY;
-
-			}
-		};
-
-		cpScrollBar.onmouseleave = function() {
-			codePanel.scrolling = false;
-		}
 	//--------------------------------------------------------------------------
 
 	//--Create User ------------------------------------------------------------

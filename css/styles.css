@@ -883,60 +883,72 @@ body {
 
 	/*--Code panel elements----------------------------------------------*/
 		.code-bit-list {
-			display: none; width: 170px; height: 100px;
-			position: absolute; top: 22px; left: 200px;
+			display: none; width: 130px; height: 100px;
+			position: absolute; top: 36px; left: 182px;
 			overflow: hidden; 
 			background-image: url('../img/code-bit-list-bar-top.png'), url('../img/code-bit-list-bar-bottom.png');
 			background-repeat: no-repeat;
 			background-position: top right, bottom right;
+			background-size: 130px 10px;
 		}
 
 		.code-bit-list-inner {
 			position: absolute;
+			width: 120px; height: 86px;
+			top: 7px; left: 2px;
+			padding-left: 3px;
+			-moz-border-radius: 0 5px 5px 5px;
+			-webkit-border-radius: 0 5px 5px 5px;
+			border-radius: 0 5px 5px 5px;
 			background-color: rgba(255,255,255,0.6);
-			border-right: 2px solid rgba(25,70,25,0.5);	
+			border-right: 1px solid rgba(25,70,25,0.5);	
+			border-left: 1px solid rgba(25,70,25,0.5);	
 		}
 
 		.code-panel { 
 			display: none;
-			width: 200px; height: 120px;
 			position: absolute; 
+			width: 180px; height: 100px;
 			top: 4px; left: 4px;
 			overflow: hidden; 
-			outline: 2px solid red;
 		}
 
 			.cp-title-bar {
-				width: 200px; height: 20px;
-				background-color: blue;
+				width: 180px; height: 20px;
+				background-image: url('../img/code-panel-title-bar.png');
+				background-position: top left;
+				background-size: 180px 20px;
+				background-repeat: no-repeat;
 				clear: both;
 			}
 				.cp-title {
 					color: white;
+					text-indent: 40px;
+					line-height: 40px;
 				}
 				.cp-view-toggle { 
-					width: 20px; height: 20px;
+					width: 16px; height: 16px;
 					display: inline-block;
 					position: absolute;
-					right: 0; top: 0;
+					right: 8px; top: 2px;
 					background-image: url("../img/cp-view-toggle-icon.png");
-					background-size: 40px;
+					background-size: 32px;
 					background-position: 0 0;
 					cursor: pointer;
 				}
 				.cp-view-toggle:hover, .cp-view-toggle:active {
-					background-position: 20px 0;
+					background-position: 16px 0;
 				}
 
 				.cp-view-toggle-up {
-					background-position: 0 -20px;
+					background-position: 0 -16px;
 				}
 
 				.cp-view-toggle-up:hover, .cp-view-toggle-up:active {
-					background-position: 20px -20px;
+					background-position: 16px -16px;
 				}
 
-			.cp-content-wrapper, .cp-scroll, .cp-controls {
+			.cp-content-wrapper, .cp-controls {
 				margin: 0; padding: 0; border: 0;
 				display: block;
 				position: relative;
@@ -944,22 +956,28 @@ body {
 			}
 
 			.cp-content-wrapper { 
-				width: 165px; height: 99px;
+				width: 156px; height: 78px;
 				background-color: rgba(250,250,255,0.5);
-				overflow: hidden;
+				overflow: auto;
+				-moz-border-radius: 0 0 0 8px;
+				-webkit-border-radius: 0 0 0 8px;
+				border-radius: 0 0 0 8px;
+				border-left: 2px solid rgba(25,25,25,0.5);
+				border-bottom: 2px solid rgba(25,25,25,0.5);
 			}
 				.cp-content {
-					background-color: white;
+					/*background-color: white;*/
 					position: absolute;
 					padding-top: 4px; 
-					width: 160px; height: auto;
+					padding-bottom: 10px;
+					width: 136px; height: auto;
 					top: 0; left:2px;
 				}
 
 				.code-bit {
 					position: relative;
 					margin-left: 1%;
-					width: 120px; height: 15px;
+					width: 110px; height: 15px;
 					border-top: 2px solid #666;
 					border-bottom: 2px solid #666;
 					background-color: #fea;
@@ -973,7 +991,7 @@ body {
 				}
 
 				.code-bit-block {
-					width: 160px; height: 30px;
+					width: 130px; height: 30px;
 				}
 
 				.code-bit:hover, .code-bit:active {
@@ -998,31 +1016,29 @@ body {
 					color: #afa;
 				}
 
-			.cp-scroll {
-				width: 13px; height: 100px;
-				background-color: #666;
-			}
-				.cp-scroll-bar {
-					display: none;
-					width: 11px; height: 20px;
-					position: absolute;
-					left: 2px; top: 0;
-					background-color: #ded;
-					cursor: pointer;
-				}
-
-				.cp-scroll-bar:hover, .cp-scroll-bar:active {
-					background-color: #bcb;
-				}
 
 			.cp-controls {
-				width: 22px; height: 100px;
-				background-color: green;
+				width: 20px; height: 78px;
+				/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d0e4f7+0,73b1e7+24,0a77d5+50,539fe1+79,87bcea+100;Blue+Pipe+%231 */
+				background: #d0e4f7; /* Old browsers */
+				background: -moz-linear-gradient(left,  #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, right top, color-stop(0%,#d0e4f7), color-stop(24%,#73b1e7), color-stop(50%,#0a77d5), color-stop(79%,#539fe1), color-stop(100%,#87bcea)); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(left,  #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(left,  #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(left,  #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* IE10+ */
+				background: linear-gradient(to right,  #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=1 ); /* IE6-9 */
+				-moz-border-radius: 0 0 8px 0;
+				-webkit-border-radius: 0 0 8px 0;
+				border-radius: 0 0 8px 0;
+				border-right: 2px solid rgba(25,25,25,0.5);
+				border-bottom: 2px solid rgba(25,25,25,0.5);
+
 			}
 				.cp-add, .cp-delete, .cp-run { 
 					width: 20px; height: 20px; 
 					position: absolute;
-					left: 1px;
+					left: 0;
 					background-image: url("../img/cp-buttons.png");
 					background-repeat: no-repeat; 
 					background-size: 60px 20px;
@@ -1038,7 +1054,7 @@ body {
 					background-position: -20px 25%;
 				}
 				.cp-run {
-					top: 60px;
+					top: 54px;
 					background-position: -40px 0;
 				}
 	/*-------------------------------------------------------------------*/
@@ -1427,44 +1443,48 @@ body {
 
 			.code-bit-list {
 				width: 208px; height: 160px;
-				top: 35px; left: 290px;
-				background-size: 275px 18px;
+				top: 50px; left: 288px;
+				background-size: 208px 16px;
 			}
 
 			.code-bit-list-inner {
 				width: 196px; height: 138px;
-				top: 11px; left: -3px;
-				padding-left: 5px;
-				border-radius: 8px;
+				top: 11px; left: 4px;
+				padding-left: 1px;
+				-moz-border-radius: 0 8px 8px 8px;
+				-webkit-border-radius: 0 8px 8px 8px;
+				border-radius: 0 8px 8px 8px;
 			}
 
 			.code-panel { 
-				width: 288px; height: 192px;
+				width: 288px; height: 160px;
 			}
 
 				.cp-title-bar {
 					width: 288px; height: 32px;
+					background-size: 288px 32px;
 				}
 
 					.cp-view-toggle { 
-						width: 32px; height: 32px;
-						background-size: 64px;
+						width: 26px; height: 26px;
+						right: 10px; top: 3px;
+						background-size: 52px;
 					}
 					.cp-view-toggle:hover, .cp-view-toggle:active {
-						background-position: 32px 0;
+						background-position: 26px 0;
 					}
 
 					.cp-view-toggle-up {
-						background-position: 0 -32px;
+						background-position: 0 -26px;
 					}
 
 					.cp-view-toggle-up:hover, .cp-view-toggle-up:active {
-						background-position: 32px -32px;
+						background-position: 26px -26px;
 					}
 
 
 				.cp-content-wrapper { 
-					width: 232px; height: 158px;
+					width: 251px; height: 126px;
 				}
 					.cp-content {
 						width: 224px; 
@@ -1474,22 +1494,15 @@ body {
 						width: 192px; height: 24px;
 						font-size: 16px;
 						text-indent: 8px;
-						line-height: 40px;
+						line-height: 30px;
 					}
 
 					.code-bit-block {
 						width: 224px; height: 48px;
 					}
 
-				.cp-scroll {
-					width: 21px; height: 160px;
-				}
-					.cp-scroll-bar {
-						width: 18px; height: 32px;
-					}
-
 				.cp-controls {
-					width: 35px; height: 160px;
+					width: 33px; height: 126px;
 				}
 					.cp-add, .cp-delete, .cp-run { 
 						width: 32px; height: 32px; 
@@ -1505,7 +1518,7 @@ body {
 						background-position: -32px 40%;
 					}
 					.cp-run {
-						top: 120px;
+						top: 90px;
 						background-position: -64px 0;
 					}
 		}
@@ -1603,44 +1616,48 @@ body {
 
 			.code-bit-list {
 				width: 260px; height: 200px;
-				top: 44px; left: 364px;
-				background-size: 344px 22px;
+				top: 60px; left: 358px;
+				background-size: 260px 20px;
 			}
 
 			.code-bit-list-inner {
-				width: 246px; height: 172px;
-				top: 14px; left: -4px;
-				padding-left: 6px;
-				border-radius: 10px;
+				width: 244px; height: 172px;
+				top: 14px; left: 6px;
+				padding-left: 2px;
+				-moz-border-radius: 0 10px 10px 10px;
+				-webkit-border-radius: 0 10px 10px 10px;
+				border-radius: 0 10px 10px 10px;
 			}
 
 			.code-panel { 
-				width: 360px; height: 240px;
+				width: 360px; height: 200px;
 			}
 
 				.cp-title-bar {
 					width: 360px; height: 40px;
+					background-size: 360px 40px;
 				}
 
 					.cp-view-toggle { 
-						width: 40px; height: 40px;
-						background-size: 80px;
+						width: 32px; height: 32px;
+						right: 12px; top: 4px;
+						background-size: 64px;
 					}
 					.cp-view-toggle:hover, .cp-view-toggle:active {
-						background-position: 40px 0;
+						background-position: 32px 0;
 					}
 
 					.cp-view-toggle-up {
-						background-position: 0 -40px;
+						background-position: 0 -32px;
 					}
 
 					.cp-view-toggle-up:hover, .cp-view-toggle-up:active {
-						background-position: 40px -40px;
+						background-position: 32px -32px;
 					}
 
 
 				.cp-content-wrapper { 
-					width: 290px; height: 198px;
+					width: 314px; height: 158px;
 				}
 					.cp-content {
 						width: 280px; 
@@ -1657,15 +1674,8 @@ body {
 						width: 280px; height: 60px;
 					}
 
-				.cp-scroll {
-					width: 26px; height: 200px;
-				}
-					.cp-scroll-bar {
-						width: 22px; height: 40px;
-					}
-
 				.cp-controls {
-					width: 44px; height: 200px;
+					width: 42px; height: 158px;
 				}
 					.cp-add, .cp-delete, .cp-run { 
 						width: 40px; height: 40px; 
@@ -1681,7 +1691,7 @@ body {
 						background-position: -40px 50%;
 					}
 					.cp-run {
-						top: 120px;
+						top: 110px;
 						background-position: -80px 0;
 					}
 		}
