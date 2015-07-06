@@ -7,13 +7,16 @@
 			var numLevels = gameLevels.length;
 			var levelStatus = 'passed';
 			var levelSelectLevels = document.getElementById('level-select-levels');
-			var addLevelThumb = function(status, index, levelData) {
+			var addLevelThumb = function(status, index, levelData, grade) {
 				var levelThumbCont = document.createElement('div');
-				var levelNum = document.createTextNode(' ' + levelData.id);
+				var levelNum = document.createTextNode(levelData.id);
 
-				levelThumbCont.className = 'level-thumb th-level-select level-' + status + ' unselectable';
+				levelThumbCont.className = 'level-thumb th-level-select level-' + status;
+				if (status === 'passed') {
+						levelThumbCont.className += ' level-' + grade;
+				}
+				levelThumbCont.className+= ' unselectable';
 				levelThumbCont.setAttribute('data-level', index);
-				generateLangOptions(levelThumbCont, {Eng: 'Level', Esp: 'Nivel'});
 				levelThumbCont.appendChild(levelNum);
 				
 				//possibly other info
@@ -29,7 +32,7 @@
 					//still checking levels cleared 
 					if (currentUser.data.levelsCleared[i]) {
 						//load level thumbnail as cleared with corresponding data
-						addLevelThumb('passed', i, gameLevels[i]);
+						addLevelThumb('passed', i, gameLevels[i], currentUser.data.levelsCleared[i].grade);
 						i++;
 					} else {
 						//change status to keep checking other levels
@@ -125,7 +128,6 @@
 				name: 'level-test',
 				title: 'Testing Level',
 				description: 'A basic level for testing purposes',
-				bg: 'sunny',
 				music: 'off',
 				puzzleTrack: ['','','','','','','','','target','','end'], //data sequence describing puzzle to be solved
 				landsTrack: [1,1,1,1,1,1,1,1,1,1], //array with corresponding 'lands' values to match puzzle 
@@ -149,7 +151,6 @@
 				name: 'level-test2',
 				title: 'Testing Level 2',
 				description: 'Another basic level for testing purposes',
-				bg: 'sunny',
 				music: 'off',
 				puzzleTrack: ['','','lever','','bridge','gap','','target','','','end'], //data sequence describing puzzle to be solved
 				landsTrack: [1,1,1,1,3,0,2,1,1,1], //array with corresponding 'lands' values to match puzzle 
@@ -175,7 +176,6 @@
 				name: 'level-test3',
 				title: 'Testing Level 3',
 				description: 'Another basic level for testing purposes',
-				bg: 'cloudy',
 				music: 'off',
 				puzzleTrack: ['','','lever','','bridge','gap','','target','','','end'], //data sequence describing puzzle to be solved
 				landsTrack: [1,1,1,1,3,0,2,1,1,1], //array with corresponding 'lands' values to match puzzle 

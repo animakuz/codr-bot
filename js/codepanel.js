@@ -41,7 +41,7 @@
 			codePanel.clearSelection();
 
 			while (len--) {
-				if (codeBits[len]=== this) {
+				if (codeBits[len].ref === this) {
 					codePanel.indexOfSelected = len;
 					break;
 				}
@@ -51,59 +51,150 @@
 		}
 	};
 	
-	//drag and drop functions for code bit list code bits and code panel
+	//arrange code bits while hovering a code bit over panel to preview its placement
+	var arrangeCodeBits = function() {
+		var len = codePanel.codeBits.length;
+		var ind = 0;
+		var target = -1;
+
+		while (ind < len) {
+			var rectCB = codePanel.codeBits[ind].ref.getBoundingClientRect(); //dimensions of code bit to check against
+			var rectDCB = codePanel.tempCodeBit.ref.getBoundingClientRect(); //dimensions of code bit being dragged
+
+			if (((rectDCB.top + rectDCB.height/2) > rectCB.top) && ((rectDCB.top + rectDCB.height/2) < rectCB.bottom)) {
+				//dragging is higher than code bit - target it for moving down
+				target = ind;
+				break;
+			}
+			ind++;
+		}
+
+		if (target >= 0) {
+			codePanel.clearShift();
+			//shift target down (causing all those below it to shift down in turn)
+			addClass(codePanel.codeBits[target].ref, 'shift-down');
+			codePanel.tempCodeBit.position = target;
+		} else {
+			codePanel.tempCodeBit.position = codePanel.numCodeBits;
+		}
+
+		//check if code bit is over loop code bit 
+
+			//change data accordingly
+
+		//check if code bit is over if code bit
+			//change data accordingly
+	};
+
+	var moveUPCodeBit = function() {
+		var len = codePanel.codeBits.length;
+		var ind, target;
+		for (ind =0; ind< len; ind++) {
+			if (codePanel.codeBits[ind].ref === this.parentNode) {
+				target = ind;
+				break;
+			}
+		}
+
+		//check if at top
+		if (target > 0) {
+			codePanel.clearSelection();
+			var tempCB = codePanel.codeBits[target - 1];
+			var tempCBS = codePanel.codeBitSequence[target - 1];
+
+			codePanel.codeBits[target - 1] = codePanel.codeBits[target];
+			codePanel.codeBitSequence[target - 1] = codePanel.codeBitSequence[target];
+
+			codePanel.codeBits[target] = tempCB;
+			codePanel.codeBitSequence[target] = tempCBS;
+
+			codePanel.reRenderCodeBits();
+			//if in block - check if it goes above block - if so take out of block
+		}
+
+	};
+
+	//drag and drop functions for dragging code bits from code bit list
 	var dragCodeBit = function(event) {
-		//TODO - ADD CONSTRAINTS
-		codePanel.draggingCodeBit.style.top = (event.clientY - 20) + 'px';
-		codePanel.draggingCodeBit.style.left = (event.clientX - 100) + 'px';
+		codePanel.tempCodeBit.ref.style.top = (event.clientY - 20) + 'px';
+		codePanel.tempCodeBit.ref.style.left = (event.clientX - 100) + 'px';
+
+		var cbRect = codePanel.tempCodeBit.ref.getBoundingClientRect();  //bounds of dragging code bit
+		var cpRect = codePanel.cpContent.getBoundingClientRect(); //bounds of target area (code panel content)
+		
+		if ((cbRect.left <= cpRect.right) && (cbRect.top <= cpRect.bottom)) {
+			arrangeCodeBits();
+		} else {
+			codePanel.clearShift();
+		}
 	};
 	
 	var dropCodeBit = function() {
-		var cbRect = codePanel.draggingCodeBit.getBoundingClientRect();  //bounds of dragging code bit
+		var cbRect = codePanel.tempCodeBit.ref.getBoundingClientRect();  //bounds of dragging code bit
 		var cpRect = codePanel.cpContentWrapper.getBoundingClientRect(); //bounds of target area (code panel content)
 
 		if ((cbRect.left <= cpRect.right) && (cbRect.top <= cpRect.bottom)) {
 			//call add codebit function
-			if (codePanel.addCodeBit(codePanel.draggingCodeBit)) {
+			if (codePanel.addCodeBit()) {
 				//code bit added - append element to cpcontent
-				codePanel.draggingCodeBit.style.position = 'relative';
-				codePanel.draggingCodeBit.style.left = 0;
-				codePanel.draggingCodeBit.style.top = 0;
-				removeClass(codePanel.draggingCodeBit, 'code-bit-drag');
-				codePanel.draggingCodeBit.addEventListener('click',selectCodeBitEvent);
+				codePanel.tempCodeBit.ref.style.position = 'relative';
+				codePanel.tempCodeBit.ref.style.left = 0;
+				codePanel.tempCodeBit.ref.style.top = 0;
+				removeClass(codePanel.tempCodeBit.ref, 'code-bit-drag');
+				codePanel.tempCodeBit.ref.addEventListener('click',selectCodeBitEvent);
+				// codePanel.tempCodeBit.ref.addEventListener('mousedown', startSortCodeBit);
 
-				//add special properties for loop and condif code bit
-				var codeBitType = codePanel.draggingCodeBit.getAttribute('data-type');
+				var codeBitType = codePanel.tempCodeBit.ref.getAttribute('data-type');
 				if (codeBitType === 'loop' || codeBitType === 'condIf') {
-					codePanel.draggingCodeBit.className += ' code-bit-block';
+					//add special properties for loop and condif code bit
+					codePanel.tempCodeBit.ref.className += ' code-bit-block';
+				} 
+
+				//add priority button on code bit
+				var moveUpBtn = document.createElement('div');
+				moveUpBtn.className = 'move-up';
+				moveUpBtn.addEventListener('click', moveUPCodeBit);
+				codePanel.tempCodeBit.ref.appendChild(moveUpBtn);
+
+				codePanel.cpContent.appendChild(codePanel.tempCodeBit.ref);
+
+				//arrange code bit according to placement from codebits array
+				if (codePanel.tempCodeBit.position < codePanel.numCodeBits - 1) {
+					codePanel.reRenderCodeBits();
 				}
-				codePanel.cpContent.appendChild(codePanel.draggingCodeBit);
+				
 			} else {
 				//code bit cannot be added - discard it
-				container.removeChild(codePanel.draggingCodeBit);
+				container.removeChild(codePanel.tempCodeBit.ref);
 			}
 		} else {
 			//code bit was not dropped - discard it
-			container.removeChild(codePanel.draggingCodeBit);
+			container.removeChild(codePanel.tempCodeBit.ref);
 		}
 
 		//clean up event listeners and draggingcodebit value
 		container.removeEventListener('mousemove', dragCodeBit, false);
 		container.removeEventListener('mouseup', dropCodeBit, false);
-		codePanel.draggingCodeBit = undefined;
+		codePanel.tempCodeBit = undefined;
+		codePanel.clearShift();
 	};
 
-	//event handler for adding code bit from code bit list
+
 	var startDragCodeBit = function(event) {
 		var newCodeBit = this.cloneNode(true);
 		newCodeBit.style.position = 'absolute';
 		addClass(newCodeBit, 'code-bit-drag');
 		container.appendChild(newCodeBit);
-		codePanel.draggingCodeBit = newCodeBit;
 		container.addEventListener('mousemove', dragCodeBit, false);
 		container.addEventListener('mouseup', dropCodeBit, false);
-	};
 
+		//temp data for code bit being added
+		codePanel.tempCodeBit = {
+			block: -1, //index of code bit block it belongs to (if it is added to a loop or if block)
+			position: 0, //position it will be added to
+			ref: newCodeBit
+		};
+	};
 
 	//$Code panel control object
 	var codePanel = {
@@ -113,9 +204,10 @@
 		maxCodeBits: 0,
 		indexOfSelected: -1,
 		indexOfExecuted: 0,
+		tempCodeBit: undefined,
 		enabled: true,
 		running: false,
-		draggingCodeBit: undefined,
+		sortingCodeBit: undefined,
 		cpContainer: undefined,
 		cpContent: undefined,
 		cpContentWrapper: undefined,
@@ -165,6 +257,9 @@
 			addClass(this.cpContainer, 'gui-active');
 		},
 		hide: function() {
+			//hide code bit list if it was showing
+			removeClass(this.codeBitList.parentNode, 'gui-active');
+			console.log('code panel hidden');
 			//TODO - use velocity for actual slide animation
 			removeClass(this.cpContainer, 'gui-active');
 		},
@@ -174,43 +269,70 @@
 			this.numCodeBits = 0;
 			this.codeBits = [];
 			this.codeBitSequence = [];
-			this.indexOfSelected = -1;
+			this.clearSelection();
+			this.clearShift();
 			this.indexOfExecuted = 0;
 			this.running = false;
 			this.enabled = true;
+			this.tempCodeBit = undefined;
 		},
 		clearSelection: function() {
 			if (this.indexOfSelected > -1) {
-				removeClass(this.codeBits[this.indexOfSelected], 'cb-selected');
+				removeClass(this.codeBits[this.indexOfSelected].ref, 'cb-selected');
 				this.indexOfSelected = -1;
 			}
 		},
-		addCodeBit: function(codeBitRef) {
+		clearShift: function() {
+			var i = 0;
+			var len = this.codeBits.length;
+			while(i < len) {
+				removeClass(this.codeBits[i].ref, 'shift-down, cb-selected');
+				i++;
+			}
+		},
+		addCodeBit: function() {
 			if (this.numCodeBits < this.maxCodeBits) {
-				this.numCodeBits++;
-				this.codeBitSequence.push(codeBitRef.getAttribute('data-type'));
-				this.codeBits.push(codeBitRef);
-				return true;
+				if (typeof this.tempCodeBit !== 'undefined') {
+					var tcb = this.tempCodeBit;
+					this.numCodeBits++;
+
+					this.codeBits.splice(tcb.position, 0, { ref: tcb.ref});
+					this.codeBitSequence.splice(tcb.position, 0, { block: tcb.block, type: tcb.ref.getAttribute('data-type')});
+					
+					return true;
+				} else {
+					return false;
+				}
 			} else {
-				showMessageBox({ Eng: 'maximum number of code bits reache', Esp: 'numero maximo de code bits'}, 'alert', 'warning');
+				showMessageBox({ Eng: 'Maximum number of code bits reached', Esp: 'Numero maximo de code bits alcanzado'}, 'alert', 'warning');
 				return false;				
 			}
 		},
-		deleteCodeBit: function(codeBitIndex) {
-			var ind = this.indexOfSelected;
+		deleteCodeBit: function() {
+			var ind =  this.indexOfSelected;
 			if (ind > -1) {
 				this.clearSelection();
 
 				//remove actual element
-				this.cpContent.removeChild(this.codeBits[ind]);
+				this.cpContent.removeChild(this.codeBits[ind].ref);
 
 				this.numCodeBits-=1;
+				//removal depending on if in block or not
 				this.codeBitSequence.splice(ind, 1);
 				this.codeBits.splice(ind, 1);
-
 			} else {
 				showMessageBox({ Eng: 'Please select a code bit', Esp: 'Por favor seleccione un code bit'}, 
 					'alert', 'warning');
+			}
+		},
+		reRenderCodeBits: function() {
+			//order code bits based on sequence in codebits array
+			empty(this.cpContent);
+			var len = this.codeBits.length;
+			var ind;
+			for (ind=0; ind<len; ind++) {
+				this.cpContent.appendChild(this.codeBits[ind].ref);
+				//rebind events if need be
 			}
 		},
 		runSequence: function() {
@@ -226,22 +348,22 @@
 
 						if (ind < codePanel.numCodeBits) {
 							if (ind > 0) {
-								removeClass(codePanel.codeBits[ind - 1], 'cb-executing');
+								removeClass(codePanel.codeBits[ind - 1].ref, 'cb-executing');
 							} 
 
 							//scroll code bit being executed into view
-							var exRect = codePanel.codeBits[ind].getBoundingClientRect();
+							var exRect = codePanel.codeBits[ind].ref.getBoundingClientRect();
 							var cpRect = codePanel.cpContentWrapper.getBoundingClientRect();
 
 							if (exRect.bottom > cpRect.bottom - 20) {
-								Velocity(codePanel.codeBits[ind], 'scroll', { duration: 100, container: codePanel.cpContentWrapper});
+								Velocity(codePanel.codeBits[ind].ref, 'scroll', { duration: 100, container: codePanel.cpContentWrapper});
 							}
 
 							//highlight code bit
-							addClass(codePanel.codeBits[ind], 'cb-executing');
+							addClass(codePanel.codeBits[ind].ref, 'cb-executing');
 
 							//execute
-							pBot.executeAction(codePanel.codeBitSequence[ind]);
+							pBot.executeAction(codePanel.codeBitSequence[ind].type);
 
 							codePanel.indexOfExecuted++;
 							setTimeout(executionCycle, 100);
@@ -250,7 +372,7 @@
 							//show result of execution
 							showMessageBox( {Eng: 'Execution Complete', Esp: 'Fin de Ejecucion'}, 'alert', 'success');
 
-							removeClass(codePanel.codeBits[ind - 1], 'cb-executing');
+							removeClass(codePanel.codeBits[ind - 1].ref, 'cb-executing');
 							codePanel.running = false;
 							codePanel.indexOfExecuted = 0;
 						}

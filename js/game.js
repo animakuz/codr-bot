@@ -367,7 +367,7 @@
 				//count number of errors as code runs
 				//check which code bits used by analyzing array
 				//use all these criteria to make evaluation
-				var grade = 10;
+				var grade = 'gold';
 
 				//add this level to levels cleared (if not already cleared)
 				var levelAlreadyCleared = false;

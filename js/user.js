@@ -86,7 +86,7 @@ var messageShowing = false;
 			buttonOK.appendChild(buttonOKText);
 			
 			box.appendChild(titleBox);
-			box.appendChild(icon);
+			// box.appendChild(icon);
 			box.appendChild(messageTextBox);
 			box.appendChild(lineBreak);
 

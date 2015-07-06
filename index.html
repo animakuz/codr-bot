@@ -239,54 +239,55 @@
 					<h2 class='gui-page-title'>
 						<span class='lang-esp'>Perfil de Usuario</span><span class='lang-eng'>User Profile</span>
 					</h2>
+					<div class='profile-content'>
+						<div class='profile-user-info'>
+							<div>
+								<img id='profile-user-icon' src='img/avatar-user.png'  />
+							</div>
+							<div>
+								<span id='profile-username'>User</span><br>
+								<span id='profile-user-names'>Nombre Apellido</span>
+							</div>
+							<div>
+								<span class='lang-eng'>Total Points: </span>
+								<span class='lang-esp'>Puntos Total: </span>
+								<span id='profile-user-points'>0</span>
+							</div>
+						</div>
 
-					<div class='profile-user-info'>
-						<div>
-							<img id='profile-user-icon' src='img/avatar-user.png'  />
+
+						<div class='gui-tab-group' id='tabs-user-info'>
+							<div class='gui-tab-title-bar'>
+								<span class='gui-tab-title active-tab-title' data-target='profile-levels-cleared'>
+									<span class='lang-eng'>Levels Cleared</span>
+									<span class='lang-esp'>Niveles Superados</span>
+								</span>
+
+								<span class='gui-tab-title ' data-target='profile-acheivements'>
+									<span class='lang-eng'>Acheivements</span>
+									<span class='lang-esp'>Logros</span>
+								</span>
+							</div>
+							
+							<!-- will be populated with javascript -->
+							<div class='gui-tab-content active-tab' id='profile-levels-cleared'>
+								<div class='level-thumb th-profile-level level-passed'></div>
+								<div class='level-thumb th-profile-level level-passed'></div>
+								<div class='level-thumb th-profile-level level-passed'></div>
+							</div>
+
+							<!-- will be populated with javascript-->
+							<div class='gui-tab-content' id='profile-acheivements'>
+								<div class='acheive-thumb'></div>
+								<div class='acheive-thumb'></div>
+							</div>
 						</div>
-						<div>
-							<span id='profile-username'>User</span><br>
-							<span id='profile-user-names'>Nombre Apellido</span>
-						</div>
-						<div>
-							<span class='lang-eng'>Total Points: </span>
-							<span class='lang-esp'>Puntos Total: </span>
-							<span id='profile-user-points'>0</span>
-						</div>
+
+						<button class='gui-button small-button red-button' id='btn-close-profile'>
+							<span class='lang-eng'>Close</span>
+							<span class='lang-esp'>Cerrar</span>
+						</button>
 					</div>
-
-
-					<div class='gui-tab-group' id='tabs-user-info'>
-						<div class='gui-tab-title-bar'>
-							<span class='gui-tab-title active-tab-title' data-target='profile-levels-cleared'>
-								<span class='lang-eng'>Levels Cleared</span>
-								<span class='lang-esp'>Niveles Superados</span>
-							</span>
-
-							<span class='gui-tab-title ' data-target='profile-acheivements'>
-								<span class='lang-eng'>Acheivements</span>
-								<span class='lang-esp'>Logros</span>
-							</span>
-						</div>
-						
-						<!-- will be populated with javascript -->
-						<div class='gui-tab-content active-tab' id='profile-levels-cleared'>
-							<div class='level-thumb th-profile-level level-passed'></div>
-							<div class='level-thumb th-profile-level level-passed'></div>
-							<div class='level-thumb th-profile-level level-passed'></div>
-						</div>
-
-						<!-- will be populated with javascript-->
-						<div class='gui-tab-content' id='profile-acheivements'>
-							<div class='acheive-thumb'></div>
-							<div class='acheive-thumb'></div>
-						</div>
-					</div>
-
-					<button class='gui-button small-button green-button' id='btn-close-profile'>
-						<span class='lang-eng'>Close</span>
-						<span class='lang-esp'>Cerrar</span>
-					</button>
 				</div>
 			<!-- </div> end gui overlay -->
 
@@ -307,16 +308,16 @@
 				</div>
 				<div class='user-session-options'> 	
 					<a href='#' class='menu-option' id='link-session-profile'>
-						<span class='gui-icon small-icon icon-user visible-small'></span>
-						<span class='gui-icon med-icon icon-user visible-med'></span>
-						<span class='gui-icon large-icon icon-user visible-large'></span>
+						<span class='gui-icon small-icon icon-profile visible-small'></span>
+						<span class='gui-icon med-icon icon-profile visible-med'></span>
+						<span class='gui-icon large-icon icon-profile visible-large'></span>
 						<span class='lang-eng'>Profile</span>
 						<span class='lang-esp'>Perfil</span>
 					</a>
 					<a href='#' class='menu-option' id='link-session-exit'>
-						<span class='gui-icon small-icon icon-user visible-small'></span>
-						<span class='gui-icon med-icon icon-user visible-med'></span>
-						<span class='gui-icon large-icon icon-user visible-large'></span>
+						<span class='gui-icon small-icon icon-exit visible-small'></span>
+						<span class='gui-icon med-icon icon-exit visible-med'></span>
+						<span class='gui-icon large-icon icon-exit visible-large'></span>
 						<span class='lang-eng'>Exit</span>
 						<span class='lang-esp'>Salir</span>
 					</a>
@@ -333,14 +334,34 @@
 					</div>
 					<div class='pause-screen-content' id='pause-screen-content'>
 						<h2 class='info-screen-title' id='info-screen-title'>Menu</h2>
-						<div class='btn-reset-level'></div>
-						<div class='btn-quit-level'></div>
+						<div class='btn-reset-level game-control-btn'></div>
+						<div class='btn-quit-level game-control-btn'></div>
 					</div>
 				</div>
 			</div>
 
+			<div class='intro-screen-wrapper' id='intro-screen-wrapper'>
+				<div class='intro-screen' id='intro-screen'>
+				</div>
+			</div>
+
+
+			<div class='slides-screen' id='slides-screen'>
+				<div class='slides'></div>
+				<div class='text'></div>
+				<div class='btn-prev-slide gui-button small-button blue-button'>
+				</div>
+
+				<div class='btn-next-slide gui-button small-button blue-button'>
+				</div>
+
+				<div class='btn-got-it gui-button small-button green-button'>
+				</div>
+			</div>
+
+
 			<!-- pause button during gameplay -->
-			<div class='btn-pause' id='btn-pause' data-paused='false'>
+			<div class='btn-pause game-control-btn' id='btn-pause' data-paused='false'>
 			</div>
 
 		</div> <!-- end app container -->
