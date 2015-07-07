@@ -166,7 +166,8 @@
 				puzzleTrack: ['','','','target','','','','','','','end'], //data sequence describing puzzle to be solved
 				landsTrack: [1,1,1,1,1,1,1,1,1,1], //array with corresponding 'lands' values to match puzzle 
 				gameObjects: [ //array of game objects corresponding to puzzle
-						['target','target', 3, 'base']
+						['target','target', 3, 'base'],
+						['detonator','tool', 2, 'base']
 				], 
 				rules: {
 					maxCodeBits: 10,

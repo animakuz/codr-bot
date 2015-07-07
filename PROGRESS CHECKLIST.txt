@@ -5,10 +5,7 @@
 
 		-- implement falling
 		-- implmenet level 2 with bridge and gap
-		-- add remaining animations
 		-- implement corresponding actions
-		-- implement cheap demos for intro slides
-
 
 		-- make corresponding actions (already have step) and apply them there
 		-- implement if special code bit

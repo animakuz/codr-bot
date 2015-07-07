@@ -76,8 +76,9 @@
 			animations: {
 				base: [0],
 				step: [0,29,'base'],
-				use: [0,29,'base'],
-				error: [0,29,'base']
+				use: [30,59,'base'],
+				error: [60,89,'base'],
+				fall: [90,119,'fall']
 			}
 		},
 		framesRemaining: 0,
@@ -183,8 +184,7 @@
 							//walk and fall into gap
 							actionToExecute = function() {
 								//TODO - IMPLEMENT FALL
-								pBot.animate('step', 'step', UNIT_DISTANCE);
-								console.log('aaaaah');
+								pBot.animate('fall', 'fall', UNIT_DISTANCE);
 							};
 						} else {
 							//bridge flat - normal step

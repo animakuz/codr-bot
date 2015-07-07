@@ -3,16 +3,20 @@
 	var gameObjMngr = {	
 		//dimensions for each game object graphic
 		imgFrames: {
-			bomb: { width: 80, height: 80 , regX: 0, regY: 40 },
+			bomb: { width: 160, height: 160 , regX: 120, regY: 120 },
 			bridge: { width: 161, height: 161 , regX: 0, regY: 120 },
 			detonator: { width: 80, height: 80 , regX: 0, regY: 40 },
 			lever: { width: 81, height: 81 , regX: 0, regY: 40 },
 			rock: { width: 80, height: 80 , regX: 0, regY: 40 },
-			target: {width: 80, height: 80 , regX: 0, regY: 40 },
+			target: {width: 80, height: 81 , regX: 0, regY: 40 },
 			wall: { width: 160, height: 160, regX: 0, regY: 120 },
 		},
 		animations: { //animation list for each game object
-			bomb: { base: [0]},
+			bomb: { 
+				base: [0],
+				explode: [1,28,'gone'],
+				gone: [29]
+			},
 			bridge: { 
 				base: [0],
 				flat: [0],
@@ -23,7 +27,11 @@
 				down: [89],
 				downToFlat: [90,119, 'flat']
 			},
-			detonator: { base: [0] },
+			detonator: { 
+				base: [0],
+				press: [1,28,'pressed'],
+				pressed: [29]
+			},
 			lever: { 
 				base: [0],
 				flat: [0],
@@ -34,13 +42,22 @@
 				down: [89],
 				downToFlat: [90,119, 'flat']
 			},
-			rock: { base: [0] },
+			rock: { 
+				base: [0],
+				fall: [1,28,'flipped'],
+				flipped: [29] 
+			},
 			target: { 
 				base: [0],
-				hit: [1,28,'gone'],
+				pulse: [1,29,'base'],
+				hit: [30,58,'gone'],
+				gone: [59]
+			},
+			wall: { 
+				base: [0],
+				explode: [1,28,'gone'],
 				gone: [29]
 			},
-			wall: { base: [0] },
 		},
 		vertAnchors: { //list of vertical anchor positions for game objects
 			bomb: 140,
