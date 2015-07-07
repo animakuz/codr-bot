@@ -118,6 +118,7 @@
 				objType: objType,
 				category: category,
 				unitPos: unitPos,
+				initialState: startState,
 				state: startState,
 				usable: false,
 				sprite: undefined,
@@ -222,7 +223,14 @@
 			this.gameObjectStage.update();
 		},
 		resetGameObjects: function() {
-			//TODO - IMPLEMENT - set game objects back to their original states
+			var len = this.objectList.length;
+			while(len--) {
+				var tempObj = this.objectList[len];
+				tempObj.sprite.gotoAndStop(tempObj.initialState);
+				tempObj.state = tempObj.initialState;
+				tempObj.sprite.y = this.vertAnchors[tempObj.objType];
+			}
+			this.gameObjectStage.update();
 		},
 		clearGameObjects: function() {
 			if (typeof this.gameObjectStage !== 'undefined') {

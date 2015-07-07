@@ -60,10 +60,23 @@
 		while (ind < len) {
 			var rectCB = codePanel.codeBits[ind].ref.getBoundingClientRect(); //dimensions of code bit to check against
 			var rectDCB = codePanel.tempCodeBit.ref.getBoundingClientRect(); //dimensions of code bit being dragged
+			var middle = (rectDCB.top + rectDCB.height/2);
 
-			if (((rectDCB.top + rectDCB.height/2) > rectCB.top) && ((rectDCB.top + rectDCB.height/2) < rectCB.bottom)) {
+			if ((middle > rectCB.top) && (middle < (rectCB.bottom - rectCB.height /2))) {
 				//dragging is higher than code bit - target it for moving down
-				target = ind;
+				if (classCheck(codePanel.codeBits[ind].ref, 'code-bit-block')) {
+					if (middle > rectCB.top + (rectCB.height/3) ) {
+						//code bit inside block - place it
+						if (!classCheck(codePanel.tempCodeBit.ref, 'cb-loop')) {
+							codePanel.tempCodeBit.block = ind;
+							codePanel.tempCodeBit.position = ind + 1;
+						}
+					} else {
+						target = ind;
+					}
+				} else {
+					target = ind;
+				}
 				break;
 			}
 			ind++;
@@ -74,44 +87,157 @@
 			//shift target down (causing all those below it to shift down in turn)
 			addClass(codePanel.codeBits[target].ref, 'shift-down');
 			codePanel.tempCodeBit.position = target;
+			codePanel.tempCodeBit.block = -1;
 		} else {
-			codePanel.tempCodeBit.position = codePanel.numCodeBits;
+			if (codePanel.tempCodeBit.block === -1) {
+				codePanel.tempCodeBit.position = codePanel.numCodeBits;
+			}
+		}
+	};
+
+	var incLoopNum = function() {
+		if (codePanel.running === false) {
+			var numBox = this.parentNode.childNodes[1];
+			var num = parseInt(numBox.innerHTML);
+			if (num < 10) {
+				num++;
+				numBox.innerHTML = num;
+				numBox.parentNode.parentNode.setAttribute('data-num', num);
+			}
+		}
+	};
+
+	var decLoopNum = function() {
+		if (codePanel.running === false) {
+			var numBox = this.parentNode.childNodes[1];
+			var num = parseInt(numBox.innerHTML);
+			if (num > 1) {
+				num--;
+				numBox.innerHTML = num;
+				numBox.parentNode.parentNode.setAttribute('data-num', num);
+			}
+		}
+	};
+
+	var updateBlocks = function(ind1, ind2, type1, type2) {
+		var tempBlockA;
+		var tempBlockB;
+		var cbs = codePanel.codeBitSequence;
+		//check if code bit at current position is block type
+		if (type1 === 'loop' || type1 === 'condIf') {
+			tempBlockA = ind1;
 		}
 
-		//check if code bit is over loop code bit 
+		if (type2 === 'loop' || type2 === 'condIf' ) {
+			tempBlockB = ind2;
+		}
 
-			//change data accordingly
+		if (typeof tempBlockA !== 'undefined') {
+			//type 1 is block - switch all occurences of bits with block = ind1 to ind2 (switch owners)
+			var len = codePanel.numCodeBits;
+			while (len--) {
+				if (codePanel.codeBitSequence[len].block === tempBlockA) {
+					codePanel.codeBitSequence[len].block = ind2;
+				}
+			}
+			console.log('temp-block A updated');
+		}
 
-		//check if code bit is over if code bit
-			//change data accordingly
+		if (typeof tempBlockB !== 'undefined') {
+			//type 2 is block - switch all occurences of bits with block = ind2 to ind1 (switch owners)
+			var len = codePanel.numCodeBits;
+			while (len--) {
+				if (codePanel.codeBitSequence[len].block === tempBlockB) {
+					codePanel.codeBitSequence[len].block = ind1;
+				}
+			}
+			console.log('temp-block B updated');
+		}
+
+	};
+
+	var switchCodeBits = function(target1, target2) {
+
+		if (typeof target2 === 'undefined') {
+			target2 = target1 - 1;
+		}
+
+		var tempCB = codePanel.codeBits[target1];
+		var tempCBS = codePanel.codeBitSequence[target1];
+		var type1 = tempCBS.type;
+		var type2 = codePanel.codeBitSequence[target2].type;
+
+		codePanel.codeBits[target1] = codePanel.codeBits[target2];
+		codePanel.codeBitSequence[target1] = codePanel.codeBitSequence[target2];
+
+		codePanel.codeBits[target2] = tempCB;
+		codePanel.codeBitSequence[target2] = tempCBS;
+
+		updateBlocks(target1, target2, type1, type2);
+
 	};
 
 	var moveUPCodeBit = function() {
-		var len = codePanel.codeBits.length;
-		var ind, target;
-		for (ind =0; ind< len; ind++) {
-			if (codePanel.codeBits[ind].ref === this.parentNode) {
-				target = ind;
-				break;
+		if (codePanel.running === false) {
+			var len = codePanel.codeBits.length;
+			var ind, target;
+			for (ind =0; ind< len; ind++) {
+				if (codePanel.codeBits[ind].ref === this.parentNode) {
+					target = ind;
+					break;
+				}
+			}
+
+			//check if at top
+			if (target > 0) {
+				codePanel.clearSelection();
+				//if in block - check if it goes above block - if so take out of block
+				if (codePanel.codeBitSequence[target - 1].type === 'loop' || codePanel.codeBitSequence[target - 1].type === 'condIf') {
+					//code bit preceeded by block
+					if (codePanel.codeBitSequence[target].block === target - 1) {
+						//code bit in block
+						// codePanel.codeBitSequence[target].block = -1;
+						// var cb = codePanel.codeBits[target];
+						// codePanel.codeBits[target - 1].ref.removeChild(cb);
+						// // codePanel.cpContent.appendChild(cb);
+						// switchCodeBits(target);
+
+					} else {
+						//not in block - add
+						if (codePanel.codeBitSequence[target].type !== 'loop') {
+							codePanel.codeBitSequence[target].block = target - 1;
+						} else {
+							//code bit is loop - call normal switch
+							switchCodeBits(target, target - 1);
+						}
+					}
+				} else {
+					//code bit not preceeded by block
+					if (codePanel.codeBitSequence[target - 1].block !== -1) {
+						//preceeding code bit is inside block 
+						if (codePanel.codeBitSequence[target].block !== codePanel.codeBitSequence[target - 1].block) {
+							//code bit not inside block - add
+							if (codePanel.codeBitSequence[target].type !== 'loop') {
+								codePanel.codeBitSequence[target].block = codePanel.codeBitSequence[target - 1].block;
+							} else {
+								//code bit is loop - call normal switch
+								switchCodeBits(target, codePanel.codeBitSequence[target - 1].block);
+							}
+						} else {
+							//code bit inside block - switch
+							switchCodeBits(target);
+						}
+					} else {
+						//normal switch
+						codePanel.codeBitSequence[target].block = -1;
+						switchCodeBits(target);
+					}
+				}
+
+
+				codePanel.reRenderCodeBits();
 			}
 		}
-
-		//check if at top
-		if (target > 0) {
-			codePanel.clearSelection();
-			var tempCB = codePanel.codeBits[target - 1];
-			var tempCBS = codePanel.codeBitSequence[target - 1];
-
-			codePanel.codeBits[target - 1] = codePanel.codeBits[target];
-			codePanel.codeBitSequence[target - 1] = codePanel.codeBitSequence[target];
-
-			codePanel.codeBits[target] = tempCB;
-			codePanel.codeBitSequence[target] = tempCBS;
-
-			codePanel.reRenderCodeBits();
-			//if in block - check if it goes above block - if so take out of block
-		}
-
 	};
 
 	//drag and drop functions for dragging code bits from code bit list
@@ -141,13 +267,37 @@
 				codePanel.tempCodeBit.ref.style.left = 0;
 				codePanel.tempCodeBit.ref.style.top = 0;
 				removeClass(codePanel.tempCodeBit.ref, 'code-bit-drag');
-				codePanel.tempCodeBit.ref.addEventListener('click',selectCodeBitEvent);
+				codePanel.tempCodeBit.ref.addEventListener('click',selectCodeBitEvent, true);
 				// codePanel.tempCodeBit.ref.addEventListener('mousedown', startSortCodeBit);
 
 				var codeBitType = codePanel.tempCodeBit.ref.getAttribute('data-type');
 				if (codeBitType === 'loop' || codeBitType === 'condIf') {
 					//add special properties for loop and condif code bit
 					codePanel.tempCodeBit.ref.className += ' code-bit-block';
+					if (codeBitType === 'loop') {
+						var loopNum = document.createElement('div');
+						loopNum.className = 'loop-number';
+						var num = document.createTextNode('1');
+						loopNum.appendChild(num);
+						var decNum = document.createElement('div');
+						var incNum = document.createElement('div');
+						decNum.className = 'loop-dec-num';
+						incNum.className = 'loop-inc-num';
+						decNum.addEventListener('click', decLoopNum, false);
+						incNum.addEventListener('click', incLoopNum, false);
+
+						var numBox = document.createElement('div');
+						numBox.className = 'loop-num-box';
+
+						numBox.appendChild(decNum);
+						numBox.appendChild(loopNum);
+						numBox.appendChild(incNum);
+
+						codePanel.tempCodeBit.ref.appendChild(numBox);
+						codePanel.tempCodeBit.ref.setAttribute('data-num', '1');
+					} else if (codeBitType === 'condIf') {
+
+					}
 				} 
 
 				//add priority button on code bit
@@ -156,13 +306,19 @@
 				moveUpBtn.addEventListener('click', moveUPCodeBit);
 				codePanel.tempCodeBit.ref.appendChild(moveUpBtn);
 
-				codePanel.cpContent.appendChild(codePanel.tempCodeBit.ref);
+				if (codePanel.tempCodeBit.block === -1) {
+					codePanel.cpContent.appendChild(codePanel.tempCodeBit.ref);
+				} else {
+					var cont = codePanel.codeBits[codePanel.tempCodeBit.block].ref;
+					cont.appendChild(codePanel.tempCodeBit.ref);
+				}
 
 				//arrange code bit according to placement from codebits array
 				if (codePanel.tempCodeBit.position < codePanel.numCodeBits - 1) {
 					codePanel.reRenderCodeBits();
 				}
 				
+
 			} else {
 				//code bit cannot be added - discard it
 				container.removeChild(codePanel.tempCodeBit.ref);
@@ -200,10 +356,15 @@
 	var codePanel = {
 		viewState: 'open',
 		numCodeBits: 0,
+		runtimeErrors: 0,
 		codeBitSequence: [],
 		maxCodeBits: 0,
 		indexOfSelected: -1,
 		indexOfExecuted: 0,
+		loopSize: 0,
+		loopCount: 0,
+		loopPos: 0,
+		loopMax: 0,
 		tempCodeBit: undefined,
 		enabled: true,
 		running: false,
@@ -275,11 +436,20 @@
 			this.running = false;
 			this.enabled = true;
 			this.tempCodeBit = undefined;
+			this.loopSize = 0;
+			this.loopCount = 0;
+			this.runtimeErrors = 0;
 		},
 		clearSelection: function() {
 			if (this.indexOfSelected > -1) {
 				removeClass(this.codeBits[this.indexOfSelected].ref, 'cb-selected');
 				this.indexOfSelected = -1;
+			}
+		},
+		clearExecuting: function() {
+			var len = this.codeBits.length;
+			while(len--) {
+				removeClass(this.codeBits[len].ref, 'cb-executing');
 			}
 		},
 		clearShift: function() {
@@ -308,13 +478,28 @@
 				return false;				
 			}
 		},
-		deleteCodeBit: function() {
-			var ind =  this.indexOfSelected;
+		deleteCodeBit: function(indToDel) {
+			var ind =  indToDel || this.indexOfSelected;
 			if (ind > -1) {
 				this.clearSelection();
 
+				//delete code bits in block if it contains any
+				if (this.codeBitSequence[ind].type === 'loop' || this.codeBitSequence[ind].type === 'condIf') {
+					var len = this.codeBits.length;
+					while (len--) {
+						if (this.codeBitSequence[len].block === ind) {
+							this.deleteCodeBit(len);
+						}
+					}
+				}
+
 				//remove actual element
-				this.cpContent.removeChild(this.codeBits[ind].ref);
+				if (this.codeBitSequence[ind].block === -1) {
+					this.cpContent.removeChild(this.codeBits[ind].ref);
+				} else {
+					var cont = this.codeBits[this.codeBitSequence[ind].block].ref;
+					cont.removeChild(this.codeBits[ind].ref);
+				}
 
 				this.numCodeBits-=1;
 				//removal depending on if in block or not
@@ -331,7 +516,12 @@
 			var len = this.codeBits.length;
 			var ind;
 			for (ind=0; ind<len; ind++) {
-				this.cpContent.appendChild(this.codeBits[ind].ref);
+				if (this.codeBitSequence[ind].block === -1) {
+					this.cpContent.appendChild(this.codeBits[ind].ref);
+				} else {
+					var cont = this.codeBits[this.codeBitSequence[ind].block].ref;
+					cont.appendChild(this.codeBits[ind].ref);
+				}
 				//rebind events if need be
 			}
 		},
@@ -345,11 +535,36 @@
 					if (pBot.framesRemaining <= 0) {
 						//only execute when bot is ready for another animation
 						var ind = codePanel.indexOfExecuted;
+						
+						if (ind < codePanel.numCodeBits && codePanel.loopMax === 0) {
+							//generate loop stack if encounter loop bit
+							if (codePanel.codeBitSequence[ind].type === 'loop') {
+								codePanel.loopMax = codePanel.codeBits[ind].ref.getAttribute('data-num') - 1;
+								//get code bits inside block
+								var len = codePanel.numCodeBits;
+								var i;
+								for (i=0; i<len; i++) {
+									if (codePanel.codeBitSequence[i].block === ind) {
+										codePanel.loopSize += 1;
+									}
+								}
+								codePanel.loopMax *= codePanel.loopSize;
+								codePanel.loopCount = 0;
+								codePanel.loopPos = ind;
+								console.log(codePanel.loopMax);
+							}
+						}
 
+						//manage loop count
+						if (codePanel.loopCount < codePanel.loopMax) {
+							ind = codePanel.loopPos + ((codePanel.loopCount % codePanel.loopSize) + 1);
+							codePanel.loopCount++;
+							console.log(ind);
+						} 
+
+						// console.log(ind + ' loopCount: ' + codePanel.loopCount);
 						if (ind < codePanel.numCodeBits) {
-							if (ind > 0) {
-								removeClass(codePanel.codeBits[ind - 1].ref, 'cb-executing');
-							} 
+							codePanel.clearExecuting();
 
 							//scroll code bit being executed into view
 							var exRect = codePanel.codeBits[ind].ref.getBoundingClientRect();
@@ -365,16 +580,22 @@
 							//execute
 							pBot.executeAction(codePanel.codeBitSequence[ind].type);
 
-							codePanel.indexOfExecuted++;
+							if (codePanel.loopCount === codePanel.loopMax) {
+								//loop ended
+								codePanel.loopSize = 0;
+								codePanel.loopPos = 0;
+								codePanel.loopMax = 0;
+								codePanel.loopCount = 0;
+								codePanel.indexOfExecuted++;
+							}
 							setTimeout(executionCycle, 100);
-
 						} else {
-							//show result of execution
-							showMessageBox( {Eng: 'Execution Complete', Esp: 'Fin de Ejecucion'}, 'alert', 'success');
-
+							//execution complete without reaching target - fail
 							removeClass(codePanel.codeBits[ind - 1].ref, 'cb-executing');
 							codePanel.running = false;
-							codePanel.indexOfExecuted = 0;
+							// codePanel.indexOfExecuted = 0;
+
+							theGame.fail();
 						}
 					} else {
 						setTimeout(executionCycle, 100);

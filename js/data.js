@@ -23,11 +23,29 @@
 	// for (var src in sources) {
 	// 	numImages++;
 	// }
-
 	var sprites = loadImages(sources, function() {
 		// imagesLoaded++;
 		// if (imagesLoaded >= numImages) {
 		// 	// allAssetsLoaded = true;
 		// }
 	});
+
+	function generateSlides(level, num) {
+		var i;
+		var slides = [];
+		var tempSlide;
+		var src;
+		for (i=0; i<num; i++) {
+			src = 'img/slides/level' + level + '/slide' + i + '.jpg';
+			tempSlide = new Image();
+			tempSlide.className = 'slide-img';
+			tempSlide.id = 'img' + i;
+			tempSlide.src = src;
+			slides.push(tempSlide);
+		}
+		return slides;
+	}
+
+	//slides
+	var IntroSlides = [generateSlides(1, 12)];
 

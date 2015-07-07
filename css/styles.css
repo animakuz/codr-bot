@@ -3,7 +3,6 @@
 	Author: Marcus Baptiste 
 */
 
-/*TODO - ADD PROPER CSS WHERE NEEDED TO LOAD IMAGE GRAPHICS INSTEAD OF PLAIN COLORED DIVS/SPANS*/
 
 /*fonts */
 @font-face {
@@ -79,14 +78,37 @@ body {
 
 	/*form elements*/
 	input {
+		color: #333;
+		border: 2px solid rgba(40,30,25,0.5);
 		-moz-border-radius: 5px; 
 		-webkit-border-radius: 5px; 
 		border-radius: 5px; 
-		border: 1px solid rgba(50,50,70,0.5);
 		height: 20px; 
 		line-height: 20px; 
 		padding: 4px 10px;
 		display: inline-block;
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d6dbbf+0,feffe8+100 */
+		background: rgb(214,219,191); /* Old browsers */
+		background: -moz-linear-gradient(top,  rgba(214,219,191,1) 0%, rgba(254,255,232,1) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(214,219,191,1)), color-stop(100%,rgba(254,255,232,1))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  rgba(214,219,191,1) 0%,rgba(254,255,232,1) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  rgba(214,219,191,1) 0%,rgba(254,255,232,1) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  rgba(214,219,191,1) 0%,rgba(254,255,232,1) 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  rgba(214,219,191,1) 0%,rgba(254,255,232,1) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6dbbf', endColorstr='#feffe8',GradientType=0 ); /* IE6-9 */
+	}
+
+	input:focus {
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b3bead+0,a9b2a4+6,d9e5d3+53,eff2e8+95,ffffff+99 */
+		background: rgb(179,190,173); /* Old browsers */
+		background: -moz-linear-gradient(top,  rgba(179,190,173,1) 0%, rgba(169,178,164,1) 6%, rgba(217,229,211,1) 53%, rgba(239,242,232,1) 95%, rgba(255,255,255,1) 99%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(179,190,173,1)), color-stop(6%,rgba(169,178,164,1)), color-stop(53%,rgba(217,229,211,1)), color-stop(95%,rgba(239,242,232,1)), color-stop(99%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  rgba(179,190,173,1) 0%,rgba(169,178,164,1) 6%,rgba(217,229,211,1) 53%,rgba(239,242,232,1) 95%,rgba(255,255,255,1) 99%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  rgba(179,190,173,1) 0%,rgba(169,178,164,1) 6%,rgba(217,229,211,1) 53%,rgba(239,242,232,1) 95%,rgba(255,255,255,1) 99%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  rgba(179,190,173,1) 0%,rgba(169,178,164,1) 6%,rgba(217,229,211,1) 53%,rgba(239,242,232,1) 95%,rgba(255,255,255,1) 99%); /* IE10+ */
+		background: linear-gradient(to bottom,  rgba(179,190,173,1) 0%,rgba(169,178,164,1) 6%,rgba(217,229,211,1) 53%,rgba(239,242,232,1) 95%,rgba(255,255,255,1) 99%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3bead', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+		border: 2px solid rgba(50,50,95,0.7);
 	}
 
 	label {
@@ -177,7 +199,32 @@ body {
 		-webkit-border-radius: 10px;
 		border-radius: 10px;
 		border: 4px solid rgba(25,25,50,0.4);
+		z-index: 3;
 	}
+		.red-box {
+			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffd1d1+0,f1f1f1+67,e1e1e1+68,f4e3e3+100 */
+			background: rgb(255,209,209); /* Old browsers */
+			background: -moz-linear-gradient(top,  rgba(255,209,209,1) 0%, rgba(241,241,241,1) 67%, rgba(225,225,225,1) 68%, rgba(244,227,227,1) 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,209,209,1)), color-stop(67%,rgba(241,241,241,1)), color-stop(68%,rgba(225,225,225,1)), color-stop(100%,rgba(244,227,227,1))); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  rgba(255,209,209,1) 0%,rgba(241,241,241,1) 67%,rgba(225,225,225,1) 68%,rgba(244,227,227,1) 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  rgba(255,209,209,1) 0%,rgba(241,241,241,1) 67%,rgba(225,225,225,1) 68%,rgba(244,227,227,1) 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  rgba(255,209,209,1) 0%,rgba(241,241,241,1) 67%,rgba(225,225,225,1) 68%,rgba(244,227,227,1) 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  rgba(255,209,209,1) 0%,rgba(241,241,241,1) 67%,rgba(225,225,225,1) 68%,rgba(244,227,227,1) 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd1d1', endColorstr='#f4e3e3',GradientType=0 ); /* IE6-9 */
+		}
+
+		.green-box {
+			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e0ffd1+0,f1f1f1+67,e1e1e1+68,e6efe1+100 */
+			background: rgb(224,255,209); /* Old browsers */
+			background: -moz-linear-gradient(top,  rgba(224,255,209,1) 0%, rgba(241,241,241,1) 67%, rgba(225,225,225,1) 68%, rgba(230,239,225,1) 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(224,255,209,1)), color-stop(67%,rgba(241,241,241,1)), color-stop(68%,rgba(225,225,225,1)), color-stop(100%,rgba(230,239,225,1))); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  rgba(224,255,209,1) 0%,rgba(241,241,241,1) 67%,rgba(225,225,225,1) 68%,rgba(230,239,225,1) 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  rgba(224,255,209,1) 0%,rgba(241,241,241,1) 67%,rgba(225,225,225,1) 68%,rgba(230,239,225,1) 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  rgba(224,255,209,1) 0%,rgba(241,241,241,1) 67%,rgba(225,225,225,1) 68%,rgba(230,239,225,1) 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  rgba(224,255,209,1) 0%,rgba(241,241,241,1) 67%,rgba(225,225,225,1) 68%,rgba(230,239,225,1) 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0ffd1', endColorstr='#e6efe1',GradientType=0 ); /* IE6-9 */
+		}
+
 
 		.message-box-title {
 			color: #333;
@@ -517,16 +564,15 @@ body {
 	/* TODO - make dimensions vary according to screen size according to screen size*/
 	.acheive-thumb {
 		width: 60px; height: 60px;
-		border: 2px solid rgba(25,50,25,0.2);
-		background-color: rgba(25,60,120, 0.8);
+		background-image: url('../img/icon-medal.png');
+		background-size: 100% 200%;
+		background-position: 0 0;
 		display: inline-table;
 		cursor: pointer;
 	}
 
 	.acheive-thumb:hover, .acheive-thumb:active {
-		border: 2px dashed rgba(100,150,100,0.5);
-		outline: 2px solid rgba(90,120,90,0.8);
-		background-color: rgba(50,80,150, 0.8);
+		background-position: 0 100%;
 	}
 /*-----------------------------------------------------------------------*/
 
@@ -568,17 +614,36 @@ body {
 		position: relative;
 		margin: 20px 0 0 0;
 		width: 480px; height: 240px;
-	/*	-webkit-transform-style: preserve-3d;
-	  	-moz-transform-style: preserve-3d;
-	  	transform-style: preserve-3d;*/
-	/*  	background-image: url("../img/bg_test.png"); 
-	  	background-repeat: no-repeat;
-	  	background-position: 50% 50%;
-	  	background-size: 100% 130%;*/
 	}
 /*--END MAIN SUBDIVISIONS------------------------------------------------*/
 
 /*--Background elements--------------------------------------------------*/
+	/*fade in - fade out mask*/
+	#fader {
+		width: 100%; height: 300%;
+		position: absolute;
+		display: none;
+		top: 0; left: 0;
+		background-color: #000;
+		z-index: 10;
+	}
+
+	#inner-fader {
+		width: 100%; height: 100%;
+		position: absolute;
+		display: none;
+		top: 0; left: 0;
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+69,87664b+100&amp;0.5+0,0.6+70,0+100 */
+		background: -moz-linear-gradient(top,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.6) 69%, rgba(4,3,2,0.6) 70%, rgba(135,102,75,0) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.5)), color-stop(69%,rgba(0,0,0,0.6)), color-stop(70%,rgba(4,3,2,0.6)), color-stop(100%,rgba(135,102,75,0))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.6) 69%,rgba(4,3,2,0.6) 70%,rgba(135,102,75,0) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.6) 69%,rgba(4,3,2,0.6) 70%,rgba(135,102,75,0) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.6) 69%,rgba(4,3,2,0.6) 70%,rgba(135,102,75,0) 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.6) 69%,rgba(4,3,2,0.6) 70%,rgba(135,102,75,0) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80000000', endColorstr='#0087664b',GradientType=0 ); /* IE6-9 */
+		z-index: 5;
+	}
+
 	/*gradient that defines sky setting (sunny*/
 	.game-bg-sky {
 		position: absolute; 
@@ -783,6 +848,10 @@ body {
 				width: 100px;
 				position: relative; top: 4px;
 				text-align: right;
+			}
+
+			.input-group-wrapper input {
+				float: right;
 			}
 
 			#btn-create-user {
@@ -1230,6 +1299,44 @@ body {
 					right: 0; top: 0;
 				}
 
+				.loop-num-box {
+					position: absolute;
+					right: 20px; top: 0;
+					width: 30px; height: 15px;
+					text-indent: 0;
+				}
+
+				.loop-number, .loop-inc-num, .loop-dec-num {
+					position: relative;
+					display: inline-block;
+					width: 10px; height: 15px;
+				}
+
+				.loop-number {
+					text-indent: 0;
+					font-size: 0.8em;
+					font-weight: bold;
+					vertical-align: top;
+					text-align: center;
+					font-family: arial;
+				}
+
+				.loop-inc-num {
+					background-image: url('../img/inc-num.png');
+					background-size: 100%;
+				}
+
+				.loop-dec-num {
+					background-image: url('../img/dec-num.png');
+					background-size: 100%;
+				}
+
+				.if-cond {
+
+				}
+
+
+
 				.code-bit:hover, .code-bit:active, .code-bit-drag, .cb-selected {
 					/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#c7cacc+0,b3babf+69,94a0a8+70,bcc8d1+100 */
 					background: #c7cacc; /* Old browsers */
@@ -1259,7 +1366,8 @@ body {
 				}
 
 				.code-bit-block {
-					width: 90%; height: 30px;
+					width: 90%; height: auto;  min-height: 30px;
+					padding-bottom: 1%;
 				}
 
 				.code-bit-drag {
@@ -1333,6 +1441,7 @@ body {
 			-ms-transform: translateX(-50%);
 			-moz-transform: translateX(-50%);
 			transform: translateX(-50%);
+			z-index: 4;
 		}
 
 		.btn-pause {
@@ -1366,6 +1475,7 @@ body {
 			top: 0; left: 0;
 			width: 100%; height: 300%;
 			background-color: rgba(0,0,0,0.4);
+			z-index: 2;
 		}
 
 			.info-screen-inner {
@@ -1381,8 +1491,11 @@ body {
 				-ms-transform: translateX(-50%);
 				-moz-transform: translateX(-50%);
 				transform: translateX(-50%);
-				width: 80%; height: auto; min-height: 200px;
+				width: 60%; height: auto; min-height: 200px;
 				background-color: rgba(100,100,100,0.8);
+				-moz-border-radius: 10px;
+				-webkit-border-radius: 10px;
+				border-radius: 10px;
 			}
 
 			.info-screen-title {
@@ -1393,15 +1506,48 @@ body {
 				text-align: center;
 			}
 
-			.info-screen-content, .pause-screen-content {
+			.info-screen-subtitle {
+				font-size: 1.2em;
+				margin-top: -5%;
+			}
+
+			.solution-screen, .fail-screen, .pause-screen {
+				display: none;
+				text-align: center;
 				width: 90%; height: auto;
 				margin: 10px auto;
 				color: #eee;
 			}
 
-			.pause-screen-content {
-				display: none;
-				text-align: center;
+			/*screen to show solution results*/
+			.solution-screen {
+
+			}
+				.solution-buttons {
+					margin-top: 2%;
+					display: block;
+					text-align: center;
+				} 
+
+				.btn-next-level {
+					position: relative;
+					display: inline-block;
+					margin: 0 20px;
+				}
+
+				.btn-next-level .level-thumb  {
+					position: absolute;
+					left: 50%; top: -5%;
+
+					-webkit-transform: translateX(-50%);
+					-ms-transform: translateX(-50%);
+					-moz-transform: translateX(-50%);
+					transform: translateX(-50%);
+				}
+
+			/*screen to show failed level message*/
+			.fail-screen {
+
 			}
 
 		/*screen to show game intro*/
@@ -1411,11 +1557,12 @@ body {
 			top: 0; left: 0;
 			width: 100%; height: 300%;
 			background-color: black;
+			z-index: 5;
 		}
 			.intro-screen {
 				display: block;
 				position: absolute;
-				top: 0; left: 50%;
+				top: 1%; left: 50%;
 				-webkit-transform: translateX(-50%);
 				-ms-transform: translateX(-50%);
 				-moz-transform: translateX(-50%);
@@ -1424,19 +1571,93 @@ body {
 				background-color: #666;
 			}
 
+			.skip-intro {
+				position: absolute;
+				display: inline-block;
+				top: 75%; left: 50%;
+				-webkit-transform: translateX(-50%);
+				-ms-transform: translateX(-50%);
+				-moz-transform: translateX(-50%);
+				transform: translateX(-50%);
+				color: rgba(200,200,200,0.5);
+				cursor: pointer;
+			}
+
+			.skip-intro:hover, .skip-intro:active {
+				color: rgba(250,250,250,0.7);
+			}
+
 		/*screen to show information slides at beginning of level*/
 
 		.slides-screen {
 			display: none;
 			position: absolute;
-			top: 0; left: 50%;
+			top: 1%; left: 50%;
+
 			-webkit-transform: translateX(-50%);
 			-ms-transform: translateX(-50%);
 			-moz-transform: translateX(-50%);
 			transform: translateX(-50%);
+			border: 2px solid rgba(25,25,50,0.6);
+
+			-moz-border-radius: 10px;
+			-webkit-border-radius: 10px;
+			border-radius: 10px;
 			width: 480px; height: 240px;
-			background-color: #666;
+			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0e0e0e+0,7d7e7d+100 */
+			background: rgb(14,14,14); /* Old browsers */
+			background: -moz-linear-gradient(top,  rgba(14,14,14,1) 0%, rgba(125,126,125,1) 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(14,14,14,1)), color-stop(100%,rgba(125,126,125,1))); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  rgba(14,14,14,1) 0%,rgba(125,126,125,1) 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  rgba(14,14,14,1) 0%,rgba(125,126,125,1) 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  rgba(14,14,14,1) 0%,rgba(125,126,125,1) 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  rgba(14,14,14,1) 0%,rgba(125,126,125,1) 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0e0e0e', endColorstr='#7d7e7d',GradientType=0 ); /* IE6-9 */
+
 		}
+
+			.slide-buttons {
+				position: absolute;
+				display: block;
+				width: 100%; height: auto;
+				bottom: 2%; left: 0;
+				text-align: center;
+			} 
+
+			.slide-img {
+				display: none;
+				position: absolute;
+				width: 80%; height: 80%;
+				top: 10%; left: 50%;
+				-webkit-transform: translateX(-50%);
+				-ms-transform: translateX(-50%);
+				-moz-transform: translateX(-50%);
+				transform: translateX(-50%);
+				-moz-border-radius: 10px;
+				-webkit-border-radius: 10px;
+				border-radius: 10px;
+				border: 2px solid rgba(25,25,75,0.5);
+			}
+
+			.btn-prev-slide, .btn-next-slide, .btn-close-slides {
+				display: inline-block;
+				margin: 0 1%;
+			}
+
+			.btn-disabled {
+				-moz-opacity: 0.6;
+				/* IE 8 */
+				-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+				opacity: 0.6;
+			}
+
+			.btn-disabled:hover, .btn-disabled:active {
+				-moz-opacity: 0.8;
+				/* IE 8 */
+				-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+				opacity: 0.8;
+			}
+
 	/*-------------------------------------------------------------------*/
 	
 	/*section of gui that is currently active*/
@@ -1509,7 +1730,7 @@ body {
 	/*--Small sized screens lower limit (500px and up)-------------------*/
 		@media only screen and (min-width: 500px) {
 			body { 
-				font-size: 1.1em;
+				font-size: 1em;
 			}
 
 			.dimension-wrapper, .intro-screen, .slides-screen {
@@ -1552,7 +1773,7 @@ body {
 	/*--Screens 600px and up---------------------------------------------*/
 		@media only screen and (min-width: 600px) {
 			body { 
-				font-size: 1.2em;
+				font-size: 1.1em;
 			}
 
 			.dimension-wrapper, .intro-screen, .slides-screen {
@@ -1600,7 +1821,7 @@ body {
 		@media only screen and (min-width: 700px) {
 			/*MEDIUM SIZE LOWER LIMIT*/
 			body { 
-				font-size: 1.2em;
+				font-size: 1.1em;
 			}
 
 			.small-button {
@@ -1695,7 +1916,7 @@ body {
 	/*--Screens 750px and up---------------------------------------------*/
 		@media only screen and (min-width: 750px) {
 			body { 
-				font-size: 1.2em;
+				font-size: 1.1em;
 			}
 
 			.gui-block-link {
@@ -1808,12 +2029,21 @@ body {
 						background-size: 24px;
 					}
 
+					.loop-num-box {
+						right: 32px; top: 0;
+						width: 48px; height: 24px;
+					}
+
+					.loop-number, .loop-inc-num, .loop-dec-num {
+						width: 16px; height: 24px;
+					}
+
 					.code-bit-drag {
 						width: 192px;
 					}
 
 					.code-bit-block {
-						height: 48px;
+						height: auto; min-height: 48px;
 					}
 
 				.cp-controls {
@@ -1841,7 +2071,7 @@ body {
 	/*--Screens 840px and up---------------------------------------------*/
 		@media only screen and (min-width: 840px) {
 			body { 
-				font-size: 1.5em;
+				font-size: 1.4em;
 			}
 
 			.dimension-wrapper, .intro-screen, .slides-screen {
@@ -1886,7 +2116,7 @@ body {
 	/*--Screens 900px and up---------------------------------------------*/
 		@media only screen and (min-width: 900px) {
 			body { 
-				font-size: 1.5em;
+				font-size: 1.4em;
 			}
 
 			.gui-block-link {
@@ -1999,12 +2229,21 @@ body {
 						background-size: 30px;
 					}
 
+					.loop-num-box {
+						right: 40px; top: 0;
+						width: 60px; height: 30px;
+					}
+
+					.loop-number, .loop-inc-num, .loop-dec-num {
+						width: 20px; height: 30px;
+					}
+
 					.code-bit-drag {
 						width: 240px;
 					}
 
 					.code-bit-block {
-						height: 60px;
+						height: auto; min-height: 60px;
 					}
 
 				.cp-controls {
@@ -2033,7 +2272,7 @@ body {
 		@media only screen and (min-width: 1000px) {
 			/*LARGE SIZE LOWER LIMIT*/
 			body { 
-				font-size: 1.5em;
+				font-size: 1.4em;
 			}
 
 			.gui-tab-content {
@@ -2113,7 +2352,7 @@ body {
 	/*--Screens 1200px and up--------------------------------------------*/
 		@media only screen and (min-width: 1200px) {
 			body { 
-				font-size: 2em;
+				font-size: 1.8em;
 			}
 
 			.dimension-wrapper, .intro-screen, .slides-screen {
@@ -2156,7 +2395,7 @@ body {
 	/*--Screens 1300px and up--------------------------------------------*/
 		@media only screen and (min-width: 1300px) {
 			body { 
-				font-size: 2em;
+				font-size: 1.8em;
 			}
 
 			.dimension-wrapper, .intro-screen, .slides-screen {

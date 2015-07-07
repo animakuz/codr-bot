@@ -1,16 +1,17 @@
 -- NEXT TASKS TO TACKLE --
+		-- FIX VARIABLE DIMENSIONS ON EVERYTHING ( EASY SHIT - DO THIS WHILE LISTENING TO SOMETHING EMPOWERING)
+		-- FIX PROBLEM WITH IMPROVING SCORE
+		-- fix moving up code bit to put code bits in and out of blocks
 
-		-- make better parser for code able to handle if and loop code bits 
-
-		-- make code bits on code panel dragable to change position
-		-- implement loop special code bit 
-		-- implement if special code bit
 		-- implement falling
 		-- implmenet level 2 with bridge and gap
-		-- implement game over and failed solution process
-		-- implement correct solution process
+		-- add remaining animations
+		-- implement corresponding actions
+		-- implement cheap demos for intro slides
+
+
 		-- make corresponding actions (already have step) and apply them there
--- info screen
+		-- implement if special code bit
 -- scenematics screen
 -- intro slides screen
 		-- make code panel drop down change top instead of height (optional)
@@ -51,25 +52,12 @@ DEVELOPMENT CHECKLIST
 		o	C-bot
 
 
-	Semana 7 – 8 – Diseño Detallado de Niveles y Historia
--	Diseño del rompecabezas de cada nivel
--	Implementación de la funcionalidad general de niveles
--	Implementación de niveles especificos
--	Implementación de elementos de la historia (entradas, guias etc)
 
 
 
-	Semana 9 – 10 – Diseño Detallado e Implementación de Gráficos
--	Diseño y desarrollo de animaciones
--	Implementación de gráficos y animaciones
--	Diseño de gráficos adicionales (fondos, historia etc.)
 
 
 
-	Semana 11 – Retoques y Detalles
--	Pruebas extensivas de partes del juego
--	Correcciones y refactorización general
--	Creación de producto final para móviles con Phonegap
 
 
-	Semana 12 – Pruebas de Usuario y Análisis
+

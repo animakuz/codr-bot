@@ -51,10 +51,9 @@ window.onload = function() {
 	var codeBitList = document.getElementsByClassName('code-bit-list')[0];
 
 	//--Game view
-	var btnPause = document.getElementById('btn-pause');
 	var infoScreenWrapper = document.getElementById('info-screen-wrapper');
-	var btnResetLevel = document.getElementsByClassName('btn-reset-level')[0];
-	var btnQuitLevel = document.getElementsByClassName('btn-quit-level')[0];
+	var btnsResetLevel = document.getElementsByClassName('btn-reset-level');
+	var btnsQuitLevel = document.getElementsByClassName('btn-quit-level');
 	// var gameObjectsCanvas = document.getElementById('game-objects-canvas');
 	// var gameLandsCanvas = document.getElementById('game-lands-canvas');
 	// var gameObjectsCanvas = document.getElementById('game-objects-canvas');
@@ -243,7 +242,24 @@ window.onload = function() {
 			profileUserNames.innerHTML = currentUser.firstName + " " + currentUser.lastName;
 			profileUserPoints.innerHTML = currentUser.data.totalPoints;
 
-			//TODO - MAKE LEVELS CLEARED LOAD BY GOING TRHOUGH ARRAY AND PUTTING OUT CORRESPONDING ELEMENTS
+			var cont = profileLevelsCleared;
+			//empty container first
+
+			empty(cont);
+
+			var LC = currentUser.data.levelsCleared;
+			var len = LC.length;
+			var i;
+			for (i=0; i<len; i++) {
+				addLevelThumb(cont, 'passed', i, LC[i], LC[i].grade);
+			}
+
+			//remove unecesarry classes and necesarry ones
+			var levelThumbs = cont.getElementsByClassName('level-thumb');
+			modifyMultiple(levelThumbs, function(ele) {
+				toggleClass(ele, 'th-profile-level, th-level-select');
+			});
+
 			//TODO - MAKE SAME FOR ACHEIVEMENTS
 
 			//show user profile screen
@@ -289,7 +305,7 @@ window.onload = function() {
 		//show options screen
 		btnGameOptions.onclick = function() {
 			//hide start menu 
-			removeClass(gameMenu, 'gui-active');
+			// removeClass(gameMenu, 'gui-active');
 
 			//update options display according to what's contained in current user
 			//language
@@ -318,8 +334,9 @@ window.onload = function() {
 				removeClass(soundOption, 'check-box-checked');
 			}
 
+			switchScreens(gameMenu, gameOptions);
 			//show options menu
-			addClass(gameOptions, 'gui-active');
+			// addClass(gameOptions, 'gui-active');
 		};
 
 		//show credits screen
@@ -430,29 +447,11 @@ window.onload = function() {
 	//--------------------------------------------------------------------------
 
 	//--Pause Button------------------------------------------------------------
-		var pausePlay = function() {
-			var btn = this || btnPause;
-			if (btn.getAttribute('data-paused') === 'false') {
-				//show pause menu and switch button to play
-				addClass(infoScreenWrapper, 'gui-active');
-				toggleClass(btn,'btn-pause, btn-play');
-				btn.setAttribute('data-paused', true);
-				theGame.paused = true;
-				createjs.Ticker.setPaused(true);
-			} else {
-				//hide pause menu and switch button to pause
-				removeClass(infoScreenWrapper, 'gui-active');
-				toggleClass(btn,'btn-pause, btn-play');
-				btn.setAttribute('data-paused', false);
-				theGame.paused = false;
-				createjs.Ticker.setPaused(false);
-			}
-		};
 
 		btnPause.onclick = pausePlay;
 
 		//reset level button
-		btnResetLevel.onclick = function() {
+		bindMultiple(btnsResetLevel, 'onclick', function() {
 			if (theGame.paused) {
 				//get confirmation if on game paused
 				showMessageBox({ 
@@ -462,7 +461,9 @@ window.onload = function() {
 					'confirm', 'warning', 
 					{
 						ok: function() { 
-							pausePlay();
+							if (theGame.paused) {
+								pausePlay();
+							}
 							theGame.reset(); 
 						},
 						cancel: function() { }
@@ -470,10 +471,10 @@ window.onload = function() {
 			} else {
 				theGame.reset();
 			}
-		};
+		});
 
 		//quit level button
-		btnQuitLevel.onclick = function() {
+		bindMultiple(btnsQuitLevel, 'onclick', function() {
 			showMessageBox({
 					Eng: 'Are you sure you want to quit the level?',
 					Esp: 'Estas seguro que quieres salir del nivel?'
@@ -481,12 +482,14 @@ window.onload = function() {
 				'confirm','warning',
 				{
 					ok: function() { 
-						pausePlay();
+						if (theGame.paused) {
+							pausePlay();
+						}
 						theGame.end(); 
 					},
 					cancel: function() {}
 			});
-		};
+		});
 	//--------------------------------------------------------------------------
 
 //--END BINDINGS AND EVENTS-----------------------------------------------------

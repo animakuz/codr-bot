@@ -63,6 +63,46 @@
 
 	}
 
+	//compare two arrays A and B - return true if they are equal in items and length
+	function compArrs(arrA, arrB) {
+		var flag = true;
+		var lenA = arrA.length;
+		var lenB = arrB.length;
+
+		if (lenA !== lenB) {
+			return false;
+		} else {
+			arrA = arrA.sort();
+			arrB = arrB.sort();
+			var ind = Math.min(lenA, lenB);
+			while(ind--) {
+				if (arrA[ind] !== arrB[ind]) {
+					return false;
+				}
+			}
+		}
+
+		return flag;
+	}
+
+	//check if array A is a sub array of B
+	function compSubArrs(arrA, arrB) {
+		var str = arrB.join('-');
+		var len = arrA.length;
+		var flag = true;
+
+		while(len--) {
+			var testExp = new RegExp(arrA[len]);
+			if (!testExp.test(str)) {
+				flag = false;
+				break;
+			}
+		}
+
+		return flag;
+	}
+
+
 	//delete all child nodes from element
 	//Source - Gabriel McAdams - StackOverflow - Answer 17/10/10
 	function empty(element) {

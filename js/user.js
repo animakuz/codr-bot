@@ -9,6 +9,7 @@ var defaultLanguage = 'Esp';
 //--determines if a message box is currently showing or not
 var messageShowing = false;
 
+var innerFader = document.getElementById('inner-fader');
 //--User prototype----------------------------------------------
 	var createUser = function() {
 		return {
@@ -25,7 +26,7 @@ var messageShowing = false;
 				totalPoints: 0,
 				codeBits: ['step'],
 				levelsCleared: [],  //array of data objects representing levels already passed
-				achievements: [],	//array of data objects representing acheivements obtained
+				acheivements: [],	//array of data objects representing acheivements obtained
 			}
 		};
 	};
@@ -67,16 +68,23 @@ var messageShowing = false;
 			lineBreak.style.clear = 'both';
 
 			switch(messageType) {
+				case 'normal':
+					title = document.createTextNode(" ");
+					break; 
+
 				case 'success':
 					addClass(icon, 'message-icon-success');
+					addClass(box, 'green-box');
 					break;
 
 				case 'warning':
 					addClass(icon, 'message-icon-warning');
+					addClass(box, 'red-box');
 					break;
 
 				case 'error':
 					addClass(icon, 'message-icon-error');
+					addClass(box, 'red-box');
 					break;
 			};
 

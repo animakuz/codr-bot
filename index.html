@@ -271,9 +271,6 @@
 							
 							<!-- will be populated with javascript -->
 							<div class='gui-tab-content active-tab' id='profile-levels-cleared'>
-								<div class='level-thumb th-profile-level level-passed'></div>
-								<div class='level-thumb th-profile-level level-passed'></div>
-								<div class='level-thumb th-profile-level level-passed'></div>
 							</div>
 
 							<!-- will be populated with javascript-->
@@ -329,11 +326,52 @@
 			<!-- game info screen - pause menu and results screen -->
 			<div class='info-screen-wrapper' id='info-screen-wrapper'>
 				<div class='info-screen-inner'>					
-					<div class='info-screen-content' id='info-screen-content'>
+					<div class='solution-screen' id='solution-screen'>
+						<h2 class='info-screen-title' id='info-screen-title'>
+							<span class='lang-eng'>Success!</span>
+							<span class='lang-esp'>Exito!</span>
+						</h2>
+						<h3 class='info-screen-subtitle' id='info-screen-subtitle'>
+							<span class='lang-eng'>You have passed this level!</span>
+							<span class='lang-esp'>Has pasado este nivel!</span>
+						</h3>
+						<div class='code-bit-earned'>
 
+						</div>
+						<div class='aheive-earned'>
+						</div>
+
+						<div class='points-obtained'>
+							<span class='lang-eng'>Points obtained: </span>
+							<span class='lang-esp'>Puntos obtenidos: </span>
+							<span id='points-obtained-value'></span>
+						</div>
+
+						<div class='solution-buttons'>
+							<div class='btn-reset-level game-control-btn'></div>
+							<div class='btn-quit-level game-control-btn'></div>						
+							<div class='btn-next-level game-control-btn'></div>
+						</div>
 					</div>
-					<div class='pause-screen-content' id='pause-screen-content'>
-						<h2 class='info-screen-title' id='info-screen-title'>Menu</h2>
+
+					<div class='fail-screen' id='fail-screen'>
+						<h2 class='info-screen-title' id='info-screen-title'>
+							<span class='lang-eng'>Fail!</span>
+							<span class='lang-esp'>Fallo!</span>
+						</h2>
+						<h3 class='info-screen-subtitle' id='info-screen-subtitle'>
+							<span class='lang-eng'>You didn't reach the target!</span>
+							<span class='lang-esp'>No pudiste alcanzar el blanco!</span>
+						</h3>
+						<div class='btn-reset-level game-control-btn'></div>
+						<div class='btn-quit-level game-control-btn'></div>
+					</div>
+
+					<div class='pause-screen' id='pause-screen'>
+						<h2 class='info-screen-title' id='info-screen-title'>
+							<span class='lang-eng'>Paused</span>
+							<span class='lang-esp'>Pausado</span>
+						</h2>
 						<div class='btn-reset-level game-control-btn'></div>
 						<div class='btn-quit-level game-control-btn'></div>
 					</div>
@@ -342,20 +380,34 @@
 
 			<div class='intro-screen-wrapper' id='intro-screen-wrapper'>
 				<div class='intro-screen' id='intro-screen'>
+					<h2 class='skip-intro'>
+						<span class='lang-eng'>Skip Intro</span>
+						<span class='lang-esp'>Saltar Intro</span>
+					</h2>
 				</div>
 			</div>
 
 
 			<div class='slides-screen' id='slides-screen'>
-				<div class='slides'></div>
-				<div class='text'></div>
-				<div class='btn-prev-slide gui-button small-button blue-button'>
+				<div class='slides' id='slide-display' data-num='0' data-current='0'>
+					<img class='slide-img' width='800' height='400' src='img/slides/level1/slide0.jpg'>
 				</div>
+				<!-- <div class='text'></div> -->
+				<div class='slide-buttons'>
+					<div class='btn-prev-slide btn-disabled gui-button small-button blue-button'>
+						<span class='lang-eng'>Previous</span>
+						<span class='lang-esp'>Anterior</span>
+					</div>
 
-				<div class='btn-next-slide gui-button small-button blue-button'>
-				</div>
+					<div class='btn-next-slide btn-disabled gui-button small-button blue-button'>
+						<span class='lang-eng'>Next</span>
+						<span class='lang-esp'>Siguiente</span>
+					</div>
 
-				<div class='btn-got-it gui-button small-button green-button'>
+					<div class='btn-close-slides btn-disabled gui-button small-button green-button'>
+						<span class='lang-eng'>Got It!</span>
+						<span class='lang-esp'>Entiendo!</span>
+					</div>
 				</div>
 			</div>
 
@@ -363,6 +415,8 @@
 			<!-- pause button during gameplay -->
 			<div class='btn-pause game-control-btn' id='btn-pause' data-paused='false'>
 			</div>
+
+			<div id='inner-fader'></div>
 
 		</div> <!-- end app container -->
 		
@@ -388,8 +442,8 @@
 		<span class='lang-esp'>Esta aplicación no está compatible con este tamaño de pantalla</span>
 	</h2>
 
-	<!-- <script src='js/phonegap.js'></script> -->
-	
+	<!-- fade in and fade out effect	 -->
+	<div id='fader'></div>
 	<!-- base functions and data -->
 	<script src='js/base.js'></script>
 	<script>

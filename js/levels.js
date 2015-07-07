@@ -2,27 +2,29 @@
 //--GAME LEVEL AND ACHEIVEMENTS DATA---------------------------------	
 	//--$Load Levels --------------------------------------------
 		//update level list and show level thumbnails (included here so this code can be called by game functions)
+		var levelSelectLevels = document.getElementById('level-select-levels');
+
+		var addLevelThumb = function(container, status, index, levelData, grade) {
+			var levelThumbCont = document.createElement('div');
+			var levelNum = document.createTextNode(index + 1);
+
+			levelThumbCont.className = 'level-thumb th-level-select level-' + status;
+			if (status === 'passed') {
+					levelThumbCont.className += ' level-' + grade;
+			}
+			levelThumbCont.className+= ' unselectable';
+			levelThumbCont.setAttribute('data-level', index);
+			levelThumbCont.appendChild(levelNum);
+			
+			//possibly other info
+
+			container.appendChild(levelThumbCont);
+		};
+
 		function loadLevels() {
 			var i = 0;
 			var numLevels = gameLevels.length;
 			var levelStatus = 'passed';
-			var levelSelectLevels = document.getElementById('level-select-levels');
-			var addLevelThumb = function(status, index, levelData, grade) {
-				var levelThumbCont = document.createElement('div');
-				var levelNum = document.createTextNode(levelData.id);
-
-				levelThumbCont.className = 'level-thumb th-level-select level-' + status;
-				if (status === 'passed') {
-						levelThumbCont.className += ' level-' + grade;
-				}
-				levelThumbCont.className+= ' unselectable';
-				levelThumbCont.setAttribute('data-level', index);
-				levelThumbCont.appendChild(levelNum);
-				
-				//possibly other info
-
-				levelSelectLevels.appendChild(levelThumbCont);
-			};
 
 			//delete current items
 			empty(levelSelectLevels);
@@ -32,7 +34,7 @@
 					//still checking levels cleared 
 					if (currentUser.data.levelsCleared[i]) {
 						//load level thumbnail as cleared with corresponding data
-						addLevelThumb('passed', i, gameLevels[i], currentUser.data.levelsCleared[i].grade);
+						addLevelThumb(levelSelectLevels, 'passed', i, gameLevels[i], currentUser.data.levelsCleared[i].grade);
 						i++;
 					} else {
 						//change status to keep checking other levels
@@ -40,13 +42,13 @@
 					}					
 				} else if (levelStatus === 'open') {
 					//load level as open
-					addLevelThumb('open', i, gameLevels[i]);
+					addLevelThumb(levelSelectLevels, 'open', i, gameLevels[i]);
 					//change status to locked - only one level after all cleared levels is open
 					levelStatus = 'locked';
 					i++;
 				} else if (levelStatus === 'locked') {
 					//load level as locked
-					addLevelThumb('locked', i, gameLevels[i]);
+					addLevelThumb(levelSelectLevels, 'locked', i, gameLevels[i]);
 					i++;
 				}
 			}
@@ -56,8 +58,7 @@
 			//bind events for click of level select buttons
 			bindMultiple(levelSelectThumbs, 'onclick', function(ele) {
 				if (classCheck(ele, 'level-locked')) {
-					console.log('level is loicked');
-					//TODO - SHOW MESSAGE THAT LEVEL IS LOCKED
+					//TODO - show animation of locked level
 				} else {
 					modifyMultiple(levelSelectThumbs, function(element) {
 						removeClass(element, 'level-selected');
@@ -68,22 +69,55 @@
 		}
 	//-----------------------------------------------------------
 
-	//--$Intro Slides -------------------------------------------
-		var IntroSlides = {
-			level1: [ ],
-			level2: [ ],
-			level3: [ ]
-		};
-	//-----------------------------------------------------------
+	//--$Acheivements-------------------------------------------
+		var acheives = [
+			{
+				id: 0,
+				titleEng: 'First Steps',
+				titleEsp: 'Primeros Pasos',
+				descEng: 'Pass first level',
+				descEsp: 'Pasar primer nivel',
+				points: 50,
+				icon: 'medal.png'
+			},
+			{
+				id: 1,
+				titleEng: 'Long Walk',
+				titleEsp: 'Caminata',
+				descEng: 'Take 8 steps',
+				descEsp: 'Hacer 8 pasos',
+				points: 50,
+				icon: 'medal.png'
+			},
+			{
+				id: 2,
+				titleEng: 'User',
+				titleEsp: 'Usuario',
+				descEng: 'Use a tool',
+				descEsp: 'Utilizar una herramienta',
+				points: 50,
+				icon: 'medal.png'
+			},
+			{
+				id: 3,
+				titleEng: 'Improved',
+				titleEsp: 'Mejorado',
+				descEng: 'Improve grade on a level',
+				descEsp: 'Mejor el grado de un nivel',
+				points: 50,
+				icon: 'medal.png'
+			}
+		];
+	//----------------------------------------------------------
 
 	//--$Grade Criteria -----------------------------------------
 		var GradeCriteria = {
 			level1: {
-				maxCodeBits: { bronze: 10, silver: 10, gold: 10 },
+				maxCodeBits: { bronze: 10, silver: 5, gold: 3 },
 				codeBitsAllowed: {
-					bronze: ['step'],
-					silver: ['step'],
-					gold: ['step']
+					bronze: ['step','use','loop','condIf'],
+					silver: ['step','use','loop'],
+					gold: ['step','loop']
 				},
 				errorsAllowed: {
 					bronze: 5,
@@ -129,22 +163,22 @@
 				title: 'Testing Level',
 				description: 'A basic level for testing purposes',
 				music: 'off',
-				puzzleTrack: ['','','','','','','','','target','','end'], //data sequence describing puzzle to be solved
+				puzzleTrack: ['','','','target','','','','','','','end'], //data sequence describing puzzle to be solved
 				landsTrack: [1,1,1,1,1,1,1,1,1,1], //array with corresponding 'lands' values to match puzzle 
 				gameObjects: [ //array of game objects corresponding to puzzle
-						['target','target', 8, 'base']
+						['target','target', 3, 'base']
 				], 
 				rules: {
 					maxCodeBits: 10,
 					codeBitsAllowed: ['step','use','loop']
 				},
-				gradeCritera: GradeCriteria.level1,
+				gradeCriteria: GradeCriteria.level1,
 				rewards: {
 					codeBit: 'use',
-					acheives: ['first steps'],
+					acheive: acheives[0],
 					points: 100
 				},
-				introSlides: IntroSlides.level1
+				introSlides: IntroSlides[0]
 			},
 			{
 				id: 2,
@@ -163,13 +197,13 @@
 					maxCodeBits: 10,
 					codeBitsAllowed: ['step','use','loop']
 				},
-				gradeCritera: GradeCriteria.level2,
+				gradeCriteria: GradeCriteria.level2,
 				rewards: {
 					codeBit: '',
-					acheives: ['user'],
+					acheive: acheives[1],
 					points: 100
 				},
-				introSlides: IntroSlides.level2
+				introSlides: []
 			},
 			{
 				id: 3,
@@ -188,34 +222,14 @@
 					maxCodeBits: 10,
 					codeBitsAllowed: ['step','use','loop']
 				},
-				gradeCritera: GradeCriteria.level3,
+				gradeCriteria: GradeCriteria.level3,
 				rewards: {
 					codeBit: '',
-					acheives: [''],
+					acheive: acheives[2],
 					points: 100
 				},
-				introSlides: IntroSlides.level3
+				introSlides: []
 			}
 		];
 	//----------------------------------------------------------
 
-	//--$Acheivements-------------------------------------------
-		var acheives = {
-			'first-steps': {
-				titleEng: 'First Steps',
-				titleEsp: 'Primeros Pasos',
-				descEng: 'Pass first level',
-				descEsp: 'Pasar primer nivel',
-				points: 50,
-				icon: 'medal.png'
-			},
-			'user': {
-				titleEng: 'First Steps',
-				titleEsp: 'Primeros Pasos',
-				descEng: 'Pass first level',
-				descEsp: 'Pasar primer nivel',
-				points: 50,
-				icon: 'medal.png'
-			}
-		};
-	//----------------------------------------------------------
