@@ -558,6 +558,10 @@ body {
 	.level-thumb:hover, .level-thumb:active{
 		background-position: 0 50%;
 	}
+
+	.th-profile-level {
+		text-align: center;
+	}
 /*-----------------------------------------------------------------------*/
 
 /*--Thumbnail previews for acheivements----------------------------------*/
@@ -793,6 +797,7 @@ body {
 			height: 40px;
 			margin: 10px auto 0;
 			display: block;
+			clear: both;
 		}
 	/*-------------------------------------------------------------------*/
 
@@ -1259,7 +1264,7 @@ body {
 				.cp-content {
 					position: absolute;
 					padding-top: 4px; 
-					padding-bottom: 10px;
+					padding-bottom: 40px;
 					width: 136px; height: auto;
 					top: 0; left:2px;
 				}

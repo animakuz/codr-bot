@@ -47,5 +47,5 @@
 	}
 
 	//slides
-	var IntroSlides = [generateSlides(1, 12)];
+	var IntroSlides = [generateSlides(1, 12), [], [], [], []];
 

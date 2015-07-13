@@ -117,13 +117,16 @@
 			}
 		},
 		animate: function(animation, movement, distance) {
-			if (movement === 'step') {
+			if (movement === 'step' || movement === 'fall') {
 				var speed = floorTrunc((distance / UNIT_TIME), 1);
 			}
 			var pBotUpdate = function(event) {
 				if (!event.paused) {
 					if (movement === 'step') {
 						pBot.sprite.x += speed;
+					} else if (movement === 'fall') {
+						pBot.sprite.x += speed;
+						pBot.sprite.y += speed  + 1;
 					}
 					pBot.framesRemaining -= 1;
 
@@ -165,27 +168,36 @@
 					var nextSpace = theGame.level.puzzleTrack[this.unitPos + 1];
 
 					if (currentSpace === 'bridge') {
-						//check state of bridge - if u prevent from moving - if down go to fall - if normal step
+						//check state of bridge - if up prevent from moving - if down go to fall - if normal step
 						var objPos = this.unitPos;
-						var objListInd = gameObjMngr.objectList.length;
+						var objListInd = 0;
+						var objListLen = gameObjMngr.objectList.length;
 						var bridge = undefined;
-						while(objListInd--) {
+						while(objListInd < objListLen) {
 							if (gameObjMngr.objectList[objListInd].unitPos === objPos &&
 								gameObjMngr.objectList[objListInd].objType === 'bridge') {
 								bridge = gameObjMngr.objectList[objListInd];
 							}
+							objListInd++;
 						}
 
-						if (bridge.state === 'up') {
-							actionToExecute = function() {
-								pBot.say({ Eng: "He can't cross", Esp: "No puede pasar"});
-							};
-						} else if (bridge.state === 'down') {
-							//walk and fall into gap
-							actionToExecute = function() {
-								//TODO - IMPLEMENT FALL
-								pBot.animate('fall', 'fall', UNIT_DISTANCE);
-							};
+						if (typeof bridge !== 'undefined') {
+							if (bridge.state === 'up') {
+								actionToExecute = function() {
+									pBot.say({ Eng: "He can't cross", Esp: "No puede pasar"});
+								};
+							} else if (bridge.state === 'down') {
+								//walk and fall into gap
+								actionToExecute = function() {
+									//TODO - IMPLEMENT FALL
+									pBot.animate('fall', 'fall', UNIT_DISTANCE);
+								};
+							} else {
+								//bridge flat - normal step
+								actionToExecute = function() {
+									pBot.animate('step', 'step', UNIT_DISTANCE);
+								};
+							}
 						} else {
 							//bridge flat - normal step
 							actionToExecute = function() {
@@ -212,10 +224,32 @@
 						};
 					} else if (nextSpace === 'wall') {
 						//error - wall blocking way
+						actionToExecute = function() {
+							var GOL = gameObjMngr.objectList;
+							var len = GOL.length;
+							while (len--) {
+								if (GOL[len].objType === 'wall') {
+									if (GOL[len].state !== 'base') {
+										pBot.animate('step','step',UNIT_DISTANCE);
+									} else {
+										pBot.animate('error');
+									}
+									break;
+								}
+							}
+
+							
+						};
 					} else if (nextSpace === 'rock') {
 						//error - rock blocking way
+						actionToExecute = function() {
+							pBot.animate('error');
+						};
 					} else if (nextSpace === 'end') {
 						//can't go further - end of track
+						actionToExecute = function() {
+							pBot.animate('error');
+						};
 					} else {
 						actionToExecute = function() {
 							pBot.animate('step', 'step', UNIT_DISTANCE);
@@ -244,23 +278,29 @@
 						switch(usableObj.objType) {
 							case 'lever':
 								//find bridge and execute corresponding action
-								objListInd = gameObjMngr.objectList.length;
-								while(objListInd--) {
+								objListInd = 0;
+								var len = gameObjMngr.objectList.length;
+								while(objListInd < len) {
 									if (gameObjMngr.objectList[objListInd].objType === 'bridge') {
-										gameObjMngr.objectList[objListInd].use();
-										break;
+										if (usableObj.unitPos < gameObjMngr.objectList[objListInd].unitPos) {
+											gameObjMngr.objectList[objListInd].use();
+											break;
+										}
 									}
+									objListInd++;
 								}
 								break;
 
 							case 'detonator':
 								//find bomb and execute corresponding action
-								objListInd = gameObjMngr.objectList.length;
-								while(objListInd--) {
+								objListInd = 0;
+								var len = gameObjMngr.objectList.length;
+								while(objListInd < len) {
 									if (gameObjMngr.objectList[objListInd].objType === 'bomb') {
 										gameObjMngr.objectList[objListInd].use();
 										break;
 									}
+									objListInd++;
 								}
 								break;
 
@@ -473,7 +513,18 @@
 
 		} else {
 			//check and update solution and grade
-			if (grade > currentUser.data.levelsCleared[theGame.level.id - 1].grade) {
+			var currGrade = currentUser.data.levelsCleared[theGame.level.id - 1].grade;
+
+			var betterGrade = false;
+			if (grade === 'gold' && currGrade !== 'gold' ) {
+				betterGrade = true;
+			}
+
+			if (grade === 'silver' && currGrade === 'bronze') {
+				betterGrade = true;
+			}
+
+			if (betterGrade) {
 				//update grade
 				currentUser.data.levelsCleared[theGame.level.id - 1].grade = grade;
 
@@ -653,7 +704,7 @@
 				
 				//evaluate level based on different criteria
 				var result = Math.floor(evaluateLevel());
-				test = result;
+				// test = result;
 				var grade = getGrade(result);
 
 				//Check if new level cleared
@@ -683,6 +734,13 @@
 				var btnNextLevel = solutionScreen.getElementsByClassName('btn-next-level')[0];
 				if (theGame.level.id < gameLevels.length) {
 					addLevelThumb(btnNextLevel, 'open', theGame.level.id );
+					var lvlBtn = btnNextLevel.getElementsByClassName('level-thumb')[0];
+					lvlBtn.onclick = function() {
+						theGame.end();
+						var levelSelect = document.getElementsByClassName('level-select')[0];
+						removeClass(levelSelect, 'gui-active');
+						theGame.initialize(gameLevels[theGame.level.id]);
+					};
 				} else {
 					btnNextLevel.parentNode.removeChild(btnNextLevel);
 				}
@@ -691,11 +749,19 @@
 				var pointsDisplay = document.getElementById('points-obtained-value');
 				pointsDisplay.innerHTML = pointsGained;
 
-				//show acheive thumbs and description
-				var acheivesEarned = [baseResults.acheive]; 
+				// //show acheive thumbs and description
+				// var acheivesEarned = [baseResults.acheive]; 
+				// if (acheivesEarned !== []) {
+				// 	var achCont = solutionScreen.getElementsByClassName('aheive-earned')[0];
+				// 	achCont.innerHTML = 'Has logrado la siguiente medalla: ' + acheivesEarned;
+				// }
 
 				//show code bit obtained and description
 				var cbEarned = theGame.level.rewards.codeBit;
+				if (cbEarned !== '') {
+					var cbCont = solutionScreen.getElementsByClassName('code-bit-earned')[0];
+					cbCont.innerHTML = 'Has obtenido el code bit \"' + cbEarned + '\"!';
+				}
 
 				//update local storage
 				storeUserData(currentUser, false);

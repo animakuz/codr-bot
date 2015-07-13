@@ -3,13 +3,13 @@
 	var gameObjMngr = {	
 		//dimensions for each game object graphic
 		imgFrames: {
-			bomb: { width: 160, height: 160 , regX: 120, regY: 120 },
+			bomb: { width: 160, height: 160 , regX: 40, regY: 120 },
 			bridge: { width: 161, height: 161 , regX: 0, regY: 120 },
-			detonator: { width: 80, height: 80 , regX: 0, regY: 40 },
+			detonator: { width: 81, height: 81 , regX: 0, regY: 40 },
 			lever: { width: 81, height: 81 , regX: 0, regY: 40 },
 			rock: { width: 80, height: 80 , regX: 0, regY: 40 },
 			target: {width: 80, height: 81 , regX: 0, regY: 40 },
-			wall: { width: 160, height: 160, regX: 0, regY: 120 },
+			wall: { width: 161, height: 161, regX: 0, regY: 120 },
 		},
 		animations: { //animation list for each game object
 			bomb: { 
@@ -204,6 +204,49 @@
 							}
 							break;
 
+						case 'detonator': 
+							this.use = function() {
+								if (this.state === 'base') {
+									gameObjMngr.animateGameObject(this.sprite, 'press');
+									this.state = 'pressed';
+								} else {
+									pBot.animate('error');
+								}
+							}
+							break;
+
+						case 'bomb':
+							var blowUpWall = function() {
+								// blow up wall
+								var GOL = gameObjMngr.objectList;
+								var ind = GOL.length;
+								while(ind--) {
+									if (GOL[ind].objType === 'wall') {
+										gameObjMngr.animateGameObject(GOL[ind].sprite, 'explode');
+										GOL[ind].state = 'gone';
+										break;
+									}
+								}
+							}
+							this.use = function() {
+								if (this.state === 'base') {
+									gameObjMngr.animateGameObject(this.sprite, 'explode');
+									var pt = theGame.level.puzzleTrack;
+									var len = pt.length;
+									while (len--) {
+										if (pt[len] === 'bomb') {
+											if (pt[len + 1] === 'wall') {
+												blowUpWall();
+											} else if (pt[len - 1] === 'wall') {
+												blowUpWall();
+											}
+										}
+									}
+
+
+								} 
+							}
+
 					}
 				}
 			};
@@ -230,13 +273,13 @@
 				this.gameObjectStage.addChild(this.objectList[i].sprite);
 			}
 
-			//draw lines to mark unit positions
-			// for (i=0; i<10; i++) {
-			// 	var line = new cjs.Shape();
-			// 	line.graphics.setStrokeStyle(4).beginStroke('red');
-			// 	line.graphics.moveTo(i* UNIT_DISTANCE, 0).lineTo(i* UNIT_DISTANCE, 200);
-			// 	this.gameObjectStage.addChild(line);
-			// }
+			// draw lines to mark unit positions
+			for (i=0; i<10; i++) {
+				var line = new cjs.Shape();
+				line.graphics.setStrokeStyle(4).beginStroke('red');
+				line.graphics.moveTo(i* UNIT_DISTANCE, 0).lineTo(i* UNIT_DISTANCE, 200);
+				this.gameObjectStage.addChild(line);
+			}
 			this.gameObjectStage.update();
 		},
 		resetGameObjects: function() {

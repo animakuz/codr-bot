@@ -1,12 +1,18 @@
 -- NEXT TASKS TO TACKLE --
+		- BEFORE DOING ANYTHING ELSE - REFACTORE, OPTIMIZE AND CLEAN UP CODE BASE 
+		- MAKE MAJOR CHANGES TO FUNCITONALITY
+		- TURN THIS INTO SOMETHING ACTUALLY USEABLE
+		- ALSO REDO GRAPHICS (CLEANER, SIMPLER GRAPHICS IN FLASH)
+
+
+
+
 		-- FIX VARIABLE DIMENSIONS ON EVERYTHING ( EASY SHIT - DO THIS WHILE LISTENING TO SOMETHING EMPOWERING)
 		-- FIX PROBLEM WITH IMPROVING SCORE
 		-- fix moving up code bit to put code bits in and out of blocks
 
-		-- implement falling
-		-- implmenet level 2 with bridge and gap
-		-- implement corresponding actions
 
+		-- add acheivements to results screen and profile
 		-- make corresponding actions (already have step) and apply them there
 		-- implement if special code bit
 -- scenematics screen
